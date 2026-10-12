@@ -7,7 +7,7 @@ CLAUDE.local.md
 .env.*
 !.env.example
 
-# Generated CV artifacts and render previews (rebuild with build_cv_v22.py).
+# Generated CV artifacts and render previews (rebuild with build_cv.py).
 # Leading slash = root only, so portfolio/assets/Abdellah_Bouhaddi_CV.pdf stays tracked.
 tmp/
 output/

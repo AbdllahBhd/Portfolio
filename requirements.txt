@@ -1,4 +1,4 @@
-# Dependencies for the CV build scripts (build_cv_v22.py, research/audit_cv.py).
+# Dependencies for the CV build script (build_cv.py) and research/audit_cv.py.
 # Install with: pip install -r requirements.txt
 python-docx==1.2.0
 reportlab==5.0.1

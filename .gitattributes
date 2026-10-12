@@ -1,0 +1,6 @@
+# Keep binaries byte-for-byte; never apply line-ending conversion to them.
+*.pdf  binary
+*.docx binary
+*.png  binary
+*.jpg  binary
+*.ico  binary

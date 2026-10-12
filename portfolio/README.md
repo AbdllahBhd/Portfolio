@@ -18,9 +18,9 @@ Then visit `http://localhost:8080`.
 
 ## Updating the resume
 
-`assets/Abdellah_Bouhaddi_CV.pdf` is the file the site links to. After
-rebuilding the CV from the repository root (`python build_cv_v22.py`), copy the
-new PDF from `output/pdf/` over this file and commit it.
+`assets/Abdellah_Bouhaddi_CV.pdf` is the file the site links to. Running
+`python build_cv.py` from the repository root builds a new CV version and
+overwrites this file. Commit it and push to `main`; the site then serves it.
 
 ## One-time GitHub Pages setup
 

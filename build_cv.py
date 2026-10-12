@@ -1,4 +1,9 @@
-"""Build Abdellah Bouhaddi CV v22 (A4, .NET / React full stack roles in the UAE) as matching DOCX and PDF."""
+"""Build the Abdellah Bouhaddi CV (A4, .NET full stack roles in the UAE) as matching DOCX and PDF.
+
+Every run creates a new version: the number in CV_VERSION is incremented, the numbered
+DOCX and PDF are written, and the PDF is copied to the portfolio site assets so the next
+push to main publishes it. Use --version N to build a specific number instead.
+"""
 
 from pathlib import Path
 from xml.sax.saxutils import escape
@@ -17,8 +22,25 @@ from reportlab.platypus import HRFlowable, KeepTogether, Paragraph, SimpleDocTem
 
 
 ROOT = Path(__file__).resolve().parent
-DOCX_OUT = ROOT / "Abdellah_Bouhaddi_Full_Stack_Software_Engineer_CV_v22.docx"
-PDF_OUT = ROOT / "output" / "pdf" / "Abdellah_Bouhaddi_Full_Stack_Software_Engineer_CV_v22.pdf"
+VERSION_FILE = ROOT / "CV_VERSION"  # tracked in git so the counter is the same on every machine
+BASENAME = "Abdellah_Bouhaddi_Full_Stack_Software_Engineer_CV"
+# The portfolio site links to this fixed filename; GitHub Pages serves it after a push to main.
+SITE_PDF = ROOT / "portfolio" / "assets" / "Abdellah_Bouhaddi_CV.pdf"
+
+
+def next_version(forced: int | None) -> int:
+    if forced is not None:
+        return forced
+    current = int(VERSION_FILE.read_text(encoding="utf-8").strip() or 0)
+    return current + 1
+
+
+def output_paths(version: int) -> tuple[Path, Path]:
+    docx_out = ROOT / f"{BASENAME}_v{version}.docx"
+    pdf_out = ROOT / "output" / "pdf" / f"{BASENAME}_v{version}.pdf"
+    return docx_out, pdf_out
+
+
 
 FONT = "Aptos"
 BLACK = RGBColor(0x11, 0x16, 0x1A)
@@ -37,7 +59,7 @@ PDF_WIDTH = CONTENT_WIDTH * 72 - 12  # points; reportlab frames pad 6pt per side
 
 NAME = "ABDELLAH BOUHADDI"
 HEADLINE = "FULL STACK SOFTWARE ENGINEER"
-HEADLINE_STACK = ".NET  ·  C#  ·  ASP.NET CORE  ·  REACT"
+HEADLINE_STACK = ".NET  ·  C#  ·  ASP.NET CORE  ·  SQL  ·  AWS"
 LOCATION = "Dubai, UAE"
 PHONE = "+971 58 534 2499"
 EMAIL = "douibouhaddi@gmail.com"
@@ -49,12 +71,13 @@ LINKS = [
 
 PROFILE = (
     "Full stack software engineer with 3+ years of experience delivering production business applications "
-    "with C#, ASP.NET Core, Entity Framework Core, SQL, React, and Razor Pages. At MATMAK in Dubai, I extend an "
+    "with C#, ASP.NET Core, Entity Framework Core, SQL, and Razor Pages. At MATMAK in Dubai, I extend an "
     "established ASP.NET Core SaaS platform, covering REST APIs, Stripe subscription billing, and customer and "
-    "admin interfaces. I also own delivery end to end: architecture, Linux and AWS infrastructure, CI/CD, monitoring, "
-    "and production support. Improved affected database read and write performance by about 40%. Earlier built "
-    "Java Spring Boot microservices for an HR and payroll SaaS. Comfortable working directly with management "
-    "and clients in English, Arabic, and French."
+    "admin interfaces, and I own the full delivery chain: architecture, production databases, Linux and AWS "
+    "servers, domains and DNS, CI/CD, monitoring, and production support. Improved affected database read and "
+    "write performance by about 40% and lead client projects from requirements to launch. Earlier built Java "
+    "Spring Boot microservices for an HR and payroll SaaS. Comfortable working directly with management and "
+    "clients in English, Arabic, and French."
 )
 
 SKILLS = [
@@ -91,6 +114,8 @@ MATMAK_DELIVERY = [
     "deployments with GitHub Actions.",
     "Built production monitoring with Prometheus, Grafana, Loki, and Promtail, with dashboards and alerts covering "
     "servers, APIs, Nginx, and application logs.",
+    "Administer the company's full infrastructure estate: cloud accounts, servers, production databases, domains, DNS, "
+    "email, and payment services, with responsibility for availability, security, backups, and access control.",
     "Lead new client projects from requirements and architecture through launch and support, working directly with "
     "management and clients on priorities, technical decisions, and troubleshooting.",
 ]
@@ -535,7 +560,20 @@ def build_pdf():
 
 
 if __name__ == "__main__":
+    import argparse
+    import shutil
+
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--version", type=int, help="build this version number instead of incrementing CV_VERSION")
+    args = parser.parse_args()
+
+    version = next_version(args.version)
+    DOCX_OUT, PDF_OUT = output_paths(version)
     build_docx()
     build_pdf()
+    shutil.copyfile(PDF_OUT, SITE_PDF)
+    VERSION_FILE.write_text(str(version) + chr(10), encoding="utf-8")
+    print(f"CV v{version}")
     print(DOCX_OUT)
     print(PDF_OUT)
+    print(SITE_PDF)
