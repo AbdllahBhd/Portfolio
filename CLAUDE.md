@@ -11,8 +11,9 @@
   Python scripts that generate the matching CV (DOCX + PDF) linked from the site.
 - **Tech stack:**
   - Site: hand-written HTML5, CSS, vanilla JS (ES2020, `"use strict"`). No framework,
-    no bundler, no build step. CSS and the `work/*.html` pages are stored **minified
-    on one line**.
+    no bundler, no build step. Inter is loaded from Google Fonts. Dark theme by
+    default, light via `prefers-color-scheme` or the header toggle (stored in
+    `localStorage`, applied by an inline script before first paint).
   - CV generator: Python 3.13 with `python-docx` (DOCX), `reportlab` (PDF),
     `pypdf` (audit script). No `requirements.txt` — packages are installed globally.
 - **Package manager:** none. There is no `package.json`; never add npm scripts
@@ -69,9 +70,11 @@ open the generated PDF/DOCX and read it.
 - **`tmp/`, `output/`, root-level `*.docx`/`*.pdf`/`*.png`** are generated
   artifacts and render previews. They are git-ignored; rebuild them with
   `build_cv.py` (deps in `requirements.txt`) instead of hand-editing.
-- **Minified assets:** when editing `styles.css` or `work/*.html`, keep them on
-  one line (prettify to edit, re-minify before saving) so the committed diff stays
-  consistent with the existing files.
+- **Stylesheet conventions:** `styles.css` is readable and sectioned, with all
+  colors as tokens on `:root` (dark) and `:root[data-theme="light"]` plus the
+  matching `prefers-color-scheme` block. Never hardcode a color on a component.
+  The three `work/*.html` case-study pages are still minified single-line files
+  and share the header markup and classes of `index.html`.
 
 ## Rules
 
