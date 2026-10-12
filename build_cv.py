@@ -70,59 +70,62 @@ LINKS = [
 ]
 
 PROFILE = (
-    "Full stack software engineer with 3+ years of experience delivering production business applications "
-    "with C#, ASP.NET Core, Entity Framework Core, SQL, and Razor Pages. At MATMAK in Dubai, I extend an "
-    "established ASP.NET Core SaaS platform, covering REST APIs, Stripe subscription billing, and customer and "
-    "admin interfaces, and I own the full delivery chain: architecture, production databases, Linux and AWS "
-    "servers, domains and DNS, CI/CD, monitoring, and production support. Improved affected database read and "
-    "write performance by about 40% and lead client projects from requirements to launch. Earlier built Java "
-    "Spring Boot microservices for an HR and payroll SaaS. Comfortable working directly with management and "
-    "clients in English, Arabic, and French."
+    "Full stack software engineer with 3+ years of experience building and operating production business "
+    "applications with C#, ASP.NET Core, Entity Framework Core, SQL, and Razor Pages. Currently extending an "
+    "established ASP.NET Core SaaS platform across REST APIs, Stripe subscription billing, and customer and "
+    "administration interfaces, with end-to-end ownership of delivery: architecture, production databases, "
+    "Linux and AWS servers, domains and DNS, CI/CD, monitoring, and production support. Improved affected "
+    "database read and write performance by about 40% and leads client projects from requirements to launch. "
+    "Earlier experience building Java Spring Boot microservices for an HR and payroll SaaS. Works directly "
+    "with management and clients in English, Arabic, and French."
 )
 
 SKILLS = [
     ("Backend", "C#, ASP.NET Core, ASP.NET Web API, RESTful APIs, Entity Framework Core, LINQ, dependency injection, JWT and OAuth, Swagger and OpenAPI, OOP, SOLID, design patterns"),
-    ("Frontend", "React, JavaScript, TypeScript, Razor Pages, HTML5, CSS3, Bootstrap, responsive UI"),
+    ("Frontend", "Razor Pages, React, JavaScript, TypeScript, HTML5, CSS3, Bootstrap, responsive UI"),
     ("Databases", "SQL Server, PostgreSQL, MySQL, MongoDB, Firestore; schema design, query optimization, stored procedures"),
-    ("Cloud and DevOps", "AWS EC2, Linux, Docker, Nginx, SSL and TLS, GitHub Actions, Jenkins, CI/CD, Git, Prometheus, Grafana, Loki, Promtail"),
-    ("Payments and testing", "Stripe (subscriptions, invoicing, webhooks), Network International, xUnit, JUnit, unit and integration testing"),
+    ("Cloud and infrastructure", "AWS EC2, Linux server administration, Docker, Nginx, SSL and TLS, domains and DNS, backups and access control"),
+    ("CI/CD and monitoring", "GitHub Actions, Jenkins, Git, Prometheus, Grafana, Loki, Promtail"),
+    ("Payments and testing", "Stripe (subscriptions, invoicing, webhooks), Network International; xUnit, JUnit, unit and integration testing"),
     ("Also experienced in", "Java, Spring Boot, Hibernate, microservices, PHP, Laravel, Filament, WordPress, WooCommerce, Flutter, Dart, Firebase, Angular"),
     ("Ways of working", "Agile and Scrum, Jira, code review, secure coding, AI-assisted development (Cursor, OpenAI Codex, MCP) with review and testing before release"),
 ]
 
 MATMAK_INTRO = (
-    "Dubai software company building an ASP.NET Core SaaS and PPF (paint protection film) cutting platform, "
-    "plus web solutions for automotive clients."
+    "Software company providing a SaaS platform for PPF (paint protection film) pattern cutting, "
+    "together with web solutions for automotive clients."
 )
 
 MATMAK_PLATFORM = [
-    "Extend an established ASP.NET Core SaaS and PPF cutting platform, building REST APIs, Razor Pages, and business "
-    "workflows for authentication, subscriptions, invoicing, pricing, credits, and cutting operations.",
-    "Work in a modular multi-project .NET solution (API, Client, Admin, Models, Services) using Entity Framework Core, "
-    "LINQ, and SQL-backed application services.",
-    "Redesigned the customer-facing pages and administration interface from a dated layout into a modern, responsive UI "
-    "connected to existing application services and data workflows.",
+    "Extend and maintain an established ASP.NET Core SaaS and PPF cutting platform: REST APIs, Razor Pages interfaces, "
+    "and business workflows for authentication, subscriptions, invoicing, pricing, credits, and cutting operations.",
+    "Develop within a modular multi-project .NET solution (API, Client, Admin, Models, Services) built on Entity "
+    "Framework Core, LINQ, and SQL-backed application services.",
+    "Redesigned the customer-facing pages and the administration interface into a modern, responsive UI connected "
+    "to the existing application services and data workflows.",
     "Integrated Stripe one-time payments, recurring subscriptions, invoicing, and webhook-driven payment status updates.",
-    "Improved affected read and write operations by about 40% by tuning EF Core queries and redesigning the database "
-    "schema to remove redundant tables and costly joins.",
+    "Improved affected read and write operations by about 40% by tuning Entity Framework Core queries and redesigning "
+    "the database schema to remove redundant tables and costly joins.",
 ]
 
 MATMAK_DELIVERY = [
+    "Hold end-to-end responsibility for the company's infrastructure: cloud accounts, servers, production databases, "
+    "domains, DNS, email, and payment services, covering availability, security, backups, and access control.",
     "Provision and harden Linux cloud and VPS servers from purchase to go-live: SSH access, firewalls, Nginx reverse "
     "proxy, SSL and TLS, application runtimes, and deployment of ASP.NET Core APIs and web applications.",
-    "Manage AWS EC2, production databases, automated backups, and separate staging environments; automate builds and "
-    "deployments with GitHub Actions.",
-    "Built production monitoring with Prometheus, Grafana, Loki, and Promtail, with dashboards and alerts covering "
+    "Administer AWS EC2 instances, production databases, automated backups, and separate staging environments; "
+    "automate builds and deployments with GitHub Actions.",
+    "Built production monitoring with Prometheus, Grafana, Loki, and Promtail: dashboards and alerts covering "
     "servers, APIs, Nginx, and application logs.",
-    "Administer the company's full infrastructure estate: cloud accounts, servers, production databases, domains, DNS, "
-    "email, and payment services, with responsibility for availability, security, backups, and access control.",
-    "Lead new client projects from requirements and architecture through launch and support, working directly with "
+    "Lead client projects from requirements and architecture through launch and support, working directly with "
     "management and clients on priorities, technical decisions, and troubleshooting.",
 ]
 
+CLIENT_PROJECTS_HEADING = "Client projects delivered at MATMAK"
+
 CLIENT_PROJECTS = [
     (
-        "XSHIELD ecommerce",
+        "XSHIELD online store",
         "WooCommerce, PHP  ·  Production",
         ("xshield-protect.com", "https://xshield-protect.com/"),
         [
@@ -131,7 +134,7 @@ CLIENT_PROJECTS = [
         ],
     ),
     (
-        "HEXIS Training Centre, France",
+        "HEXIS Training Centre (France)",
         "Laravel, Filament, React  ·  Staging",
         None,
         [
@@ -140,7 +143,7 @@ CLIENT_PROJECTS = [
         ],
     ),
     (
-        "HEXIS PRECUT LAB / BODYFENCE",
+        "HEXIS Precut Lab / BODYFENCE",
         "WordPress, PHP, REST API  ·  Production",
         ("bodyfence.net/hpl", "https://www.bodyfence.net/en/hpl/"),
         [
@@ -151,24 +154,24 @@ CLIENT_PROJECTS = [
 
 EARLIER_ROLES = [
     (
-        "Mobile Application Developer", "Apr 2024 – Jun 2024", "Freelance", "Dubai, UAE",
+        "Mobile Application Developer (Freelance)", "Apr 2024 – Jun 2024", "Self-employed", "Dubai, UAE",
         [
             "Developed cross-platform Android and iOS applications with Flutter and Dart, integrating Firebase Authentication, Cloud Firestore, Cloud Storage, and push notifications.",
         ],
     ),
     (
-        "Backend Developer, Java Spring Boot", "Sep 2023 – Apr 2024", "Tech-Instinct", "Bejaia, Algeria",
+        "Backend Developer (Java Spring Boot)", "Sep 2023 – Apr 2024", "Tech-Instinct", "Bejaia, Algeria",
         [
-            "Maintained and extended the production Spring Boot REST microservices of the RH Partner HR and payroll SaaS, each deployed in its own Docker container.",
+            "Maintained and extended the production Spring Boot REST microservices of RH Partner, an HR and payroll SaaS, with each service deployed in its own Docker container.",
             "Designed database schemas and optimized SQL queries, improving affected query performance by 35%.",
             "Wrote JUnit unit and integration tests reaching over 90% coverage in the tested scope, and resolved production defects to support reliable releases.",
         ],
     ),
     (
         "Part-Time Computer Science Instructor", "Sep 2022 – Jun 2023",
-        "ESTIN Higher School of Computer Science and Technology, University Abderrahmane Mira", "Bejaia, Algeria",
+        "ESTIN Higher School of Computer Science and Technology and University Abderrahmane Mira", "Bejaia, Algeria",
         [
-            "Taught and mentored 100+ students in programming, algorithms and data structures, networks, web, and mobile development; created practical lab material.",
+            "Taught and mentored 100+ students in programming, algorithms and data structures, computer networks, and web and mobile development; created practical lab material.",
         ],
     ),
 ]
@@ -176,7 +179,7 @@ EARLIER_ROLES = [
 EDUCATION = [
     (
         "Master's Degree in Software Engineering", "2020 – 2022", "University Abderrahmane Mira", "Bejaia, Algeria",
-        "Thesis: MERN (MongoDB, Express, React, Node.js) progressive web ecommerce application with real-time inventory, payment processing, and a responsive checkout.",
+        "Thesis: progressive web B2C ecommerce application built on the MERN stack (MongoDB, Express, React, Node.js) with real-time inventory, payment processing, and a responsive checkout.",
     ),
     (
         "Bachelor's Degree in Computer Science", "2017 – 2020", "University Abderrahmane Mira", "Bejaia, Algeria",
@@ -257,7 +260,12 @@ def word_section(document, text):
 
 def word_role(document, title, dates, company, location):
     p = document.add_paragraph(style="Heading 2")
-    word_format(p, before=4, after=0.3, line=1.0, keep_next=True)
+    word_format(p, before=7, after=0.3, line=1.0, keep_next=True)
+    # Thin light rule above every role so each employer reads as a separate block.
+    top = OxmlElement("w:top")
+    top.set(qn("w:val"), "single"); top.set(qn("w:sz"), "4"); top.set(qn("w:space"), "4"); top.set(qn("w:color"), "DCE3E5")
+    borders = OxmlElement("w:pBdr"); borders.append(top)
+    p._p.get_or_add_pPr().append(borders)
     p.paragraph_format.tab_stops.add_tab_stop(Inches(CONTENT_WIDTH), WD_TAB_ALIGNMENT.RIGHT)
     set_word_font(p.add_run(title), 10.2, bold=True, color=BLACK)
     set_word_font(p.add_run("\t" + dates), 9.0, bold=True, color=ACCENT)
@@ -273,10 +281,12 @@ def word_note(document, text):
     set_word_font(p.add_run(text), 9.0, italic=True, color=MUTED)
 
 
-def word_subheading(document, title, detail=None, link=None, before=3.5):
+def word_subheading(document, title, detail=None, link=None, before=3.5, indent=0.0, size=9.7):
     p = document.add_paragraph(style="Heading 3")
     word_format(p, before=before, after=0.8, line=1.0, keep_next=True)
-    set_word_font(p.add_run(title), 9.7, bold=True, color=BLACK)
+    if indent:
+        p.paragraph_format.left_indent = Inches(indent)
+    set_word_font(p.add_run(title), size, bold=True, color=BLACK)
     if detail:
         set_word_font(p.add_run("  |  " + detail), 8.9, italic=True, color=MUTED)
     if link:
@@ -284,16 +294,18 @@ def word_subheading(document, title, detail=None, link=None, before=3.5):
         word_hyperlink(p, link[0], link[1], 8.9)
 
 
-def word_bullet(document, text, keep_next=False):
+def word_bullet(document, text, keep_next=False, indent=0.0):
     p = document.add_paragraph(style="List Bullet")
     word_format(p, after=1.3, line=1.03, keep_next=keep_next)
+    if indent:
+        p.paragraph_format.left_indent = Inches(0.22 + indent)
     set_word_font(p.add_run(text), 9.5)
 
 
-def word_bullets(document, items):
+def word_bullets(document, items, indent=0.0):
     """Bullets of one short entry, kept on the same page."""
     for i, text in enumerate(items):
-        word_bullet(document, text, keep_next=i < len(items) - 1)
+        word_bullet(document, text, keep_next=i < len(items) - 1, indent=indent)
 
 
 def word_skill(document, label, text):
@@ -398,9 +410,10 @@ def build_docx():
     word_subheading(document, "Delivery, infrastructure, and operations")
     for text in MATMAK_DELIVERY:
         word_bullet(document, text)
+    word_subheading(document, CLIENT_PROJECTS_HEADING)
     for title, detail, link, bullets in CLIENT_PROJECTS:
-        word_subheading(document, "Client project: " + title, detail, link)
-        word_bullets(document, bullets)
+        word_subheading(document, title, detail, link, before=2.0, indent=0.22, size=9.4)
+        word_bullets(document, bullets, indent=0.22)
 
     for title, dates, company, location, bullets in EARLIER_ROLES:
         word_role(document, title, dates, company, location)
@@ -416,10 +429,10 @@ def build_docx():
     word_skill(document, "Languages", LANGUAGES)
 
     props = document.core_properties
-    props.title = "Abdellah Bouhaddi - Full Stack Software Engineer (.NET, React) CV"
-    props.subject = "Full stack .NET and React software engineering roles in Dubai and the UAE"
+    props.title = "Abdellah Bouhaddi - Full Stack Software Engineer (.NET) CV"
+    props.subject = "Full stack .NET software engineering roles in Dubai and the UAE"
     props.author = "Abdellah Bouhaddi"
-    props.keywords = "Full Stack, Software Engineer, .NET, C#, ASP.NET Core, Web API, React, TypeScript, Entity Framework Core, SQL Server, AWS, Docker, CI/CD, Dubai, UAE"
+    props.keywords = "Full Stack, Software Engineer, .NET, C#, ASP.NET Core, Web API, Entity Framework Core, SQL Server, AWS, Linux, Docker, CI/CD, Stripe, Dubai, UAE"
     document.save(DOCX_OUT)
 
 
@@ -445,6 +458,8 @@ def pdf_styles():
         "body": style("Body", fontName="Helvetica", fontSize=9.6, leading=12.2, textColor=PDF_BODY, alignment=4),
         "skill": style("Skill", fontName="Helvetica", fontSize=9.3, leading=11.6, textColor=PDF_BODY),
         "bullet": style("Bullet", fontName="Helvetica", fontSize=9.5, leading=11.9, textColor=PDF_BODY, leftIndent=12, bulletIndent=3, spaceAfter=2),
+        "project": style("Project", fontName="Helvetica-Bold", fontSize=9.4, leading=11.2, textColor=PDF_BLACK, leftIndent=12, spaceBefore=3, spaceAfter=1, keepWithNext=True),
+        "projectBullet": style("ProjectBullet", fontName="Helvetica", fontSize=9.5, leading=11.9, textColor=PDF_BODY, leftIndent=24, bulletIndent=15, spaceAfter=2),
     }
 
 
@@ -464,7 +479,7 @@ def pdf_section_start(s, text):
     ]
 
 
-def pdf_role(s, title, dates, company, location):
+def pdf_role(s, title, dates, company, location, rule=True):
     row = Table(
         [[Paragraph(escape(title), s["role"]), Paragraph(escape(dates), s["date"])]],
         colWidths=[PDF_WIDTH * 0.72, PDF_WIDTH * 0.28],
@@ -477,20 +492,22 @@ def pdf_role(s, title, dates, company, location):
         ("BOTTOMPADDING", (0, 0), (-1, -1), 0),
     ]))
     meta = Paragraph(f"{escape(company)}&nbsp;&nbsp;|&nbsp;&nbsp;<font name='Helvetica-Oblique' color='#555E66'>{escape(location)}</font>", s["meta"])
-    return [row, meta]
+    # Thin light rule above every role so each employer reads as a separate block.
+    lead = [HRFlowable(width="100%", thickness=0.4, color=colors.HexColor("#DCE3E5"), spaceBefore=4, spaceAfter=0)] if rule else []
+    return lead + [row, meta]
 
 
-def pdf_bullet(s, text):
-    return Paragraph(escape(text), s["bullet"], bulletText="•")
+def pdf_bullet(s, text, style="bullet"):
+    return Paragraph(escape(text), s[style], bulletText="•")
 
 
-def pdf_subheading(s, title, detail=None, link=None, space_before=None):
+def pdf_subheading(s, title, detail=None, link=None, space_before=None, style="h3"):
     html = escape(title)
     if detail:
         html += f"<font name='Helvetica-Oblique' size='8.6' color='#555E66'>&nbsp;&nbsp;|&nbsp;&nbsp;{escape(detail)}</font>"
     if link:
         html += f"<font size='8.6' color='#555E66'>&nbsp;&nbsp;|&nbsp;&nbsp;</font><link href='{link[1]}'><font size='8.6' color='#{ACCENT_HEX}'>{escape(link[0])}</font></link>"
-    st = s["h3"] if space_before is None else ParagraphStyle("H3x", parent=s["h3"], spaceBefore=space_before)
+    st = s[style] if space_before is None else ParagraphStyle(style + "x", parent=s[style], spaceBefore=space_before)
     return Paragraph(html, st)
 
 
@@ -523,21 +540,22 @@ def build_pdf():
     story.append(KeepTogether(pdf_section_start(s, "Technical Skills") + [pdf_skills_table(s, SKILLS)]))
 
     first = pdf_section_start(s, "Professional Experience")
-    first += pdf_role(s, "Full Stack Developer", "Jun 2024 – Present", "MATMAK", "Dubai, UAE")
+    first += pdf_role(s, "Full Stack Developer", "Jun 2024 – Present", "MATMAK", "Dubai, UAE", rule=False)
     first += [Paragraph(escape(MATMAK_INTRO), s["note"]), pdf_subheading(s, ".NET SaaS platform", space_before=1.5), pdf_bullet(s, MATMAK_PLATFORM[0])]
     story.append(KeepTogether(first))
     story += [pdf_bullet(s, t) for t in MATMAK_PLATFORM[1:]]
     story.append(pdf_subheading(s, "Delivery, infrastructure, and operations"))
     story += [pdf_bullet(s, t) for t in MATMAK_DELIVERY]
+    story.append(pdf_subheading(s, CLIENT_PROJECTS_HEADING))
     for title, detail, link, bullets in CLIENT_PROJECTS:
-        story.append(KeepTogether([pdf_subheading(s, "Client project: " + title, detail, link)] + [pdf_bullet(s, t) for t in bullets]))
+        story.append(KeepTogether([pdf_subheading(s, title, detail, link, style="project")] + [pdf_bullet(s, t, "projectBullet") for t in bullets]))
 
     for title, dates, company, location, bullets in EARLIER_ROLES:
         story.append(KeepTogether(pdf_role(s, title, dates, company, location) + [pdf_bullet(s, t) for t in bullets]))
 
     edu = pdf_section_start(s, "Education")
     for i, (degree, dates, school, location, detail) in enumerate(EDUCATION):
-        block = pdf_role(s, degree, dates, school, location) + [pdf_bullet(s, detail)]
+        block = pdf_role(s, degree, dates, school, location, rule=i > 0) + [pdf_bullet(s, detail)]
         story.append(KeepTogether(edu + block if i == 0 else block))
 
     story.append(KeepTogether(pdf_section_start(s, "Certifications and Languages") + [
@@ -551,10 +569,10 @@ def build_pdf():
         rightMargin=MARGIN * inch,
         topMargin=0.5 * inch,
         bottomMargin=0.55 * inch,
-        title="Abdellah Bouhaddi - Full Stack Software Engineer (.NET, React) CV",
+        title="Abdellah Bouhaddi - Full Stack Software Engineer (.NET) CV",
         author="Abdellah Bouhaddi",
-        subject="Full stack .NET and React software engineering roles in Dubai and the UAE",
-        keywords="Full Stack, Software Engineer, .NET, C#, ASP.NET Core, React, TypeScript, SQL Server, AWS, Dubai, UAE",
+        subject="Full stack .NET software engineering roles in Dubai and the UAE",
+        keywords="Full Stack, Software Engineer, .NET, C#, ASP.NET Core, Entity Framework Core, SQL Server, AWS, Linux, CI/CD, Stripe, Dubai, UAE",
     )
     pdf.build(story, onFirstPage=pdf_footer, onLaterPages=pdf_footer)
 
