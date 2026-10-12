@@ -1,0 +1,29 @@
+# Personal Claude Code files — never commit these
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Generated CV artifacts and render previews (rebuild with build_cv_v22.py).
+# Leading slash = root only, so portfolio/assets/Abdellah_Bouhaddi_CV.pdf stays tracked.
+tmp/
+output/
+/*.docx
+/*.pdf
+/*.png
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Common junk
+node_modules/
+dist/
+build/
+*.log
+.DS_Store
+Thumbs.db
