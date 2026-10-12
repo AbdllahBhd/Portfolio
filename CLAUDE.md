@@ -21,8 +21,8 @@
 ## Essential Commands
 
 ```bash
-# Preview the site locally (from the site folder, then open http://localhost:8080)
-cd portfolio && python -m http.server 8080
+# Preview the site locally (or use the "portfolio" entry in .claude/launch.json)
+python -m http.server 8080 --directory portfolio
 
 # Build a NEW CV version: bumps CV_VERSION, writes the numbered .docx (root) and .pdf
 # (output/pdf/), and copies the PDF to portfolio/assets/ so the next push publishes it

@@ -41,5 +41,20 @@ if (menuButton && primaryNav) {
   document.documentElement.classList.add("nav-enhanced");
 }
 
+// Highlight the nav link of the section currently in view (CSS styles a[aria-current]).
+const navLinks = [...document.querySelectorAll(".primary-nav a[href^='#']")];
+const spied = navLinks.map((link) => document.getElementById(link.getAttribute("href").slice(1))).filter(Boolean);
+if (spied.length && "IntersectionObserver" in window) {
+  const setCurrent = (id) => navLinks.forEach((link) => {
+    if (link.getAttribute("href") === "#" + id) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+  const spy = new IntersectionObserver((entries) => {
+    const visible = entries.find((entry) => entry.isIntersecting);
+    if (visible) setCurrent(visible.target.id);
+  }, { rootMargin: "-35% 0px -60% 0px", threshold: 0 });
+  spied.forEach((section) => spy.observe(section));
+}
+
 const currentYear = document.querySelector("#current-year");
 if (currentYear) currentYear.textContent = String(new Date().getFullYear());
