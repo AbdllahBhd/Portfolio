@@ -83,6 +83,8 @@ Detailed conventions live in `.claude/rules/` and are loaded automatically:
 - @.claude/rules/code-style.md
 - @.claude/rules/pr.md
 - @.claude/rules/workflow.md
+- @.claude/rules/delivery.md
+- @.claude/rules/reporting.md
 
 API conventions load on demand as a skill (`.claude/skills/api-conventions/`) —
 only sessions that touch an API pay for them. This project currently has no API.

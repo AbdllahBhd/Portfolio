@@ -32,6 +32,23 @@
   it as steps complete — plans must survive a restart; memory does not.
 - Trivial fixes (typo, one-liner, rename) skip planning. When unsure, plan.
 
+## Plan quality (large features & new projects)
+
+- A plan is a professional document, straight to the point: **Objective** (one
+  sentence) · **In scope / Out of scope** · **Approach** (the decision and its why,
+  not a survey of options) · **Ordered steps, each ending with how that step is
+  verified** · **Files/components touched** · **Risks & open questions**.
+- For a NEW project (or new module), the plan includes the folder structure —
+  follow the recognized best-practice layout for the stack via the
+  `project-structure` skill. Clean architecture only where it earns its weight;
+  the skill says when.
+- **Adversarial plan review before presenting:** for large features and new
+  projects, have the draft plan reviewed in a fresh context before showing it —
+  the `llm-council` skill when available, otherwise a subagent prompted as a
+  critical plan reviewer (gaps, wrong assumptions, missing verification — not
+  style). Address the findings, then present the plan noting it was reviewed
+  and what changed. Present it only when it would pass a senior engineer's bar.
+
 ## Test-driven by default
 
 - For new behavior: write the failing test FIRST, see it fail, implement, see it pass.

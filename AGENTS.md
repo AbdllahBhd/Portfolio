@@ -11,6 +11,8 @@ Also read the convention files it references:
 - [.claude/rules/code-style.md](.claude/rules/code-style.md)
 - [.claude/rules/pr.md](.claude/rules/pr.md)
 - [.claude/rules/workflow.md](.claude/rules/workflow.md)
+- [.claude/rules/delivery.md](.claude/rules/delivery.md)
+- [.claude/rules/reporting.md](.claude/rules/reporting.md)
 
 On-demand knowledge and workflows are available to you natively as skills in
 `.agents/skills/` (api-conventions, testing-patterns, deploy, install, retro —
