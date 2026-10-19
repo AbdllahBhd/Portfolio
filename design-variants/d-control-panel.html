@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Variant D · Control panel — Abdellah Bouhaddi</title>
+<meta name="description" content="Design variant D: control-panel portfolio for Abdellah Bouhaddi, full-stack .NET engineer in Dubai.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#0e1218; --side:#0a0e13; --panel:#141a22; --panel-2:#1a222c; --line:#232d3a; --line-2:#34435500;
+  --text:#e7edf3; --soft:#b8c3cf; --muted:#8392a3; --accent:#4cc9f0; --accent-2:#7cf5c6; --accent-soft:rgba(76,201,240,.12);
+  --ok:#7cf5c6; --warn:#ffcf5c; --mark:rgba(255,207,92,.35);
+  --sans:"Inter",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+:root[data-theme="light"]{--bg:#f3f5f8;--side:#ffffff;--panel:#ffffff;--panel-2:#eef2f6;--line:#dbe2ea;--text:#101722;--soft:#2c3744;--muted:#5f6b7a;--accent:#0a7ea4;--accent-2:#0f9c7a;--accent-soft:rgba(10,126,164,.1);--ok:#0f9c7a;--warn:#b7791f;--mark:rgba(255,207,92,.6)}
+*,*::before,*::after{box-sizing:border-box}*{margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}ul,ol{list-style:none;padding:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3,h4{font-weight:700;letter-spacing:-.02em;line-height:1.15}
+h1{font-size:clamp(2rem,1.3rem + 2.8vw,3.4rem)} h2{font-size:1.5rem} h3{font-size:1.05rem}
+p{color:var(--soft)}
+.cmd{font-family:var(--mono);font-size:.8rem;color:var(--accent)}
+.cmd::before{content:"$ ";color:var(--muted)}
+mark{background:var(--mark);color:inherit;border-radius:3px;padding:0 2px}
+
+/* layout */
+.app{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;height:100vh;background:var(--side);border-right:1px solid var(--line);padding:24px 20px;display:flex;flex-direction:column;gap:22px;overflow:auto}
+.who{display:flex;align-items:center;gap:12px}
+.who i{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-style:normal;font-weight:800;color:#06131a}
+.who b{display:block;font-size:.95rem} .who span{display:block;font-size:.76rem;color:var(--muted)}
+.online{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--line);border-radius:8px;font-family:var(--mono);font-size:.7rem;color:var(--soft);background:var(--panel)}
+.online i{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 8px var(--ok)}
+.search{position:relative}
+.search input{width:100%;padding:10px 12px 10px 34px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);font:inherit;font-size:.86rem}
+.search input::placeholder{color:var(--muted)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2}
+.search small{display:block;margin-top:6px;font-family:var(--mono);font-size:.68rem;color:var(--muted);min-height:1em}
+.menu{display:grid;gap:2px}
+.menu a{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;font-size:.88rem;color:var(--muted);text-decoration:none;transition:.2s}
+.menu a:hover{color:var(--text);background:var(--panel)}
+.menu a[aria-current]{color:var(--accent);background:var(--accent-soft)}
+.menu a .pct{font-family:var(--mono);font-size:.66rem;color:var(--muted)}
+.menu a[aria-current] .pct{color:var(--accent)}
+.side .foot{margin-top:auto;display:grid;gap:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);font-size:.86rem;font-weight:600;text-decoration:none;transition:.2s;background:var(--panel)}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#06131a}
+.btn.primary:hover{filter:brightness(1.08);color:#06131a}
+.iconrow{display:flex;gap:6px}
+.iconrow a,.iconrow button{flex:1;display:grid;place-items:center;padding:8px;border:1px solid var(--line);border-radius:8px;font-family:var(--mono);font-size:.7rem;color:var(--muted);text-decoration:none}
+.iconrow a:hover,.iconrow button:hover{color:var(--accent);border-color:var(--accent)}
+
+.main{padding:28px 36px 60px;display:grid;gap:28px;max-width:1240px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.crumbs{font-family:var(--mono);font-size:.76rem;color:var(--muted)} .crumbs b{color:var(--text);font-weight:500}
+.topbar .meta{display:flex;gap:14px;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+.panel-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.panel-head h2{margin-top:4px}
+.panel-head .cmd{display:block}
+.panel-head p{color:var(--muted);font-size:.9rem;max-width:52ch}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:22px}
+.hero .lead{margin-top:14px;max-width:54ch;font-size:1.04rem}
+.hero .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.kpi{padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.kpi small{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kpi strong{display:block;margin-top:6px;font-size:1.7rem;letter-spacing:-.03em}
+.kpi strong b{color:var(--accent-2)}
+.kpi span{display:block;font-size:.78rem;color:var(--soft)}
+
+/* system map */
+.sysmap{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+.nodes{display:grid;gap:10px}
+.node{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);text-align:left;transition:.2s}
+.node i{width:52px;height:40px;border-radius:9px;display:grid;place-items:center;font-family:var(--mono);font-size:.7rem;font-style:normal;background:var(--panel);border:1px solid var(--line)}
+.node b{display:block;font-size:.95rem} .node small{display:block;color:var(--muted);font-size:.76rem}
+.node em{font-style:normal;font-family:var(--mono);font-size:.68rem;color:var(--ok)}
+.node:hover,.node[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.node[aria-pressed="true"] i{background:var(--accent);color:#06131a;border-color:var(--accent)}
+.node-detail{padding:18px;border:1px dashed var(--line);border-radius:12px;min-height:220px}
+.node-detail h3{font-size:1.1rem} .node-detail p{margin-top:8px;font-size:.92rem}
+.node-detail ul{margin-top:12px;display:grid;gap:6px;font-size:.88rem;color:var(--soft)}
+.node-detail li{display:grid;grid-template-columns:16px 1fr;gap:8px}.node-detail li::before{content:"›";color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chips li{font-family:var(--mono);font-size:.7rem;padding:4px 8px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--soft)}
+.chips li.on{border-color:var(--accent-2);color:var(--accent-2)}
+
+/* projects table */
+.table{width:100%;border-collapse:collapse;font-size:.92rem}
+.table th{text-align:left;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;padding:0 10px 10px;border-bottom:1px solid var(--line)}
+.table td{padding:14px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.table tr:hover td{background:var(--panel-2)}
+.table .name b{display:block;font-size:1rem} .table .name span{display:block;color:var(--muted);font-size:.82rem;margin-top:2px}
+.table .name a{text-decoration:none}.table .name a:hover{color:var(--accent)}
+.status{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ok)}
+.status::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.status.warn{color:var(--warn)}
+.table .role{font-size:.86rem;color:var(--soft);max-width:34ch}
+.table .links{white-space:nowrap;font-size:.84rem}
+.table .links a{text-decoration:none;color:var(--accent)} .table .links a+a{margin-left:10px}
+.table .expand{margin-top:8px;font-size:.8rem;color:var(--accent);text-decoration:none;display:inline-flex;gap:6px}
+.table tr.detail td{background:var(--panel-2);padding:14px 18px;font-size:.88rem}
+.table tr.detail[hidden]{display:none}
+.table tr.detail ul{display:grid;gap:6px;color:var(--soft)}
+.table tr.detail li{display:grid;grid-template-columns:16px 1fr;gap:8px}.table tr.detail li::before{content:"✓";color:var(--accent-2)}
+.sort{display:flex;gap:6px;flex-wrap:wrap}
+.sort button{padding:6px 10px;border:1px solid var(--line);border-radius:999px;font-size:.78rem;color:var(--soft)}
+.sort button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+
+/* experience */
+.xp{display:grid;grid-template-columns:220px 1fr;gap:28px}
+.xp .intro{position:sticky;top:28px;align-self:start}
+.xp .intro p{margin-top:10px;font-size:.9rem;color:var(--muted)}
+.xp .list{display:grid}
+.xp article{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line)}
+.xp article:first-child{border-top:0;padding-top:0}
+.xp .date{font-family:var(--mono);font-size:.74rem;color:var(--muted);padding-top:4px}
+.xp .org{font-size:.84rem;color:var(--muted)} .xp p.desc{margin-top:8px;font-size:.92rem}
+.xp .chips{margin-top:10px}
+
+/* skills matrix */
+.matrix{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.matrix article{padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.matrix h3{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.matrix ul{margin-top:10px;display:grid;gap:6px}
+.matrix li{display:flex;justify-content:space-between;gap:8px;font-size:.86rem}
+.matrix li span:last-child{font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.matrix li.prod span:last-child{color:var(--ok)}
+
+/* ask + about */
+.two{display:grid;grid-template-columns:1.1fr 1fr;gap:22px}
+.faq details{border-top:1px solid var(--line);padding:12px 0}
+.faq details:last-of-type{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:"+";color:var(--accent)}.faq details[open] summary::after{content:"–"}
+.faq details p{margin-top:8px;font-size:.9rem}
+.about dl{display:grid;gap:0}
+.about dl div{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:.9rem}
+.about dt{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+.contact{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:center;background:linear-gradient(135deg,var(--panel),var(--panel-2))}
+.contact .list{display:grid;gap:8px}
+.contact .list a{display:flex;justify-content:space-between;gap:12px;padding:11px 14px;border:1px solid var(--line);border-radius:10px;text-decoration:none;font-size:.9rem;background:var(--bg);transition:.2s}
+.contact .list a:hover{border-color:var(--accent);color:var(--accent)}
+.contact .list a span{font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.foot{font-family:var(--mono);font-size:.72rem;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.mobile-top{display:none}
+
+@media(max-width:1100px){.matrix{grid-template-columns:1fr 1fr}.hero,.sysmap,.two,.contact{grid-template-columns:1fr}}
+@media(max-width:860px){
+  .app{grid-template-columns:1fr}.side{display:none}
+  .mobile-top{display:flex;position:sticky;top:0;z-index:20;justify-content:space-between;align-items:center;gap:10px;padding:12px 18px;background:var(--side);border-bottom:1px solid var(--line)}
+  .mobile-top nav{display:flex;gap:4px;overflow:auto}.mobile-top nav a{padding:6px 10px;font-size:.82rem;color:var(--muted);text-decoration:none;white-space:nowrap}
+  .main{padding:18px 16px 48px}.xp{grid-template-columns:1fr}.xp .intro{position:static}.xp article{grid-template-columns:1fr;gap:4px}
+  .table thead{display:none}.table tr{display:grid;gap:6px;padding:12px 0;border-bottom:1px solid var(--line)}.table td{border:0;padding:0}.table tr.detail td{padding:12px}
+  .matrix{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="mobile-top"><b>Abdellah Bouhaddi</b><nav><a href="#overview">Overview</a><a href="#work">Work</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#ask">Ask</a><a href="#contact">Contact</a></nav></div>
+<div class="app">
+  <aside class="side">
+    <div class="who"><i>AB</i><div><b>Abdellah Bouhaddi</b><span>Full-stack · .NET · Dubai</span></div></div>
+    <span class="online"><i aria-hidden="true"></i> open to roles · UAE</span>
+    <div class="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Search this page… (e.g. Stripe)" aria-label="Search the page">
+      <small id="q-note"></small>
+    </div>
+    <nav class="menu" aria-label="Sections">
+      <a href="#overview">Overview<span class="pct"></span></a>
+      <a href="#system">System map<span class="pct"></span></a>
+      <a href="#work">Projects<span class="pct"></span></a>
+      <a href="#experience">Experience<span class="pct"></span></a>
+      <a href="#skills">Skills<span class="pct"></span></a>
+      <a href="#ask">Ask me<span class="pct"></span></a>
+      <a href="#contact">Contact<span class="pct"></span></a>
+    </nav>
+    <div class="foot">
+      <a class="btn primary" href="../portfolio/assets/Abdellah_Bouhaddi_CV.pdf" download data-track="resume">Download resume</a>
+      <a class="btn" href="mailto:douibouhaddi@gmail.com" data-track="email">Email me</a>
+      <div class="iconrow"><a href="https://github.com/AbdllahBhd" target="_blank" rel="noopener">github</a><a href="https://www.linkedin.com/in/abdellah-bouhaddi-1688421a9/" target="_blank" rel="noopener">linkedin</a><button id="theme" type="button" aria-label="Toggle theme">theme</button></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar"><p class="crumbs">portfolio / <b>abdellah.bouhaddi</b></p><div class="meta"><span>Dubai, UAE · UTC+4</span><span id="clock"></span></div></div>
+
+    <section class="panel hero" id="overview">
+      <div><p class="cmd">whoami</p><h1 style="margin-top:8px">Full-stack engineer who ships the feature and runs the server.</h1><p class="lead">C# and ASP.NET Core in production, with ownership of the whole chain: interfaces, APIs, payments, databases, Linux and AWS, domains, releases and monitoring.</p><div class="actions"><a class="btn primary" href="#work">Open projects</a><a class="btn" href="#ask">Ask me</a></div></div>
+      <div class="kpis">
+        <div class="kpi"><small>Experience</small><strong>3<b>+</b> yrs</strong><span>production software</span></div>
+        <div class="kpi"><small>DB performance</small><strong>~40<b>%</b></strong><span>faster affected reads/writes</span></div>
+        <div class="kpi"><small>Client launches led</small><strong>3</strong><span>XSHIELD · HEXIS · HPL</span></div>
+        <div class="kpi"><small>Languages</small><strong>EN·AR·FR</strong><span>+ native Kabyle</span></div>
+      </div>
+    </section>
+
+    <section class="panel" id="system">
+      <div class="panel-head"><div><span class="cmd">systemctl status --all</span><h2>Where I sit in the system</h2></div><p>Hover or click a component. Everything is shown; the detail just gets deeper.</p></div>
+      <div class="sysmap">
+        <div class="nodes" role="group" aria-label="System components">
+          <button class="node" data-n="ui" aria-pressed="false"><i>UI</i><span><b>Interfaces</b><small>Customer pages · admin tools · mobile</small></span><em>active</em></button>
+          <button class="node" data-n="api" aria-pressed="true"><i>API</i><span><b>Application</b><small>ASP.NET Core · workflows · payments</small></span><em>active</em></button>
+          <button class="node" data-n="db" aria-pressed="false"><i>DB</i><span><b>Data</b><small>SQL · schema · performance · backups</small></span><em>active</em></button>
+          <button class="node" data-n="infra" aria-pressed="false"><i>INFRA</i><span><b>Infrastructure</b><small>Linux · AWS · DNS · TLS · CI/CD</small></span><em>active</em></button>
+          <button class="node" data-n="obs" aria-pressed="false"><i>OBS</i><span><b>Monitoring</b><small>Prometheus · Grafana · Loki · alerts</small></span><em>active</em></button>
+        </div>
+        <div class="node-detail" id="node-detail" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="work">
+      <div class="panel-head"><div><span class="cmd">ls ./work --sort=impact</span><h2>Projects</h2></div><div class="sort" role="group" aria-label="Sort"><button type="button" aria-pressed="true" data-sort="impact">by impact</button><button type="button" aria-pressed="false" data-sort="date">by date</button><button type="button" aria-pressed="false" data-sort="stack">by stack</button></div></div>
+      <table class="table" id="projects">
+        <thead><tr><th>Project</th><th>Status</th><th>My role</th><th>Stack</th><th>Links</th></tr></thead>
+        <tbody>
+          <tr data-impact="1" data-date="2024-06" data-stack=".NET"><td class="name"><b><a href="../portfolio/work/matmak.html">MATMAK — PPF cutting SaaS</a></b><span>Team contribution · Dubai</span><a class="expand" href="#" data-expand>details ▾</a></td><td><span class="status">Production</span></td><td class="role">Extend the ASP.NET Core platform; own servers, databases, AWS and releases.</td><td><ul class="chips"><li>C#</li><li>ASP.NET Core</li><li>EF Core</li><li>SQL</li><li>Stripe</li><li>AWS</li></ul></td><td class="links"><a href="../portfolio/work/matmak.html">case study</a><a href="https://matmaksolutions.com/en" target="_blank" rel="noopener">live ↗</a></td></tr>
+          <tr class="detail" hidden><td colspan="5"><ul><li>REST APIs, Razor Pages and workflows for auth, subscriptions, invoicing, pricing, credits and cutting operations.</li><li>Redesigned the customer pages and admin interface into a responsive UI.</li><li>Stripe one-time, subscriptions, invoicing, webhooks.</li><li>~40% faster affected reads/writes via schema redesign and EF Core tuning.</li></ul></td></tr>
+          <tr data-impact="2" data-date="2025-01" data-stack="PHP"><td class="name"><b><a href="../portfolio/work/xshield.html">XSHIELD — online store</a></b><span>Client project · UAE</span><a class="expand" href="#" data-expand>details ▾</a></td><td><span class="status">Production</span></td><td class="role">Delivered end to end: plugins, payments, hosting, DNS, email, go-live.</td><td><ul class="chips"><li>WooCommerce</li><li>PHP</li><li>Stripe</li><li>Network Intl.</li><li>Linux</li></ul></td><td class="links"><a href="../portfolio/work/xshield.html">case study</a><a href="https://xshield-protect.com/" target="_blank" rel="noopener">live ↗</a></td></tr>
+          <tr class="detail" hidden><td colspan="5"><ul><li>Linux hosting, domain and DNS, Google Workspace email, deployment, operational support.</li><li>Custom PHP pages and plugins, API integrations, import/export workflows.</li><li>Stripe and Network International gateways for UAE checkout.</li></ul></td></tr>
+          <tr data-impact="3" data-date="2025-03" data-stack="React"><td class="name"><b><a href="../portfolio/work/hexis-training.html">HEXIS Training Centre</a></b><span>Client project · France</span><a class="expand" href="#" data-expand>details ▾</a></td><td><span class="status warn">Staging</span></td><td class="role">Architected and built the whole platform.</td><td><ul class="chips"><li>React</li><li>Laravel</li><li>Filament</li><li>MySQL</li></ul></td><td class="links"><a href="../portfolio/work/hexis-training.html">case study</a><a href="https://staging.hexis-training.com/" target="_blank" rel="noopener">staging ↗</a></td></tr>
+          <tr class="detail" hidden><td colspan="5"><ul><li>Laravel backend, Filament administration, React public interface, multilingual.</li><li>Course planning, locations, registrations, certifications, transactional email.</li><li>Quiz flow: emailed access, automatic submission, scoring, results.</li></ul></td></tr>
+          <tr data-impact="4" data-date="2024-10" data-stack="PHP"><td class="name"><b>HEXIS Precut Lab / BODYFENCE</b><span>Integration</span></td><td><span class="status">Production</span></td><td class="role">WordPress plugin over a dedicated MATMAK API.</td><td><ul class="chips"><li>WordPress</li><li>PHP</li><li>REST</li></ul></td><td class="links"><a href="https://www.bodyfence.net/en/hpl/" target="_blank" rel="noopener">visit ↗</a></td></tr>
+          <tr data-impact="5" data-date="2023-09" data-stack="Java"><td class="name"><b>RH Partner — HR &amp; payroll SaaS</b><span>Tech-Instinct · Béjaïa</span></td><td><span class="status">Production</span></td><td class="role">Maintained Spring Boot microservices; SQL tuning; 90%+ coverage in scope.</td><td><ul class="chips"><li>Java</li><li>Spring Boot</li><li>Docker</li><li>JUnit</li></ul></td><td class="links"><a href="https://rh-partner.com/" target="_blank" rel="noopener">visit ↗</a></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel" id="experience">
+      <div class="xp">
+        <div class="intro"><span class="cmd">git log --oneline career</span><h2 style="margin-top:6px">Experience</h2><p>From teaching the fundamentals to owning software and infrastructure in production.</p><a class="btn" style="margin-top:14px" href="../portfolio/assets/Abdellah_Bouhaddi_CV.pdf" download data-track="resume">Full resume ↓</a></div>
+        <div class="list">
+          <article><p class="date">Jun 2024 — now</p><div><h3>Full Stack Developer</h3><p class="org">MATMAK · Dubai, UAE</p><p class="desc">Extend the .NET SaaS with the team, modernise customer and admin interfaces, lead client applications to launch. Own cloud accounts, servers, production databases, domains, email and payment services.</p><ul class="chips"><li>C#</li><li>ASP.NET Core</li><li>SQL</li><li>Stripe</li><li>AWS</li><li>Linux</li><li>CI/CD</li></ul></div></article>
+          <article><p class="date">Apr — Jun 2024</p><div><h3>Mobile Application Developer</h3><p class="org">Freelance · Dubai</p><p class="desc">Cross-platform Flutter apps with Firebase auth, Firestore, storage and push notifications.</p><ul class="chips"><li>Flutter</li><li>Dart</li><li>Firebase</li></ul></div></article>
+          <article><p class="date">Sep 2023 — Apr 2024</p><div><h3>Backend Developer · Java Spring Boot</h3><p class="org">Tech-Instinct · Béjaïa, Algeria</p><p class="desc">Maintained and extended RH Partner's production REST microservices; schemas, SQL optimisation, JUnit tests, production defects.</p><ul class="chips"><li>Java</li><li>Spring Boot</li><li>Docker</li><li>JUnit</li></ul></div></article>
+          <article><p class="date">Sep 2022 — Jun 2023</p><div><h3>Computer Science Instructor</h3><p class="org">ESTIN &amp; University Abderrahmane Mira · part-time</p><p class="desc">Mentored 100+ students through practical labs in programming, algorithms, networks, web and mobile development.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="skills">
+      <div class="panel-head"><div><span class="cmd">cat skills.yaml</span><h2>Skills matrix</h2></div><p><span style="color:var(--ok)">prod</span> = used in production work · <span style="color:var(--muted)">proj</span> = project or academic</p></div>
+      <div class="matrix">
+        <article><h3>backend &amp; data</h3><ul><li class="prod"><span>C# · ASP.NET Core</span><span>prod</span></li><li class="prod"><span>EF Core · LINQ</span><span>prod</span></li><li class="prod"><span>SQL Server · PostgreSQL</span><span>prod</span></li><li class="prod"><span>REST · JWT · Swagger</span><span>prod</span></li><li class="prod"><span>Java · Spring Boot</span><span>prod</span></li></ul></article>
+        <article><h3>frontend</h3><ul><li class="prod"><span>Razor Pages</span><span>prod</span></li><li class="prod"><span>React</span><span>prod</span></li><li><span>TypeScript</span><span>proj</span></li><li class="prod"><span>HTML · CSS · JS</span><span>prod</span></li><li class="prod"><span>Flutter · Dart</span><span>prod</span></li></ul></article>
+        <article><h3>infrastructure</h3><ul><li class="prod"><span>Linux · Nginx · TLS</span><span>prod</span></li><li class="prod"><span>AWS EC2 · backups</span><span>prod</span></li><li class="prod"><span>DNS · domains · email</span><span>prod</span></li><li class="prod"><span>Docker · GitHub Actions</span><span>prod</span></li><li class="prod"><span>Prometheus · Grafana · Loki</span><span>prod</span></li></ul></article>
+        <article><h3>payments &amp; platforms</h3><ul><li class="prod"><span>Stripe</span><span>prod</span></li><li class="prod"><span>Network International</span><span>prod</span></li><li class="prod"><span>WordPress · WooCommerce</span><span>prod</span></li><li class="prod"><span>Laravel · Filament</span><span>prod</span></li><li><span>Firebase</span><span>proj</span></li></ul></article>
+      </div>
+    </section>
+
+    <section class="panel" id="ask">
+      <div class="panel-head"><div><span class="cmd">abdellah --help</span><h2>Ask me</h2></div></div>
+      <div class="two">
+        <div class="faq">
+          <details open><summary>Can you own a .NET product end to end?</summary><p>Yes. At MATMAK I extend the ASP.NET Core SaaS with the team and own the servers, databases, AWS, DNS, email, payments and releases around it.</p></details>
+          <details><summary>Backend or frontend?</summary><p>Backend-first (C#, ASP.NET Core, SQL) with real frontend delivery: Razor Pages in production, React for HEXIS, Flutter for mobile.</p></details>
+          <details><summary>Have you handled payments?</summary><p>Stripe subscriptions, invoicing and webhooks in the MATMAK platform; Stripe and Network International for a UAE WooCommerce checkout.</p></details>
+          <details><summary>Do you lead or execute?</summary><p>Both: I lead client projects from requirements to launch, and execute inside the team on the core product.</p></details>
+          <details><summary>Availability?</summary><p>Based in Dubai, open to full-stack and .NET roles across the UAE. English, Arabic, French.</p></details>
+        </div>
+        <div class="about"><span class="cmd">cat about.md</span><dl style="margin-top:10px">
+          <div><dt>Based in</dt><dd>Dubai, UAE. Software engineering foundation from Béjaïa, Algeria.</dd></div>
+          <div><dt>Education</dt><dd>MSc Software Engineering (2022), BSc Computer Science (2020), University Abderrahmane Mira.</dd></div>
+          <div><dt>Certifications</dt><dd>Java Developer Certificate · Huawei Cloud Computing.</dd></div>
+          <div><dt>Languages</dt><dd>English, Arabic, French (fluent) · Kabyle (native).</dd></div>
+          <div><dt>How I work</dt><dd>Directly with management and clients; AI-assisted tooling where it helps, with review and testing before anything ships.</dd></div>
+        </dl></div>
+      </div>
+    </section>
+
+    <section class="panel contact" id="contact">
+      <div><span class="cmd">ping abdellah</span><h2 style="margin-top:6px">Reply within a day.</h2><p style="margin-top:8px">Have a role or a project in mind? Email is fastest.</p></div>
+      <div class="list"><a href="mailto:douibouhaddi@gmail.com" data-track="email">douibouhaddi@gmail.com <span>email</span></a><a href="tel:+971585342499">+971 58 534 2499 <span>phone</span></a><a href="https://www.linkedin.com/in/abdellah-bouhaddi-1688421a9/" target="_blank" rel="noopener">abdellah-bouhaddi <span>linkedin</span></a><a href="https://github.com/AbdllahBhd" target="_blank" rel="noopener">AbdllahBhd <span>github</span></a></div>
+    </section>
+
+    <p class="foot"><span>© 2026 Abdellah Bouhaddi</span><span>Variant D · Control panel</span></p>
+  </main>
+</div>
+
+<!-- Analytics: GoatCounter (privacy-friendly, no cookies). Replace YOURCODE after creating a free account at goatcounter.com -->
+<script data-goatcounter="https://YOURCODE.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script>
+function track(n){ if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "event/" + n, title: n, event: true }); }
+document.querySelectorAll("[data-track]").forEach(a => a.addEventListener("click", () => track(a.dataset.track)));
+
+/* theme + clock */
+const root = document.documentElement;
+try { const s = localStorage.getItem("theme-d"); if (s) root.setAttribute("data-theme", s); } catch (e) {}
+document.getElementById("theme").addEventListener("click", () => { const n = root.getAttribute("data-theme") === "light" ? "dark" : "light"; root.setAttribute("data-theme", n); try { localStorage.setItem("theme-d", n); } catch (e) {} });
+const clock = document.getElementById("clock");
+const tick = () => clock.textContent = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Dubai", hour: "2-digit", minute: "2-digit" }).format(new Date()) + " local";
+tick(); setInterval(tick, 30000);
+
+/* page search: highlights, never hides */
+const q = document.getElementById("q"), qNote = document.getElementById("q-note");
+const searchable = [...document.querySelectorAll(".main p, .main li, .main td, .main h1, .main h2, .main h3, .main dd")].filter(el => !el.querySelector("p, li, h1, h2, h3, dd"));
+searchable.forEach(el => el.dataset.html = el.innerHTML);
+let qTimer;
+q.addEventListener("input", () => { clearTimeout(qTimer); qTimer = setTimeout(() => {
+  const term = q.value.trim(); let hits = 0, first = null;
+  searchable.forEach(el => { el.innerHTML = el.dataset.html; if (term.length < 2) return; const re = new RegExp("(" + term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi"); if (re.test(el.textContent)) { hits += 1; first = first || el; el.innerHTML = (">" + el.dataset.html + "<").replace(/>([^<]+)</g, (m, t) => ">" + t.replace(re, "<mark>$1</mark>") + "<").slice(1, -1); } });
+  qNote.textContent = term.length < 2 ? "" : hits ? `${hits} matches` : "no matches";
+  if (first) { const tr = first.closest("tr.detail"); if (tr) tr.hidden = false; first.scrollIntoView({ block: "center", behavior: "smooth" }); }
+  if (term.length >= 2) track("search");
+}, 180); });
+
+/* system map */
+const NODES = {
+  ui: { t: "Interfaces", p: "Customer-facing pages, administration tools and mobile apps that people actually use every day.", l: ["Redesigned MATMAK's customer pages and admin interface into a responsive UI.", "React public interface for HEXIS Training; Flutter apps for freelance clients."], c: ["Razor Pages", "React", "TypeScript", "Bootstrap", "Flutter"] },
+  api: { t: "Application", p: "ASP.NET Core REST APIs and business workflows: authentication, subscriptions, invoicing, pricing, credits and cutting operations.", l: ["Stripe one-time, recurring, invoicing and webhook-driven status updates.", "Modular multi-project .NET solution: API, Client, Admin, Models, Services."], c: ["C#", "ASP.NET Core", "Web API", "EF Core", "Stripe", "JWT"] },
+  db: { t: "Data", p: "Schema design, query performance, production databases and backups.", l: ["Schema redesign removed redundant tables and costly joins; EF Core tuning: ~40% faster affected reads/writes.", "Automated backups and separate staging databases."], c: ["SQL Server", "PostgreSQL", "EF Core", "LINQ", "Backups"] },
+  infra: { t: "Infrastructure", p: "Provision and harden Linux servers from purchase to go-live; AWS EC2; domains, DNS, TLS; CI/CD.", l: ["SSH access, firewalls, Nginx reverse proxy, TLS, runtimes, deployments.", "GitHub Actions builds and deployments; staging environments."], c: ["Linux", "AWS EC2", "Nginx", "TLS", "DNS", "Docker", "GitHub Actions"] },
+  obs: { t: "Monitoring", p: "Production monitoring with dashboards and alerts covering servers, APIs, Nginx and application logs.", l: ["Prometheus + Grafana dashboards; Loki + Promtail for logs; alerting on critical issues."], c: ["Prometheus", "Grafana", "Loki", "Promtail"] },
+};
+const nd = document.getElementById("node-detail"), nodes = document.querySelectorAll(".node");
+function showNode(k){ nodes.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.n === k))); const n = NODES[k]; nd.innerHTML = `<h3>${n.t}</h3><p>${n.p}</p><ul>${n.l.map(x => `<li>${x}</li>`).join("")}</ul><ul class="chips">${n.c.map(x => `<li class="on">${x}</li>`).join("")}</ul>`; }
+nodes.forEach(b => { b.addEventListener("click", () => { showNode(b.dataset.n); track("node-" + b.dataset.n); }); b.addEventListener("mouseenter", () => showNode(b.dataset.n)); });
+showNode("api");
+
+/* projects: sort + expand */
+const tbody = document.querySelector("#projects tbody");
+document.querySelectorAll(".sort button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".sort button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  const key = b.dataset.sort, rows = [...tbody.querySelectorAll("tr:not(.detail)")];
+  const pairs = rows.map(r => [r, r.nextElementSibling && r.nextElementSibling.classList.contains("detail") ? r.nextElementSibling : null]);
+  pairs.sort((a, c) => key === "impact" ? +a[0].dataset.impact - +c[0].dataset.impact : key === "date" ? c[0].dataset.date.localeCompare(a[0].dataset.date) : a[0].dataset.stack.localeCompare(c[0].dataset.stack));
+  pairs.forEach(([r, d]) => { tbody.appendChild(r); if (d) tbody.appendChild(d); });
+  track("sort-" + key);
+}));
+document.querySelectorAll("[data-expand]").forEach(a => a.addEventListener("click", e => { e.preventDefault(); const d = a.closest("tr").nextElementSibling; d.hidden = !d.hidden; a.textContent = d.hidden ? "details ▾" : "details ▴"; track("expand"); }));
+
+/* sidebar: current section + read progress per section */
+const links = [...document.querySelectorAll(".menu a")];
+const sections = links.map(a => document.querySelector(a.getAttribute("href")));
+function progress(){
+  const y = window.scrollY + window.innerHeight * .4;
+  let current = sections[0];
+  sections.forEach((s, i) => { const top = s.offsetTop, h = s.offsetHeight; const pct = Math.max(0, Math.min(100, Math.round(((window.scrollY + window.innerHeight) - top) / h * 100))); links[i].querySelector(".pct").textContent = pct > 0 ? pct + "%" : ""; if (y >= top) current = s; });
+  links.forEach((a, i) => sections[i] === current ? a.setAttribute("aria-current", "location") : a.removeAttribute("aria-current"));
+}
+progress(); window.addEventListener("scroll", progress, { passive: true }); window.addEventListener("resize", progress);
+</script>
+</body>
+</html>

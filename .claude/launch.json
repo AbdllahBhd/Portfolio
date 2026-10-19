@@ -4,8 +4,24 @@
     {
       "name": "portfolio",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "8080", "--directory", "portfolio"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8080",
+        "--directory",
+        "portfolio"
+      ],
       "port": 8080
+    },
+    {
+      "name": "variants",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8081"
+      ],
+      "port": 8081
     }
   ]
 }

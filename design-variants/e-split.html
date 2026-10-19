@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Variant E · Split screen — Abdellah Bouhaddi</title>
+<meta name="description" content="Design variant E: split-screen portfolio for Abdellah Bouhaddi, full-stack .NET engineer in Dubai.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#f8f7f4; --bg-2:#f1efe9; --card:#ffffff; --line:#e3dfd6; --line-2:#cfc9bc;
+  --text:#17191d; --soft:#3d424a; --muted:#6f7680; --accent:#1d6f5a; --accent-2:#c9512b; --accent-soft:rgba(29,111,90,.1); --spot:rgba(29,111,90,.08);
+  --sans:"Inter",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1115;--bg-2:#151920;--card:#171b22;--line:#242a34;--line-2:#333b48;--text:#e9ecf1;--soft:#c0c7d1;--muted:#8791a0;--accent:#5fd3b3;--accent-2:#ff9b73;--accent-soft:rgba(95,211,179,.12);--spot:rgba(95,211,179,.07)}}
+*,*::before,*::after{box-sizing:border-box}*{margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}ul,ol{list-style:none;padding:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-weight:700;letter-spacing:-.025em;line-height:1.1}
+h1{font-size:clamp(2.2rem,1.6rem + 2vw,3.2rem)} h2{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-family:var(--mono);font-weight:500} h3{font-size:1.1rem}
+p{color:var(--soft)}
+.cmd{font-family:var(--mono);font-size:.8rem;color:var(--accent)} .cmd::before{content:"$ ";color:var(--muted)}
+.spot{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(600px circle at var(--mx,50%) var(--my,30%),var(--spot),transparent 55%)}
+
+.layout{position:relative;z-index:1;width:min(1180px,calc(100% - 64px));margin-inline:auto;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px}
+.left{position:sticky;top:0;height:100vh;padding:80px 0 56px;display:flex;flex-direction:column}
+.left h1 span{color:var(--accent)}
+.left .role{margin-top:10px;font-size:1.1rem;font-weight:500}
+.left .tag{margin-top:14px;max-width:34ch;color:var(--muted)}
+.left nav{margin-top:52px;display:grid;gap:6px}
+.left nav a{display:flex;align-items:center;gap:14px;padding:8px 0;font-family:var(--mono);font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+.left nav a i{display:block;width:32px;height:1px;background:var(--line-2);transition:width .3s,background .3s}
+.left nav a:hover,.left nav a[aria-current]{color:var(--text)} .left nav a:hover i,.left nav a[aria-current] i{width:64px;background:var(--text)}
+.progress{margin-top:auto;display:grid;gap:12px}
+.bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:var(--accent)}
+.social{display:flex;gap:18px;font-size:.84rem}
+.social a{color:var(--muted);text-decoration:none}.social a:hover{color:var(--accent)}
+.left .btns{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;border:1px solid var(--line-2);font-size:.88rem;font-weight:600;text-decoration:none;transition:.2s}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--text);border-color:var(--text);color:var(--bg)}.btn.primary:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.right{padding:80px 0 80px}
+.right section{padding-bottom:72px}
+.right section>h2{margin-bottom:20px}
+.right .intro p{font-size:1.06rem;max-width:62ch}.right .intro p+p{margin-top:14px}
+.right .intro b{color:var(--text);font-weight:600}
+.chip{display:inline-block;padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-family:var(--mono);font-size:.74rem;cursor:pointer;border:1px solid transparent;transition:.2s}
+.chip:hover,.chip.hot{border-color:var(--accent);background:var(--accent);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.hint{font-size:.78rem;color:var(--muted);font-family:var(--mono);margin-top:10px}
+.hint b{color:var(--accent);font-weight:500}
+.clear{font-family:var(--mono);font-size:.74rem;color:var(--accent-2);margin-left:8px;display:none}
+
+.row{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:20px 18px;margin:0 -18px;border-radius:14px;transition:background .2s,box-shadow .2s;text-decoration:none}
+.row:hover{background:var(--card);box-shadow:0 10px 30px rgba(0,0,0,.06)}
+.row .when{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:5px}
+.row h3 a{text-decoration:none}.row h3 a:hover{color:var(--accent)}
+.row .org{font-size:.88rem;color:var(--muted)}
+.row p.desc{margin-top:8px;font-size:.95rem}
+.row .status{display:inline-block;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-left:8px}
+.row .status.warn{color:var(--accent-2)}
+.row.dim{opacity:.35}
+.row .links{margin-top:10px;display:flex;gap:16px;font-size:.86rem;font-weight:600}
+.row .links a{text-decoration:none;border-bottom:1px solid var(--line-2)}.row .links a:hover{color:var(--accent);border-color:var(--accent)}
+.thumb{width:120px;height:72px;border-radius:8px;border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:.68rem;color:var(--muted);background:linear-gradient(140deg,var(--accent-soft),var(--bg-2))}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.kpi{padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.kpi strong{display:block;font-size:1.7rem;letter-spacing:-.03em}.kpi strong b{color:var(--accent)}.kpi span{font-size:.82rem;color:var(--muted)}
+.faq details{border-top:1px solid var(--line);padding:12px 0}.faq details:last-of-type{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:"+";color:var(--accent)}.faq details[open] summary::after{content:"–"}
+.faq details p{margin-top:8px;font-size:.92rem}
+.foot{font-size:.8rem;color:var(--muted);padding-top:20px;border-top:1px solid var(--line)}
+.mnav{display:none}
+
+@media(max-width:960px){
+  .layout{grid-template-columns:1fr;gap:0;width:min(1180px,calc(100% - 40px))}
+  .left{position:static;height:auto;padding:56px 0 24px}.left nav,.progress{display:none}
+  .right{padding-top:24px}.row{grid-template-columns:1fr;gap:4px;margin:0;padding:16px 0;border-radius:0;border-top:1px solid var(--line)}.row:hover{background:none;box-shadow:none}
+  .thumb{display:none}.kpis{grid-template-columns:1fr}
+  .mnav{display:flex;position:sticky;top:0;z-index:5;gap:4px;overflow:auto;padding:10px 0;background:var(--bg);border-bottom:1px solid var(--line)}.mnav a{padding:6px 10px;font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-decoration:none;white-space:nowrap}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}.spot{display:none}}
+</style>
+</head>
+<body>
+<div class="spot" aria-hidden="true"></div>
+<div class="layout">
+  <header class="left">
+    <p class="cmd">whoami</p>
+    <h1 style="margin-top:10px">Abdellah <span>Bouhaddi</span></h1>
+    <p class="role">Full-stack Software Engineer · .NET</p>
+    <p class="tag">I build business software with C# and ASP.NET Core, and I run the servers, databases, cloud and payments behind it. Dubai, UAE.</p>
+    <div class="btns"><a class="btn primary" href="../portfolio/assets/Abdellah_Bouhaddi_CV.pdf" download data-track="resume">Resume ↓</a><a class="btn" href="mailto:douibouhaddi@gmail.com" data-track="email">Email</a></div>
+    <nav aria-label="Sections"><a href="#about"><i></i>About</a><a href="#work"><i></i>Work</a><a href="#experience"><i></i>Experience</a><a href="#stack"><i></i>Stack</a><a href="#ask"><i></i>Ask me</a><a href="#contact"><i></i>Contact</a></nav>
+    <div class="progress"><div class="bar" aria-hidden="true"><i id="bar"></i></div><div class="social"><a href="https://github.com/AbdllahBhd" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/abdellah-bouhaddi-1688421a9/" target="_blank" rel="noopener">LinkedIn</a><a href="mailto:douibouhaddi@gmail.com">douibouhaddi@gmail.com</a><a href="tel:+971585342499">+971 58 534 2499</a></div></div>
+  </header>
+
+  <main class="right">
+    <nav class="mnav" aria-label="Sections"><a href="#about">About</a><a href="#work">Work</a><a href="#experience">Experience</a><a href="#stack">Stack</a><a href="#ask">Ask me</a><a href="#contact">Contact</a></nav>
+
+    <section id="about" class="intro">
+      <h2>cat about.md</h2>
+      <p>I'm a full-stack engineer with a <b>C# and ASP.NET Core</b> foundation. At MATMAK in Dubai I extend an established SaaS platform for PPF pattern cutting, from customer and admin interfaces to REST APIs, Stripe billing and data performance.</p>
+      <p>What makes my role different is that I also <b>own the infrastructure</b>: cloud accounts, Linux servers, AWS EC2, production databases, domains and DNS, email, payment services, CI/CD and monitoring. When I say a feature is live, I mean I deployed it and I'm watching the dashboards.</p>
+      <p>Before Dubai: Java Spring Boot microservices for an HR and payroll SaaS in Algeria, a stretch of Flutter freelance work, and a year teaching computer science at ESTIN and the University of Béjaïa. I work in English, Arabic and French.</p>
+      <div class="kpis" style="margin-top:24px"><div class="kpi"><strong>3<b>+</b></strong><span>years in production software</span></div><div class="kpi"><strong>~40<b>%</b></strong><span>faster DB reads &amp; writes</span></div><div class="kpi"><strong>3</strong><span>client projects led to launch</span></div></div>
+    </section>
+
+    <section id="work">
+      <h2>ls ./work --sort=impact</h2>
+      <p class="hint">Click any <b>technology chip</b> on this page to highlight where it was used. Nothing is hidden; unrelated rows just dim. <button class="clear" id="clear" type="button">clear ×</button></p>
+      <div style="margin-top:14px">
+        <article class="row" data-tech="C# ASP.NET-Core EF-Core SQL Stripe AWS Linux Razor-Pages"><div class="thumb">MATMAK</div><div><h3><a href="../portfolio/work/matmak.html">MATMAK — PPF cutting SaaS platform</a><span class="status">Production</span></h3><p class="org">Team contribution · Dubai · 2024 → now</p><p class="desc">Extend the ASP.NET Core platform: customer and admin interfaces, subscriptions and Stripe billing, EF Core performance, releases. Own the servers, databases and AWS it runs on.</p><div class="chips"><span class="chip">C#</span><span class="chip">ASP.NET Core</span><span class="chip">Razor Pages</span><span class="chip">EF Core</span><span class="chip">SQL</span><span class="chip">Stripe</span><span class="chip">AWS</span><span class="chip">Linux</span></div><div class="links"><a href="../portfolio/work/matmak.html">Case study</a><a href="https://matmaksolutions.com/en" target="_blank" rel="noopener">Live ↗</a></div></div></article>
+        <article class="row" data-tech="PHP WooCommerce Stripe Network-International Linux DNS"><div class="thumb">XSHIELD</div><div><h3><a href="../portfolio/work/xshield.html">XSHIELD — online store, end to end</a><span class="status">Production</span></h3><p class="org">Client project · UAE</p><p class="desc">Custom PHP plugins and integrations, Stripe and Network International for UAE checkout, Linux hosting, DNS, email and go-live.</p><div class="chips"><span class="chip">PHP</span><span class="chip">WooCommerce</span><span class="chip">Stripe</span><span class="chip">Network International</span><span class="chip">Linux</span><span class="chip">DNS</span></div><div class="links"><a href="../portfolio/work/xshield.html">Case study</a><a href="https://xshield-protect.com/" target="_blank" rel="noopener">Live ↗</a></div></div></article>
+        <article class="row" data-tech="React Laravel Filament MySQL"><div class="thumb">HEXIS</div><div><h3><a href="../portfolio/work/hexis-training.html">HEXIS Training Centre — training platform</a><span class="status warn">Staging</span></h3><p class="org">Client project · France</p><p class="desc">Architected and built: Laravel backend, Filament admin, React public interface, multilingual, quiz flow with emailed access and automatic scoring.</p><div class="chips"><span class="chip">React</span><span class="chip">Laravel</span><span class="chip">Filament</span><span class="chip">MySQL</span></div><div class="links"><a href="../portfolio/work/hexis-training.html">Case study</a><a href="https://staging.hexis-training.com/" target="_blank" rel="noopener">Staging ↗</a></div></div></article>
+        <article class="row" data-tech="PHP WordPress REST"><div class="thumb">HPL</div><div><h3>HEXIS Precut Lab / BODYFENCE — API plugin<span class="status">Production</span></h3><p class="org">Integration</p><p class="desc">Custom WordPress plugin consuming a dedicated MATMAK API through shortcodes to display vehicle patterns and car kits.</p><div class="chips"><span class="chip">PHP</span><span class="chip">WordPress</span><span class="chip">REST</span></div><div class="links"><a href="https://www.bodyfence.net/en/hpl/" target="_blank" rel="noopener">Visit ↗</a></div></div></article>
+        <article class="row" data-tech="Java Spring-Boot Docker SQL JUnit"><div class="thumb">RH PARTNER</div><div><h3>RH Partner — HR &amp; payroll microservices<span class="status">Production</span></h3><p class="org">Tech-Instinct · 2023 → 2024</p><p class="desc">Maintained Spring Boot REST services in Docker, designed schemas, optimised SQL, 90%+ coverage in scope.</p><div class="chips"><span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">Docker</span><span class="chip">SQL</span><span class="chip">JUnit</span></div><div class="links"><a href="https://rh-partner.com/" target="_blank" rel="noopener">Visit ↗</a></div></div></article>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2>git log --oneline career</h2>
+      <article class="row" data-tech="C# ASP.NET-Core SQL Stripe AWS Linux"><p class="when">2024 — now</p><div><h3>Full Stack Developer <span class="status">Current</span></h3><p class="org">MATMAK · Dubai, UAE</p><p class="desc">Extend the .NET SaaS with the team, modernise customer and admin interfaces, lead client applications from requirements to launch. Own cloud accounts, servers, production databases, domains, email and payment services.</p><div class="chips"><span class="chip">C#</span><span class="chip">ASP.NET Core</span><span class="chip">SQL</span><span class="chip">Stripe</span><span class="chip">AWS</span><span class="chip">Linux</span></div></div></article>
+      <article class="row" data-tech="Flutter Firebase"><p class="when">Apr — Jun 2024</p><div><h3>Mobile Application Developer</h3><p class="org">Freelance · Dubai</p><p class="desc">Cross-platform Flutter apps with Firebase authentication, Firestore, storage and push notifications.</p><div class="chips"><span class="chip">Flutter</span><span class="chip">Firebase</span></div></div></article>
+      <article class="row" data-tech="Java Spring-Boot Docker SQL JUnit"><p class="when">2023 — 2024</p><div><h3>Backend Developer · Java Spring Boot</h3><p class="org">Tech-Instinct · Béjaïa, Algeria</p><p class="desc">Maintained and extended RH Partner's production microservices; schemas, SQL optimisation, JUnit tests, production defects.</p><div class="chips"><span class="chip">Java</span><span class="chip">Spring Boot</span><span class="chip">Docker</span><span class="chip">JUnit</span></div></div></article>
+      <article class="row"><p class="when">2022 — 2023</p><div><h3>Computer Science Instructor</h3><p class="org">ESTIN &amp; University Abderrahmane Mira · part-time</p><p class="desc">Mentored 100+ students through practical labs in programming, algorithms, networks, web and mobile development.</p></div></article>
+      <article class="row"><p class="when">2017 — 2022</p><div><h3>MSc Software Engineering · BSc Computer Science</h3><p class="org">University Abderrahmane Mira · Béjaïa</p><p class="desc">Thesis: MERN progressive web e-commerce application. Certifications: Java Developer, Huawei Cloud Computing.</p></div></article>
+    </section>
+
+    <section id="stack">
+      <h2>cat skills.yaml</h2>
+      <article class="row" data-tech="C# ASP.NET-Core EF-Core SQL Java Spring-Boot"><p class="when">Backend</p><div><p class="desc">REST APIs, workflows, authentication, data. Core stack is C# and ASP.NET Core with EF Core and SQL; earlier production Java.</p><div class="chips"><span class="chip">C#</span><span class="chip">ASP.NET Core</span><span class="chip">EF Core</span><span class="chip">SQL</span><span class="chip">JWT</span><span class="chip">Java</span><span class="chip">Spring Boot</span></div></div></article>
+      <article class="row" data-tech="Razor-Pages React Flutter"><p class="when">Frontend</p><div><p class="desc">Customer-facing pages, admin tools and multilingual apps. Razor Pages inside .NET products, React when a separate frontend makes sense, Flutter for mobile.</p><div class="chips"><span class="chip">Razor Pages</span><span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Flutter</span></div></div></article>
+      <article class="row" data-tech="Linux AWS Docker DNS"><p class="when">Infrastructure</p><div><p class="desc">Provision and harden Linux servers, run AWS EC2 and production databases, automate with GitHub Actions, monitor with Prometheus, Grafana and Loki.</p><div class="chips"><span class="chip">Linux</span><span class="chip">AWS</span><span class="chip">Nginx</span><span class="chip">Docker</span><span class="chip">DNS</span><span class="chip">GitHub Actions</span><span class="chip">Grafana</span></div></div></article>
+      <article class="row" data-tech="Stripe Network-International WooCommerce Laravel"><p class="when">Payments &amp; platforms</p><div><p class="desc">Stripe subscriptions, invoicing and webhooks; Network International for UAE checkout; WordPress, WooCommerce, Laravel and Filament for client work.</p><div class="chips"><span class="chip">Stripe</span><span class="chip">Network International</span><span class="chip">WooCommerce</span><span class="chip">Laravel</span><span class="chip">Filament</span></div></div></article>
+    </section>
+
+    <section id="ask" class="faq">
+      <h2>abdellah --help</h2>
+      <details open><summary>Can you own a .NET product end to end?</summary><p>Yes. At MATMAK I extend the ASP.NET Core SaaS with the team and own the servers, databases, AWS, DNS, email, payments and releases around it.</p></details>
+      <details><summary>Backend or frontend?</summary><p>Backend-first (C#, ASP.NET Core, SQL) with real frontend delivery: Razor Pages in production, React for HEXIS, Flutter for mobile.</p></details>
+      <details><summary>Have you handled payments?</summary><p>Stripe subscriptions, invoicing and webhooks in the MATMAK platform; Stripe and Network International for a UAE WooCommerce checkout.</p></details>
+      <details><summary>Do you lead or execute?</summary><p>Both: I lead client projects from requirements to launch, and execute inside the team on the core product.</p></details>
+      <details><summary>Availability?</summary><p>Based in Dubai, open to full-stack and .NET roles across the UAE. English, Arabic, French.</p></details>
+    </section>
+
+    <section id="contact">
+      <h2>ping abdellah</h2>
+      <p style="font-size:1.06rem;max-width:56ch">Have a role or a project in mind? Email is fastest and I reply within a day: <a href="mailto:douibouhaddi@gmail.com" data-track="email" style="font-weight:600">douibouhaddi@gmail.com</a>. Or call <a href="tel:+971585342499" style="font-weight:600">+971 58 534 2499</a>.</p>
+      <p class="foot" style="margin-top:40px">© 2026 Abdellah Bouhaddi · Variant E · Split screen · Dubai, UAE</p>
+    </section>
+  </main>
+</div>
+
+<!-- Analytics: GoatCounter (privacy-friendly, no cookies). Replace YOURCODE after creating a free account at goatcounter.com -->
+<script data-goatcounter="https://YOURCODE.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script>
+function track(n){ if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "event/" + n, title: n, event: true }); }
+document.querySelectorAll("[data-track]").forEach(a => a.addEventListener("click", () => track(a.dataset.track)));
+
+/* cursor spotlight */
+if (matchMedia("(pointer:fine)").matches) document.addEventListener("pointermove", e => { document.documentElement.style.setProperty("--mx", e.clientX + "px"); document.documentElement.style.setProperty("--my", e.clientY + "px"); }, { passive: true });
+
+/* chip highlighting: dims unrelated rows, never hides */
+const rows = [...document.querySelectorAll(".row[data-tech]")], chips = [...document.querySelectorAll(".chip")], clear = document.getElementById("clear");
+const key = t => t.trim().replace(/\s+/g, "-");
+let active = null;
+function apply(){
+  chips.forEach(c => c.classList.toggle("hot", active !== null && key(c.textContent) === active));
+  rows.forEach(r => r.classList.toggle("dim", active !== null && !r.dataset.tech.split(" ").includes(active)));
+  document.querySelectorAll(".row:not([data-tech])").forEach(r => r.classList.toggle("dim", active !== null));
+  clear.style.display = active ? "inline" : "none";
+}
+chips.forEach(c => c.addEventListener("click", () => { const k = key(c.textContent); active = active === k ? null : k; apply(); if (active) track("chip-" + active); }));
+clear.addEventListener("click", () => { active = null; apply(); });
+
+/* nav current + read progress */
+const links = [...document.querySelectorAll(".left nav a")], sections = links.map(a => document.querySelector(a.getAttribute("href"))), bar = document.getElementById("bar");
+function onScroll(){
+  const max = document.documentElement.scrollHeight - innerHeight; bar.style.width = Math.round(scrollY / max * 100) + "%";
+  const y = scrollY + innerHeight * .35; let cur = sections[0]; sections.forEach(s => { if (y >= s.offsetTop) cur = s; });
+  links.forEach((a, i) => sections[i] === cur ? a.setAttribute("aria-current", "location") : a.removeAttribute("aria-current"));
+}
+onScroll(); addEventListener("scroll", onScroll, { passive: true });
+</script>
+</body>
+</html>
