@@ -11,9 +11,10 @@
   Python scripts that generate the matching CV (DOCX + PDF) linked from the site.
 - **Tech stack:**
   - Site: hand-written HTML5, CSS, vanilla JS (ES2020, `"use strict"`). No framework,
-    no bundler, no build step. Inter is loaded from Google Fonts. Dark theme by
-    default, light via `prefers-color-scheme` or the header toggle (stored in
-    `localStorage`, applied by an inline script before first paint).
+    no bundler, no build step. Inter and JetBrains Mono load from Google Fonts.
+    **Light theme by default**; dark via the labelled Light/Dark switch in the
+    header (stored in `localStorage`, applied by an inline head script before
+    first paint, which also adds the `js` class used by reveal animations).
   - CV generator: Python 3.13 with `python-docx` (DOCX), `reportlab` (PDF),
     `pypdf` (audit script). No `requirements.txt` — packages are installed globally.
 - **Package manager:** none. There is no `package.json`; never add npm scripts
@@ -49,11 +50,23 @@ open the generated PDF/DOCX and read it.
   default branch `main`). The site, CV scripts, research, and AI config are all
   tracked; generated CV files are ignored (see `.gitignore`). Only `portfolio/`
   is published.
-- **Site entry point:** `portfolio/index.html` — a single page with sections
-  `#top` (hero), `#work`, `#experience`, `#stack`, `#about`, `#contact`.
-  Case-study pages live in `portfolio/work/` (`matmak.html`, `hexis-training.html`,
-  `xshield.html`). Shared styles in `portfolio/css/styles.css`, behavior in
-  `portfolio/js/main.js` (mobile menu toggle, focus management, footer year).
+- **Site entry point:** `portfolio/index.html` — one page, all content visible
+  without clicking: `#top` (hero + contact card + stats), `#work` (filterable
+  cards, each with a screenshot slider), `#experience` (sticky title + timeline),
+  `#skills`, `#ask` (open Q&A + interactive fit checker), `#background`,
+  `#contact`. Section labels are command-style (`$ ls ./work --sort=impact`)
+  above plain headings. Case studies in `portfolio/work/` (`matmak.html`,
+  `hexis-training.html`, `xshield.html`) share the same header, slider gallery,
+  sticky "On this page" nav, next-project link and contact block.
+- **Shared assets:** one stylesheet `portfolio/css/styles.css` and one script
+  `portfolio/js/main.js` for every page (theme switch, progress bar, scroll-spy,
+  reveals, count-up, copy buttons, tag highlighting, work filters, sliders,
+  lightbox, fit checker, footer year). Every feature checks its elements exist.
+- **Screenshots:** `portfolio/assets/screens/<site>-<1..4>.jpg` (1200×750 JPEG)
+  feed the sliders. They were captured from the live sites with Playwright at
+  1440×900, cookie banners rejected; re-capture when a client site changes.
+- **Analytics:** GoatCounter, off until `GOATCOUNTER_CODE` at the top of
+  `main.js` is set. Elements with `data-track="name"` send custom events.
 - **Resume download:** `portfolio/assets/Abdellah_Bouhaddi_CV.pdf` is what the
   site links to. `build_cv.py` overwrites it on every run; commit it together with
   `CV_VERSION` and the script so the pushed site always serves the latest build.
@@ -70,11 +83,12 @@ open the generated PDF/DOCX and read it.
 - **`tmp/`, `output/`, root-level `*.docx`/`*.pdf`/`*.png`** are generated
   artifacts and render previews. They are git-ignored; rebuild them with
   `build_cv.py` (deps in `requirements.txt`) instead of hand-editing.
-- **Stylesheet conventions:** `styles.css` is readable and sectioned, with all
-  colors as tokens on `:root` (dark) and `:root[data-theme="light"]` plus the
-  matching `prefers-color-scheme` block. Never hardcode a color on a component.
-  The three `work/*.html` case-study pages are still minified single-line files
-  and share the header markup and classes of `index.html`.
+- **Stylesheet conventions:** all colors are tokens on `:root` /
+  `:root[data-theme="light"]` (light) and `:root[data-theme="dark"]`. Never
+  hardcode a color on a component (the slider's overlay arrows are the one
+  deliberate exception, since they sit on screenshots).
+- **`design-variants/`** holds the throwaway design explorations (A–I, G2) that
+  led to the current site. Not published; safe to delete once the site is final.
 
 ## Rules
 
