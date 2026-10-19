@@ -104,7 +104,7 @@ document.querySelectorAll("[data-slider]").forEach((slider) => {
     dots.appendChild(dot);
   });
   const index = () => Math.round(rail.scrollLeft / rail.clientWidth);
-  function go(i) { const target = Math.max(0, Math.min(slides.length - 1, i)); rail.scrollTo({ left: target * rail.clientWidth }); sync(target); }
+  function go(i) { if (!rail.clientWidth) return; const target = Math.max(0, Math.min(slides.length - 1, i)); rail.scrollTo({ left: target * rail.clientWidth }); sync(target); }
   function sync(i = index()) {
     [...dots.children].forEach((d, k) => d.setAttribute("aria-current", String(k === i)));
     caption.textContent = `${i + 1}/${slides.length} · ${slides[i].querySelector("img").dataset.caption}`;
@@ -114,7 +114,7 @@ document.querySelectorAll("[data-slider]").forEach((slider) => {
   next.addEventListener("click", () => { go(index() + 1); track("slide"); });
   rail.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") { e.preventDefault(); go(index() + 1); } if (e.key === "ArrowLeft") { e.preventDefault(); go(index() - 1); } });
   let raf; rail.addEventListener("scroll", () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => sync()); }, { passive: true });
-  addEventListener("resize", () => go(index()));
+  addEventListener("resize", () => { if (rail.clientWidth) go(index()); });
   sync(0);
 });
 
@@ -124,7 +124,7 @@ if (lightbox) {
 const lbImg = lightbox.querySelector("img"), lbCap = lightbox.querySelector("figcaption");
 let lbSet = [], lbIndex = 0;
 function showLb(i) { lbIndex = (i + lbSet.length) % lbSet.length; const img = lbSet[lbIndex]; lbImg.src = img.src; lbImg.alt = img.alt; lbCap.textContent = img.alt + ` (${lbIndex + 1}/${lbSet.length})`; }
-document.querySelectorAll("[data-zoom]").forEach((img) => img.addEventListener("click", () => {
+document.querySelectorAll("[data-zoom]").forEach((img) => (img.closest(".zoom") || img).addEventListener("click", () => {
   lbSet = [...img.closest("[data-slider]").querySelectorAll("img")]; showLb(lbSet.indexOf(img));
   if (typeof lightbox.showModal === "function") lightbox.showModal(); else window.open(img.src, "_blank");
   track("zoom");
