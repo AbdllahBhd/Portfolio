@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Variant C · Interactive — Abdellah Bouhaddi</title>
+<meta name="description" content="Design variant C: interactive bento portfolio for Abdellah Bouhaddi, full-stack .NET engineer in Dubai.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#0a0d12; --surface:#111620; --surface-2:#171e2a; --line:#222c3a; --line-2:#30405a;
+  --text:#e9eef5; --soft:#bfc8d4; --muted:#8793a3;
+  --accent:#8b7cff; --accent-2:#5eead4; --accent-3:#ffb45e; --accent-soft:rgba(139,124,255,.14); --teal-soft:rgba(94,234,212,.12);
+  --sans:"Inter",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace; --r:20px; --max:1160px;
+  color-scheme:dark;
+}
+:root[data-theme="light"]{--bg:#f4f5f9;--surface:#fff;--surface-2:#eceef5;--line:#dfe3ec;--line-2:#c6cdd9;--text:#0f1422;--soft:#2b3240;--muted:#5d6878;--accent:#5b49e6;--accent-2:#0f9c8a;--accent-3:#c7741a;--accent-soft:rgba(91,73,230,.1);--teal-soft:rgba(15,156,138,.1);color-scheme:light}
+*,*::before,*::after{box-sizing:border-box}*{margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{font-family:var(--sans);background:radial-gradient(900px 500px at 10% -10%,var(--accent-soft),transparent 60%),radial-gradient(700px 400px at 100% 10%,var(--teal-soft),transparent 60%),var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}ul,ol{list-style:none;padding:0}
+:focus-visible{outline:2px solid var(--accent-2);outline-offset:3px}
+.wrap{width:min(var(--max),calc(100% - 48px));margin-inline:auto}
+h1,h2,h3{font-weight:700;letter-spacing:-.03em;line-height:1.08;text-wrap:balance}
+h1{font-size:clamp(2.5rem,1.4rem + 4.6vw,5.2rem);font-weight:800}
+h2{font-size:clamp(1.8rem,1.2rem + 2.2vw,3rem)} h3{font-size:1.2rem}
+p{color:var(--soft)}
+.label{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-2)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);transition:border-color .25s,transform .25s,box-shadow .25s}
+.card:hover{border-color:var(--line-2);transform:translateY(-3px);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+
+/* header */
+.top{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;min-height:70px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;text-decoration:none;font-size:.95rem}
+.brand i{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:grid;place-items:center;font-style:normal;font-weight:800;color:#fff;font-size:.85rem}
+nav{display:flex;gap:2px}
+nav a{padding:8px 12px;border-radius:8px;font-size:.9rem;color:var(--muted);text-decoration:none}
+nav a:hover{color:var(--text);background:var(--surface-2)} nav a[aria-current]{color:var(--accent-2)}
+.tools{display:flex;gap:8px;align-items:center}
+.icon-btn{width:40px;height:40px;border:1px solid var(--line);border-radius:10px;display:grid;place-items:center;color:var(--muted)}
+.icon-btn:hover{color:var(--text);border-color:var(--line-2)}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 20px;border-radius:999px;font-weight:600;text-decoration:none;transition:.2s;border:1px solid transparent}
+.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff}
+.btn.primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn.ghost{border-color:var(--line-2);color:var(--text)} .btn.ghost:hover{background:var(--surface-2)}
+
+/* hero bento */
+.hero{padding:clamp(44px,7vw,88px) 0 0;display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.hero .intro{grid-column:span 7;padding:36px;display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.hero .intro h1 span{background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .intro p.lead{max-width:50ch;font-size:1.08rem}
+.hero .actions{display:flex;flex-wrap:wrap;gap:10px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);font-size:.8rem;width:max-content}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 4px var(--teal-soft)}
+.hero .map{grid-column:span 5;padding:26px}
+.hero .stat{grid-column:span 3;padding:24px;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:150px}
+.hero .stat strong{font-size:clamp(1.8rem,1.3rem + 1.5vw,2.6rem);font-weight:800;letter-spacing:-.04em}
+.hero .stat strong b{color:var(--accent-2);font-weight:800}
+.hero .stat span{font-size:.86rem;color:var(--muted)}
+.hero .stat.counter strong{font-variant-numeric:tabular-nums}
+
+/* architecture map (interactive) */
+.map h3{font-size:1rem}
+.map p.hint{font-size:.8rem;color:var(--muted);margin-top:4px}
+.arch{margin-top:18px;display:grid;gap:8px}
+.arch button{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;text-align:left;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2);transition:.2s}
+.arch button b{display:block;font-size:.92rem} .arch button small{display:block;font-size:.76rem;color:var(--muted)}
+.arch button i{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;font-family:var(--mono);font-size:.72rem;font-style:normal;background:var(--surface);border:1px solid var(--line)}
+.arch button:hover,.arch button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.arch button[aria-pressed="true"] i{background:var(--accent);color:#fff;border-color:var(--accent)}
+.arch-detail{margin-top:14px;padding:14px 16px;border-radius:12px;border:1px dashed var(--line-2);font-size:.86rem;min-height:92px}
+.arch-detail b{color:var(--text)} .arch-detail .tags{margin-top:8px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags li{font-family:var(--mono);font-size:.7rem;padding:4px 8px;border-radius:6px;background:var(--surface-2);border:1px solid var(--line);color:var(--soft);transition:.2s}
+.tags li.hot{border-color:var(--accent-2);color:var(--accent-2);background:var(--teal-soft)}
+
+/* sections */
+.section{padding:clamp(56px,8vw,104px) 0}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:32px}
+.sec-head h2{margin-top:10px} .sec-head p{max-width:46ch;color:var(--muted)}
+
+/* flip cards */
+.flip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.flip{perspective:1400px;min-height:380px}
+.flip-inner{position:relative;width:100%;height:100%;min-height:380px;transition:transform .7s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.flip.is-flipped .flip-inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r);border:1px solid var(--line);padding:26px;display:flex;flex-direction:column;gap:12px;background:var(--surface)}
+.face.back{transform:rotateY(180deg);background:var(--surface-2)}
+.face .top-row{display:flex;justify-content:space-between;align-items:center}
+.face .status{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-2)}
+.face .status.amber{color:var(--accent-3)}
+.face .art{flex:1;display:grid;place-items:center;border-radius:14px;margin:4px 0;font-weight:800;font-size:1.5rem;letter-spacing:-.03em;text-align:center;padding:16px}
+.art-1{background:linear-gradient(140deg,var(--accent-soft),transparent)} .art-2{background:linear-gradient(140deg,var(--teal-soft),transparent)} .art-3{background:linear-gradient(140deg,rgba(255,180,94,.14),transparent)}
+.face h3 a{text-decoration:none} .face h3 a:hover{color:var(--accent-2)}
+.face p{font-size:.92rem}
+.face .flip-btn{margin-top:auto;align-self:flex-start;font-size:.84rem;font-weight:600;color:var(--accent-2);display:inline-flex;gap:6px;align-items:center}
+.face .back-list{display:grid;gap:8px;font-size:.88rem}
+.face .back-list li{display:grid;grid-template-columns:18px 1fr;gap:8px;color:var(--soft)} .face .back-list li::before{content:"✓";color:var(--accent-2)}
+.face .links{display:flex;gap:16px;font-size:.88rem;font-weight:600;margin-top:auto}
+.face .links a{text-decoration:none;border-bottom:1px solid var(--line-2)} .face .links a:hover{color:var(--accent-2);border-color:var(--accent-2)}
+
+/* timeline scrubber */
+.scrub{padding:28px;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;align-items:start}
+.track{position:relative;margin-top:10px}
+.track input[type=range]{width:100%;accent-color:var(--accent);height:28px}
+.track .ticks{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-top:4px}
+.stops{margin-top:18px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.stops button{padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);font-size:.76rem;line-height:1.3;text-align:left;transition:.2s}
+.stops button b{display:block;font-family:var(--mono);font-size:.68rem;color:var(--muted);margin-bottom:4px}
+.stops button[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.scrub-detail{padding:22px;border-radius:16px;background:var(--surface-2);border:1px solid var(--line);min-height:260px}
+.scrub-detail .label{color:var(--accent)} .scrub-detail h3{margin-top:8px;font-size:1.35rem} .scrub-detail .org{font-size:.86rem;color:var(--muted)} .scrub-detail p.desc{margin-top:12px;font-size:.92rem} .scrub-detail .tags{margin-top:14px}
+
+/* ask me (FAQ) + fit checker */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.faq{padding:26px}
+.faq details{border-top:1px solid var(--line);padding:14px 0}
+.faq details:last-of-type{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::after{content:"+";color:var(--accent-2);font-weight:400} .faq details[open] summary::after{content:"–"}
+.faq details p{margin-top:10px;font-size:.92rem}
+.fit{padding:26px}
+.fit .opts{display:grid;gap:8px;margin-top:16px}
+.fit label{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);font-size:.9rem;cursor:pointer}
+.fit input{accent-color:var(--accent-2)}
+.fit .result{margin-top:16px;padding:16px;border-radius:12px;border:1px solid var(--line-2);font-size:.92rem;min-height:84px}
+.fit .result b{color:var(--accent-2)}
+
+/* contact */
+.contact{padding:clamp(32px,5vw,56px);display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center;background:linear-gradient(135deg,var(--surface),var(--surface-2));position:relative;overflow:hidden}
+.contact::after{content:"";position:absolute;width:400px;height:400px;right:-140px;top:-180px;border-radius:50%;background:radial-gradient(circle,var(--accent-soft),transparent 65%);pointer-events:none}
+.contact p{margin-top:14px;max-width:46ch}
+.contact .col{display:grid;gap:10px;justify-items:start;position:relative}
+.contact .col a.plain{text-decoration:none;color:var(--text);font-weight:600} .contact .col a.plain:hover{color:var(--accent-2)}
+.contact .copy{font-family:var(--mono);font-size:.78rem;padding:6px 10px;border:1px solid var(--line-2);border-radius:8px;color:var(--muted)}
+.contact .copy:hover{color:var(--accent-2);border-color:var(--accent-2)}
+footer{padding:28px 0;font-size:.84rem;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}.reveal.in{opacity:1;transform:none}
+
+@media(max-width:1000px){.hero .intro,.hero .map{grid-column:span 12}.hero .stat{grid-column:span 6}.flip-grid{grid-template-columns:1fr}.flip,.flip-inner{min-height:340px}.scrub{grid-template-columns:1fr}.two{grid-template-columns:1fr}.contact{grid-template-columns:1fr}}
+@media(max-width:640px){.wrap{width:calc(100% - 32px)}nav{display:none}.hero .stat{grid-column:span 12}.hero .intro{padding:26px}.stops{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.reveal{opacity:1;transform:none}.flip-inner{transition:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><i>AB</i>Abdellah Bouhaddi</a>
+    <nav aria-label="Main"><a href="#work">Work</a><a href="#journey">Journey</a><a href="#ask">Ask me</a><a href="#contact">Contact</a></nav>
+    <div class="tools"><button class="icon-btn" id="theme" aria-label="Toggle theme" title="Toggle theme">◐</button><a class="btn ghost" href="../portfolio/assets/Abdellah_Bouhaddi_CV.pdf" download data-track="resume">Resume ↓</a></div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO BENTO -->
+  <section class="wrap hero">
+    <div class="card intro">
+      <div>
+        <p class="pill"><i aria-hidden="true"></i> Open to .NET &amp; full-stack roles · Dubai, UAE</p>
+        <h1 style="margin-top:22px">I build business software<br>and <span>keep it running.</span></h1>
+        <p class="lead" style="margin-top:18px">Full-stack engineer with a C# and ASP.NET Core foundation. I own the whole chain: interfaces, APIs, payments, databases, servers, cloud and releases.</p>
+      </div>
+      <div class="actions"><a class="btn primary" href="#work">See the work</a><a class="btn ghost" href="mailto:douibouhaddi@gmail.com" data-track="email">Email me</a></div>
+    </div>
+
+    <div class="card map">
+      <p class="label">Interactive · architecture</p>
+      <h3 style="margin-top:6px">Where I work in a system</h3>
+      <p class="hint">Click a layer to see what I do there and which tools light up.</p>
+      <div class="arch" role="group" aria-label="Architecture layers">
+        <button type="button" data-layer="ui" aria-pressed="false"><i>UI</i><span><b>Interfaces</b><small>Customer pages · admin tools · mobile</small></span></button>
+        <button type="button" data-layer="api" aria-pressed="true"><i>API</i><span><b>Application</b><small>ASP.NET Core · workflows · payments</small></span></button>
+        <button type="button" data-layer="data" aria-pressed="false"><i>DB</i><span><b>Data</b><small>SQL · schema · performance · backups</small></span></button>
+        <button type="button" data-layer="ops" aria-pressed="false"><i>OPS</i><span><b>Operations</b><small>Linux · AWS · DNS · CI/CD · monitoring</small></span></button>
+      </div>
+      <div class="arch-detail" id="arch-detail" aria-live="polite"></div>
+    </div>
+
+    <div class="card stat counter"><span class="label">Experience</span><strong data-count="3" data-suffix="+">0</strong><span>years shipping production software</span></div>
+    <div class="card stat counter"><span class="label">Performance</span><strong data-count="40" data-prefix="~" data-suffix="%">0</strong><span>faster DB reads &amp; writes after schema and query work</span></div>
+    <div class="card stat counter"><span class="label">Delivery</span><strong data-count="3">0</strong><span>client projects led from requirements to launch</span></div>
+    <div class="card stat"><span class="label">Languages</span><strong>EN · AR · FR</strong><span>fluent, plus native Kabyle</span></div>
+  </section>
+
+  <!-- FLIP CARDS -->
+  <section class="section wrap" id="work">
+    <div class="sec-head"><div><p class="label">01 · Selected work</p><h2>Flip a card for what I actually did.</h2></div><p>Front: the project. Back: my contribution, in bullet points.</p></div>
+    <div class="flip-grid">
+      <div class="flip reveal"><div class="flip-inner">
+        <div class="face front"><div class="top-row"><span class="status">Production · team</span><span class="label" style="color:var(--muted)">MATMAK</span></div><div class="art art-1">A production .NET SaaS,<br>extended on every layer.</div><h3><a href="../portfolio/work/matmak.html">PPF cutting platform</a></h3><p>ASP.NET Core, Razor Pages, EF Core, SQL, Stripe, AWS.</p><button class="flip-btn" type="button" data-flip>What I did →</button></div>
+        <div class="face back"><p class="label">My contribution</p><ul class="back-list"><li>Extend REST APIs, Razor Pages and workflows: auth, subscriptions, invoicing, pricing, credits, cutting.</li><li>Redesigned customer pages and the admin interface.</li><li>Stripe one-time, subscriptions, invoicing, webhooks.</li><li>~40% faster affected reads/writes via schema redesign and EF Core tuning.</li><li>Own the servers, databases, AWS and releases.</li></ul><div class="links"><a href="../portfolio/work/matmak.html">Case study</a><a href="https://matmaksolutions.com/en" target="_blank" rel="noopener">Live ↗</a></div><button class="flip-btn" type="button" data-flip>← Back</button></div>
+      </div></div>
+      <div class="flip reveal"><div class="flip-inner">
+        <div class="face front"><div class="top-row"><span class="status amber">Staging · client</span><span class="label" style="color:var(--muted)">HEXIS Training</span></div><div class="art art-2">From planning to results,<br>in three languages.</div><h3><a href="../portfolio/work/hexis-training.html">Training platform</a></h3><p>React, Laravel, Filament, MySQL.</p><button class="flip-btn" type="button" data-flip>What I did →</button></div>
+        <div class="face back"><p class="label">My contribution</p><ul class="back-list"><li>Architected the platform: Laravel backend, Filament admin, React public interface.</li><li>Course planning, locations, registrations, certifications.</li><li>Quiz flow: emailed access, auto-submit, scoring, results.</li><li>Transactional email and multilingual content.</li></ul><div class="links"><a href="../portfolio/work/hexis-training.html">Case study</a><a href="https://staging.hexis-training.com/" target="_blank" rel="noopener">Staging ↗</a></div><button class="flip-btn" type="button" data-flip>← Back</button></div>
+      </div></div>
+      <div class="flip reveal"><div class="flip-inner">
+        <div class="face front"><div class="top-row"><span class="status">Production · client</span><span class="label" style="color:var(--muted)">XSHIELD</span></div><div class="art art-3">More than<br>a storefront.</div><h3><a href="../portfolio/work/xshield.html">Online store, end to end</a></h3><p>WooCommerce, PHP, Stripe, Network International, Linux.</p><button class="flip-btn" type="button" data-flip>What I did →</button></div>
+        <div class="face back"><p class="label">My contribution</p><ul class="back-list"><li>Linux hosting, domain, DNS, Google Workspace email, deployment.</li><li>Custom PHP pages and plugins, API integrations, import/export.</li><li>Stripe and Network International for UAE checkout.</li><li>Go-live and operational support.</li></ul><div class="links"><a href="../portfolio/work/xshield.html">Case study</a><a href="https://xshield-protect.com/" target="_blank" rel="noopener">Live ↗</a></div><button class="flip-btn" type="button" data-flip>← Back</button></div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- TIMELINE SCRUBBER -->
+  <section class="section wrap" id="journey">
+    <div class="sec-head"><div><p class="label">02 · Journey</p><h2>Drag through the timeline.</h2></div><p>From teaching the fundamentals to owning software and infrastructure in production.</p></div>
+    <div class="card scrub">
+      <div>
+        <div class="track"><input type="range" id="range" min="0" max="4" step="1" value="4" aria-label="Timeline position"><div class="ticks"><span>2017</span><span>2020</span><span>2022</span><span>2023</span><span>2024 →</span></div></div>
+        <div class="stops" id="stops">
+          <button type="button" data-i="0" aria-pressed="false"><b>2017–22</b>University</button>
+          <button type="button" data-i="1" aria-pressed="false"><b>2022–23</b>Instructor</button>
+          <button type="button" data-i="2" aria-pressed="false"><b>2023–24</b>Java backend</button>
+          <button type="button" data-i="3" aria-pressed="false"><b>2024</b>Flutter</button>
+          <button type="button" data-i="4" aria-pressed="true"><b>2024 →</b>MATMAK</button>
+        </div>
+      </div>
+      <div class="scrub-detail" id="scrub-detail" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ASK ME + FIT CHECK -->
+  <section class="section wrap" id="ask">
+    <div class="sec-head"><div><p class="label">03 · Ask me</p><h2>The questions recruiters ask first.</h2></div><p>Short honest answers, and a quick way to check if I fit your opening.</p></div>
+    <div class="two">
+      <div class="card faq">
+        <details open><summary>Can you own a .NET product end to end?</summary><p>Yes. At MATMAK I extend the ASP.NET Core SaaS with the team and I own the servers, databases, AWS, DNS, email, payments and releases around it.</p></details>
+        <details><summary>Backend or frontend?</summary><p>Backend-first (C#, ASP.NET Core, SQL) with real frontend delivery: Razor Pages in production, React for HEXIS, Flutter for mobile.</p></details>
+        <details><summary>Have you handled payments?</summary><p>Stripe subscriptions, invoicing and webhooks in the MATMAK platform; Stripe and Network International for a UAE WooCommerce checkout.</p></details>
+        <details><summary>Do you lead or just execute?</summary><p>Both. I lead client projects from requirements and architecture to launch, working directly with management and clients, and I execute inside an existing team on the core product.</p></details>
+        <details><summary>Availability and location?</summary><p>Based in Dubai. Open to full-stack and .NET roles in Dubai and across the UAE. English, Arabic and French.</p></details>
+      </div>
+      <div class="card fit">
+        <p class="label">Interactive · fit check</p>
+        <h3 style="margin-top:6px">What does your role need?</h3>
+        <div class="opts" id="fit">
+          <label><input type="checkbox" value="dotnet" checked> C# / ASP.NET Core backend</label>
+          <label><input type="checkbox" value="sql"> SQL design and performance</label>
+          <label><input type="checkbox" value="front"> Frontend (Razor Pages / React)</label>
+          <label><input type="checkbox" value="infra"> Linux / AWS / CI/CD ownership</label>
+          <label><input type="checkbox" value="pay"> Payment integrations</label>
+          <label><input type="checkbox" value="lead"> Client-facing delivery lead</label>
+          <label><input type="checkbox" value="mobile"> Mobile (Flutter)</label>
+          <label><input type="checkbox" value="java"> Java / Spring Boot</label>
+        </div>
+        <div class="result" id="fit-result" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section wrap" id="contact">
+    <div class="card contact">
+      <div><p class="label">04 · Contact</p><h2 style="margin-top:10px">Let's talk about your stack.</h2><p>Email is fastest. I reply within a day, and I'm happy to walk through how I'd approach your product or your infrastructure.</p></div>
+      <div class="col">
+        <a class="btn primary" href="mailto:douibouhaddi@gmail.com" data-track="email">Start a conversation</a>
+        <a class="plain" href="mailto:douibouhaddi@gmail.com">douibouhaddi@gmail.com</a>
+        <button class="copy" type="button" data-copy="douibouhaddi@gmail.com">copy email</button>
+        <a class="plain" href="tel:+971585342499" data-track="phone">+971 58 534 2499</a>
+        <div style="display:flex;gap:16px;font-size:.9rem"><a href="https://www.linkedin.com/in/abdellah-bouhaddi-1688421a9/" target="_blank" rel="noopener" data-track="linkedin">LinkedIn ↗</a><a href="https://github.com/AbdllahBhd" target="_blank" rel="noopener" data-track="github">GitHub ↗</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="wrap"><span>© 2026 Abdellah Bouhaddi</span><span>Variant C · Interactive</span><span>Dubai, UAE</span></footer>
+
+<!-- Analytics: GoatCounter (privacy-friendly, no cookies). Replace YOURCODE after creating a free account at goatcounter.com -->
+<script data-goatcounter="https://YOURCODE.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script>
+function track(name){ if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "event/" + name, title: name, event: true }); }
+document.querySelectorAll("[data-track]").forEach(a => a.addEventListener("click", () => track(a.dataset.track)));
+
+/* theme */
+const root = document.documentElement;
+try { const s = localStorage.getItem("theme-c"); if (s) root.setAttribute("data-theme", s); } catch (e) {}
+document.getElementById("theme").addEventListener("click", () => { const n = root.getAttribute("data-theme") === "light" ? "dark" : "light"; root.setAttribute("data-theme", n); try { localStorage.setItem("theme-c", n); } catch (e) {} track("theme-" + n); });
+
+/* architecture map */
+const LAYERS = {
+  ui:   { text: "<b>Interfaces.</b> Redesigned MATMAK's customer pages and admin interface into a responsive UI; built the HEXIS React public interface; Flutter apps for freelance clients.", tags: ["Razor Pages","React","TypeScript","Bootstrap","Flutter"] },
+  api:  { text: "<b>Application.</b> ASP.NET Core REST APIs and business workflows for authentication, subscriptions, invoicing, pricing, credits and cutting operations. Stripe one-time, recurring, invoicing and webhooks.", tags: ["C#","ASP.NET Core","Web API","EF Core","Stripe","JWT"] },
+  data: { text: "<b>Data.</b> Schema redesign that removed redundant tables and costly joins, EF Core query tuning (~40% faster affected reads/writes), production databases and automated backups.", tags: ["SQL Server","PostgreSQL","EF Core","LINQ","Backups"] },
+  ops:  { text: "<b>Operations.</b> Provision and harden Linux servers (SSH, firewalls, Nginx, TLS), run AWS EC2 and staging, automate builds with GitHub Actions, monitor with Prometheus, Grafana and Loki.", tags: ["Linux","AWS EC2","Nginx","TLS","DNS","Docker","GitHub Actions","Grafana"] },
+};
+const detail = document.getElementById("arch-detail"), archBtns = document.querySelectorAll(".arch button");
+function showLayer(key){ archBtns.forEach(b => b.setAttribute("aria-pressed", String(b.dataset.layer === key))); const l = LAYERS[key]; detail.innerHTML = `<p>${l.text}</p><ul class="tags">${l.tags.map(t => `<li class="hot">${t}</li>`).join("")}</ul>`; }
+archBtns.forEach(b => { b.addEventListener("click", () => { showLayer(b.dataset.layer); track("layer-" + b.dataset.layer); }); b.addEventListener("mouseenter", () => showLayer(b.dataset.layer)); });
+showLayer("api");
+
+/* counters */
+const cnt = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const el = e.target, end = +el.dataset.count, pre = el.dataset.prefix || "", suf = el.dataset.suffix || ""; let t0; const step = ts => { t0 = t0 || ts; const p = Math.min(1, (ts - t0) / 900); el.textContent = pre + Math.round(end * (1 - Math.pow(1 - p, 3))) + suf; if (p < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); cnt.unobserve(el); }), { threshold: .5 });
+document.querySelectorAll("[data-count]").forEach(el => cnt.observe(el));
+
+/* flip cards */
+document.querySelectorAll("[data-flip]").forEach(b => b.addEventListener("click", () => { const f = b.closest(".flip"); f.classList.toggle("is-flipped"); track("flip"); }));
+
+/* timeline scrubber */
+const STOPS = [
+  { label: "2017 — 2022", title: "MSc Software Engineering · BSc Computer Science", org: "University Abderrahmane Mira · Béjaïa, Algeria", desc: "Thesis: progressive web B2C e-commerce app on the MERN stack. Java inventory software; C++ and Android Minimax game. Java Developer and Huawei Cloud certificates.", tags: ["MERN","Java","C++"] },
+  { label: "Sep 2022 — Jun 2023", title: "Computer Science Instructor", org: "ESTIN & University Abderrahmane Mira · part-time", desc: "Mentored 100+ students through practical labs in programming, algorithms and data structures, networks, web and mobile development.", tags: ["Teaching","Algorithms","Web","Mobile"] },
+  { label: "Sep 2023 — Apr 2024", title: "Backend Developer · Java Spring Boot", org: "Tech-Instinct · Béjaïa, Algeria", desc: "Maintained and extended RH Partner's production REST microservices in Docker. Designed schemas, optimised SQL (~35% on affected queries), 90%+ JUnit coverage in scope.", tags: ["Java","Spring Boot","Docker","SQL","JUnit"] },
+  { label: "Apr 2024 — Jun 2024", title: "Mobile Application Developer", org: "Freelance · Dubai, UAE", desc: "Cross-platform Flutter applications with Firebase authentication, Firestore, storage and push notifications.", tags: ["Flutter","Dart","Firebase"] },
+  { label: "Jun 2024 — Present", title: "Full Stack Developer", org: "MATMAK · Dubai, UAE", desc: "Extend the .NET SaaS with the team, modernise customer and admin interfaces, lead client applications to launch, and own the company's infrastructure: cloud, servers, databases, domains, email, payments.", tags: ["C#","ASP.NET Core","SQL","Stripe","AWS","Linux","CI/CD"] },
+];
+const range = document.getElementById("range"), stops = document.querySelectorAll("#stops button"), sd = document.getElementById("scrub-detail");
+function showStop(i){ const s = STOPS[i]; range.value = i; stops.forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.i === i))); sd.innerHTML = `<p class="label">${s.label}</p><h3>${s.title}</h3><p class="org">${s.org}</p><p class="desc">${s.desc}</p><ul class="tags">${s.tags.map(t => `<li>${t}</li>`).join("")}</ul>`; }
+range.addEventListener("input", () => showStop(+range.value));
+stops.forEach(b => b.addEventListener("click", () => { showStop(+b.dataset.i); track("timeline-" + b.dataset.i); }));
+showStop(4);
+
+/* fit check */
+const FIT = { dotnet: "C#/ASP.NET Core daily in production", sql: "schema redesign and ~40% query gains", front: "Razor Pages in production, React for HEXIS", infra: "owns Linux, AWS, DNS, CI/CD and monitoring at MATMAK", pay: "Stripe + Network International integrations", lead: "led 3 client projects to launch", mobile: "Flutter apps with Firebase (2024)", java: "8 months on Spring Boot microservices" };
+const fit = document.getElementById("fit"), fitRes = document.getElementById("fit-result");
+function renderFit(){ const on = [...fit.querySelectorAll("input:checked")].map(i => i.value); if (!on.length) { fitRes.innerHTML = "Tick what the role needs."; return; } const strong = on.filter(k => !["mobile","java"].includes(k)); fitRes.innerHTML = `<b>${strong.length === on.length ? "Strong match" : "Good match"}</b> on ${on.length} of ${on.length}: ` + on.map(k => FIT[k]).join("; ") + "." + (strong.length < on.length ? " Mobile and Java are secondary skills, honestly stated." : ""); }
+fit.addEventListener("change", () => { renderFit(); track("fit-check"); }); renderFit();
+
+/* copy email */
+document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => { try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = "copied ✓"; setTimeout(() => b.textContent = "copy email", 1600); track("copy-email"); } catch (e) { b.textContent = "select & copy: " + b.dataset.copy; } }));
+
+/* reveal + scroll-spy */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .08 });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+const navLinks = [...document.querySelectorAll("nav a")];
+const spy = new IntersectionObserver(es => { const v = es.find(e => e.isIntersecting); if (v) navLinks.forEach(a => a.getAttribute("href") === "#" + v.target.id ? a.setAttribute("aria-current", "location") : a.removeAttribute("aria-current")); }, { rootMargin: "-35% 0px -60% 0px" });
+navLinks.forEach(a => { const s = document.querySelector(a.getAttribute("href")); if (s) spy.observe(s); });
+</script>
+</body>
+</html>

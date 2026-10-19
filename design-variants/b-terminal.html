@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Variant B · Terminal — Abdellah Bouhaddi</title>
+<meta name="description" content="Design variant B: engineer's terminal portfolio for Abdellah Bouhaddi, full-stack .NET engineer in Dubai.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#07090d; --bg-2:#0c1016; --panel:#10161e; --panel-2:#161e28; --line:#1f2a36; --line-2:#2c3a49;
+  --text:#dbe4ee; --soft:#aab6c3; --muted:#6f7d8c; --green:#3ddc97; --green-soft:rgba(61,220,151,.12); --amber:#f5b945; --red:#ff6b6b; --blue:#6ea8fe;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace; --sans:"Inter",system-ui,sans-serif; --max:1140px;
+}
+*,*::before,*::after{box-sizing:border-box} *{margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;background-position:center top}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(900px 500px at 70% -10%,rgba(61,220,151,.09),transparent 60%),linear-gradient(var(--bg),rgba(7,9,13,.85));pointer-events:none;z-index:-1}
+a{color:inherit} button{font:inherit;color:inherit;background:none;border:0;cursor:pointer} ul,ol{list-style:none;padding:0}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.wrap{width:min(var(--max),calc(100% - 48px));margin-inline:auto}
+.mono{font-family:var(--mono)}
+h1,h2,h3{font-weight:700;letter-spacing:-.025em;line-height:1.1;text-wrap:balance}
+h1{font-size:clamp(2.4rem,1.4rem + 4.4vw,5rem)} h2{font-size:clamp(1.7rem,1.2rem + 2vw,2.8rem)} h3{font-size:1.15rem}
+p{color:var(--soft)}
+.prompt{font-family:var(--mono);font-size:.8rem;color:var(--green)}
+.prompt::before{content:"$ ";color:var(--muted)}
+.kbd{display:inline-block;padding:1px 6px;border:1px solid var(--line-2);border-bottom-width:2px;border-radius:4px;font-family:var(--mono);font-size:.72rem;color:var(--soft);background:var(--panel)}
+
+/* header */
+.top{position:sticky;top:0;z-index:30;background:rgba(7,9,13,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;min-height:64px;gap:16px}
+.brand{font-family:var(--mono);font-size:.9rem;text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+nav{display:flex;gap:2px;font-family:var(--mono);font-size:.8rem}
+nav a{padding:8px 10px;color:var(--muted);text-decoration:none;border-radius:6px}
+nav a:hover{color:var(--text);background:var(--panel)}
+nav a[aria-current]{color:var(--green)}
+nav a b{color:var(--muted);font-weight:400;margin-right:4px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--line-2);border-radius:8px;font-family:var(--mono);font-size:.8rem;text-decoration:none;transition:.2s;background:var(--panel)}
+.btn:hover{border-color:var(--green);color:var(--green)}
+.btn.primary{background:var(--green);border-color:var(--green);color:#06130d;font-weight:600}
+.btn.primary:hover{filter:brightness(1.1);color:#06130d}
+
+/* hero */
+.hero{padding:clamp(48px,8vw,96px) 0 32px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:48px;align-items:center}
+.hero h1 span{color:var(--green)}
+.hero .lead{margin-top:22px;max-width:52ch;font-size:1.08rem}
+.hero .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.hero .hint{margin-top:22px;font-size:.82rem;color:var(--muted)}
+
+/* status board */
+.board{border:1px solid var(--line-2);border-radius:12px;background:var(--panel);box-shadow:0 30px 80px rgba(0,0,0,.5);overflow:hidden}
+.board-head{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+.board-head i{width:10px;height:10px;border-radius:50%;background:var(--line-2)} .board-head i:nth-child(1){background:#ff5f57}.board-head i:nth-child(2){background:#febc2e}.board-head i:nth-child(3){background:#28c840}
+.board-head span{margin-left:auto}
+.board-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}
+.tile{background:var(--panel);padding:16px 18px}
+.tile small{display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tile strong{display:block;margin-top:6px;font-size:1.5rem;font-weight:700;letter-spacing:-.03em}
+.tile strong.ok{color:var(--green)}
+.tile span{display:block;margin-top:2px;font-size:.78rem;color:var(--soft)}
+.tile .bar{margin-top:10px;height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.tile .bar i{display:block;height:100%;background:var(--green);width:0;transition:width 1.2s ease}
+.tile.wide{grid-column:span 2}
+.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.layers li{padding:10px;border:1px solid var(--line);border-radius:8px;font-family:var(--mono);font-size:.72rem;color:var(--soft);background:var(--bg-2)}
+.layers li b{display:block;color:var(--text);font-weight:600;margin-bottom:2px}
+
+/* terminal */
+.term{margin-top:40px;border:1px solid var(--line-2);border-radius:12px;background:#060a0f;overflow:hidden;font-family:var(--mono);font-size:.86rem}
+.term-out{padding:18px 20px;min-height:220px;max-height:420px;overflow:auto;white-space:pre-wrap;line-height:1.55;color:var(--soft)}
+.term-out .c{color:var(--green)} .term-out .k{color:var(--blue)} .term-out .w{color:var(--amber)} .term-out .e{color:var(--red)} .term-out .d{color:var(--muted)}
+.term-out a{color:var(--green)}
+.term-in{display:flex;align-items:center;gap:10px;padding:12px 20px;border-top:1px solid var(--line)}
+.term-in label{color:var(--green)}
+.term-in input{flex:1;background:none;border:0;color:var(--text);font:inherit;outline:none;caret-color:var(--green)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 20px 14px}
+.chips button{padding:4px 10px;border:1px solid var(--line-2);border-radius:999px;font-size:.72rem;color:var(--soft)}
+.chips button:hover{border-color:var(--green);color:var(--green)}
+
+/* sections */
+.section{padding:clamp(56px,8vw,104px) 0}
+.sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:32px;flex-wrap:wrap}
+.sec-head .prompt{font-size:.86rem}
+.sec-head p{width:100%;max-width:60ch;color:var(--muted);margin-top:6px}
+
+/* projects as log list */
+.proj{display:grid;gap:14px}
+.proj article{display:grid;grid-template-columns:160px minmax(0,1fr) auto;gap:24px;align-items:start;padding:22px 24px;border:1px solid var(--line);border-radius:12px;background:var(--panel);transition:.25s}
+.proj article:hover{border-color:var(--green);transform:translateX(4px)}
+.proj .meta{font-family:var(--mono);font-size:.74rem;color:var(--muted);display:grid;gap:6px}
+.proj .meta b{color:var(--green);font-weight:500}
+.proj .meta b.amber{color:var(--amber)}
+.proj h3 a{text-decoration:none} .proj h3 a:hover{color:var(--green)}
+.proj p{margin-top:6px;font-size:.95rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tags li{font-family:var(--mono);font-size:.7rem;padding:3px 8px;border-radius:4px;background:var(--bg-2);border:1px solid var(--line);color:var(--soft)}
+.proj .go{font-family:var(--mono);font-size:.78rem;color:var(--muted);text-decoration:none;white-space:nowrap;padding-top:4px}
+.proj .go:hover{color:var(--green)}
+
+/* skills as table */
+.skills{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.skills article{padding:20px 22px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.skills h3{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--green);font-weight:500}
+.skills .rows{margin-top:12px;display:grid;gap:8px}
+.skills .row{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:center;font-size:.9rem}
+.skills .row span:first-child{color:var(--text);font-weight:500}
+.skills .meter{height:6px;border-radius:3px;background:var(--line);overflow:hidden}
+.skills .meter i{display:block;height:100%;background:linear-gradient(90deg,var(--green),#7ff0c0);width:0;transition:width 1s ease}
+.skills .note{margin-top:14px;font-size:.78rem;color:var(--muted)}
+
+/* experience */
+.xp{display:grid;gap:0;border-left:1px solid var(--line-2);margin-left:8px}
+.xp article{position:relative;padding:4px 0 32px 32px}
+.xp article::before{content:"";position:absolute;left:-5px;top:12px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:2px solid var(--green)}
+.xp .date{font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+.xp h3{margin-top:4px} .xp .org{font-size:.88rem;color:var(--muted)} .xp p.desc{margin-top:8px;font-size:.95rem;max-width:66ch}
+
+/* contact */
+.contact{border:1px solid var(--line-2);border-radius:16px;background:linear-gradient(140deg,var(--panel),var(--panel-2));padding:clamp(32px,5vw,56px);display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.contact p{margin-top:14px;max-width:46ch}
+.contact .list{display:grid;gap:10px;font-family:var(--mono);font-size:.84rem}
+.contact .list a{display:flex;justify-content:space-between;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:8px;text-decoration:none;background:var(--bg-2);transition:.2s}
+.contact .list a:hover{border-color:var(--green);color:var(--green)}
+.contact .list a span{color:var(--muted)}
+footer{padding:28px 0;font-family:var(--mono);font-size:.74rem;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}.reveal.in{opacity:1;transform:none}
+
+@media(max-width:960px){.hero{grid-template-columns:1fr}.proj article{grid-template-columns:1fr;gap:10px}.skills{grid-template-columns:1fr}.contact{grid-template-columns:1fr}}
+@media(max-width:640px){.wrap{width:calc(100% - 32px)}nav{display:none}.board-grid{grid-template-columns:1fr}.tile.wide{grid-column:span 1}.layers{grid-template-columns:1fr}.skills .row{grid-template-columns:1fr;gap:4px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span>abdellah@dubai:~</a>
+    <nav aria-label="Main"><a href="#work"><b>1</b>work</a><a href="#skills"><b>2</b>skills</a><a href="#experience"><b>3</b>experience</a><a href="#contact"><b>4</b>contact</a></nav>
+    <a class="btn" href="../portfolio/assets/Abdellah_Bouhaddi_CV.pdf" download data-track="resume">resume.pdf ↓</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="wrap hero">
+    <div>
+      <p class="prompt">whoami</p>
+      <h1>Full-stack engineer.<br>I ship it <span>and</span> I run it.</h1>
+      <p class="lead">C# and ASP.NET Core applications in production, plus the servers, databases, cloud, domains and payment services behind them. Based in Dubai, open to .NET and full-stack roles across the UAE.</p>
+      <div class="actions"><a class="btn primary" href="#work" data-track="see-work">./view-work</a><a class="btn" href="mailto:douibouhaddi@gmail.com" data-track="email">mail --to abdellah</a></div>
+      <p class="hint">Tip: press <span class="kbd">1</span>–<span class="kbd">4</span> to jump between sections, or type <span class="kbd">help</span> in the terminal below.</p>
+    </div>
+    <div class="board" aria-label="Status board">
+      <div class="board-head"><i></i><i></i><i></i><span>status — abdellah.bouhaddi</span></div>
+      <div class="board-grid">
+        <div class="tile"><small>Role</small><strong class="ok">Full Stack Dev</strong><span>MATMAK · Dubai · since Jun 2024</span></div>
+        <div class="tile"><small>Uptime in production</small><strong>3+ years</strong><span>business software, shipped and operated</span></div>
+        <div class="tile"><small>DB performance gain</small><strong class="ok">~40%</strong><span>affected reads and writes</span><div class="bar"><i data-w="40"></i></div></div>
+        <div class="tile"><small>Client launches led</small><strong>3</strong><span>XSHIELD · HEXIS · HPL</span><div class="bar"><i data-w="100"></i></div></div>
+        <div class="tile wide"><small>Ownership scope</small><ul class="layers"><li><b>app</b>APIs · Razor Pages · EF Core</li><li><b>data</b>SQL · schema · backups</li><li><b>infra</b>Linux · AWS · DNS · TLS · CI/CD</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERMINAL -->
+  <section class="wrap" aria-label="Interactive terminal">
+    <div class="term">
+      <div class="term-out" id="out" aria-live="polite"></div>
+      <div class="chips" aria-label="Quick commands"><button data-cmd="help">help</button><button data-cmd="skills">skills</button><button data-cmd="projects">projects</button><button data-cmd="infra">infra</button><button data-cmd="contact">contact</button><button data-cmd="resume">resume</button></div>
+      <form class="term-in" id="form" autocomplete="off"><label for="cmd">abdellah@dubai:~$</label><input id="cmd" type="text" spellcheck="false" aria-label="Type a command" placeholder="type a command, e.g. skills"></form>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="section wrap" id="work">
+    <div class="sec-head"><p class="prompt">ls ./work --sort=impact</p><p>Production work first. Each entry opens a full case study.</p></div>
+    <div class="proj">
+      <article class="reveal"><div class="meta"><b>PRODUCTION</b><span>2024 → now</span><span>team · MATMAK</span></div><div><h3><a href="../portfolio/work/matmak.html">MATMAK — PPF cutting SaaS platform</a></h3><p>Extend an ASP.NET Core SaaS: customer and admin interfaces, subscriptions and Stripe billing, EF Core performance, releases. Also the servers, databases and AWS it runs on.</p><ul class="tags"><li>C#</li><li>ASP.NET Core</li><li>Razor Pages</li><li>EF Core</li><li>SQL</li><li>Stripe</li><li>AWS</li><li>Linux</li></ul></div><a class="go" href="../portfolio/work/matmak.html">open →</a></article>
+      <article class="reveal"><div class="meta"><b>PRODUCTION</b><span>client · MATMAK</span></div><div><h3><a href="../portfolio/work/xshield.html">XSHIELD — online store, end to end</a></h3><p>Custom PHP plugins and integrations, Stripe and Network International for UAE checkout, hosting, DNS, email and go-live.</p><ul class="tags"><li>WooCommerce</li><li>PHP</li><li>Stripe</li><li>Network Intl.</li><li>Linux</li></ul></div><a class="go" href="../portfolio/work/xshield.html">open →</a></article>
+      <article class="reveal"><div class="meta"><b class="amber">STAGING</b><span>client · MATMAK</span></div><div><h3><a href="../portfolio/work/hexis-training.html">HEXIS Training Centre — training platform</a></h3><p>Architected and built: Laravel backend, Filament admin, React public interface, multilingual, quiz flow with emailed access and automatic scoring.</p><ul class="tags"><li>React</li><li>Laravel</li><li>Filament</li><li>MySQL</li></ul></div><a class="go" href="../portfolio/work/hexis-training.html">open →</a></article>
+      <article class="reveal"><div class="meta"><b>PRODUCTION</b><span>integration</span></div><div><h3>HEXIS Precut Lab / BODYFENCE — API plugin</h3><p>Custom WordPress plugin consuming a dedicated MATMAK API through shortcodes to display vehicle patterns and car kits.</p><ul class="tags"><li>WordPress</li><li>PHP</li><li>REST</li></ul></div><a class="go" href="https://www.bodyfence.net/en/hpl/" target="_blank" rel="noopener">visit ↗</a></article>
+      <article class="reveal"><div class="meta"><b>PRODUCTION</b><span>2023 → 2024</span><span>Tech-Instinct</span></div><div><h3>RH Partner — HR &amp; payroll microservices</h3><p>Maintained Spring Boot REST services in Docker, designed schemas, optimised SQL (~35% on affected queries), 90%+ coverage in scope.</p><ul class="tags"><li>Java</li><li>Spring Boot</li><li>Docker</li><li>JUnit</li></ul></div><a class="go" href="https://rh-partner.com/" target="_blank" rel="noopener">visit ↗</a></article>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section wrap" id="skills">
+    <div class="sec-head"><p class="prompt">cat skills.yaml</p><p>Depth is relative to my own stack, not a benchmark. Hover a bar for what it's based on.</p></div>
+    <div class="skills">
+      <article class="reveal"><h3>backend &amp; data</h3><div class="rows">
+        <div class="row"><span>C# / ASP.NET Core</span><div class="meter" title="Daily, in production since 2024"><i data-w="95"></i></div></div>
+        <div class="row"><span>EF Core · SQL</span><div class="meter" title="Schema redesign, query tuning, ~40% gain"><i data-w="90"></i></div></div>
+        <div class="row"><span>REST APIs · JWT</span><div class="meter" title="Platform APIs, third-party integrations"><i data-w="88"></i></div></div>
+        <div class="row"><span>Java · Spring Boot</span><div class="meter" title="8 months in production at Tech-Instinct"><i data-w="65"></i></div></div></div></article>
+      <article class="reveal"><h3>frontend</h3><div class="rows">
+        <div class="row"><span>Razor Pages</span><div class="meter" title="MATMAK customer + admin UI"><i data-w="90"></i></div></div>
+        <div class="row"><span>React · TypeScript</span><div class="meter" title="HEXIS public interface"><i data-w="70"></i></div></div>
+        <div class="row"><span>HTML · CSS · JS</span><div class="meter" title="All projects, this site"><i data-w="85"></i></div></div>
+        <div class="row"><span>Flutter</span><div class="meter" title="Freelance apps, 2024"><i data-w="55"></i></div></div></div></article>
+      <article class="reveal"><h3>infrastructure &amp; delivery</h3><div class="rows">
+        <div class="row"><span>Linux · Nginx · TLS</span><div class="meter" title="Provision and harden servers from purchase to go-live"><i data-w="88"></i></div></div>
+        <div class="row"><span>AWS EC2 · backups</span><div class="meter" title="Production instances, staging, automated backups"><i data-w="80"></i></div></div>
+        <div class="row"><span>GitHub Actions · Docker</span><div class="meter" title="Automated builds and deployments"><i data-w="78"></i></div></div>
+        <div class="row"><span>Prometheus · Grafana · Loki</span><div class="meter" title="Built production monitoring and alerting"><i data-w="75"></i></div></div></div></article>
+      <article class="reveal"><h3>payments &amp; integrations</h3><div class="rows">
+        <div class="row"><span>Stripe</span><div class="meter" title="Subscriptions, invoicing, webhooks"><i data-w="88"></i></div></div>
+        <div class="row"><span>Network International</span><div class="meter" title="UAE checkout for XSHIELD"><i data-w="70"></i></div></div>
+        <div class="row"><span>WordPress · WooCommerce · PHP</span><div class="meter" title="Custom plugins and client sites"><i data-w="80"></i></div></div>
+        <div class="row"><span>Laravel · Filament</span><div class="meter" title="HEXIS backend and admin"><i data-w="65"></i></div></div></div>
+        <p class="note">Also: Agile/Scrum, Jira, code review, AI-assisted development with review and testing before release.</p></article>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section wrap" id="experience">
+    <div class="sec-head"><p class="prompt">git log --oneline career</p></div>
+    <div class="xp">
+      <article class="reveal"><p class="date">2024-06 → now</p><h3>Full Stack Developer</h3><p class="org">MATMAK · Dubai, UAE</p><p class="desc">Extend the .NET SaaS with the team, modernise customer and admin interfaces, lead client applications from requirements to launch. Own the company's infrastructure: cloud accounts, servers, production databases, domains, email and payment services.</p></article>
+      <article class="reveal"><p class="date">2024-04 → 2024-06</p><h3>Mobile Application Developer</h3><p class="org">Freelance · Dubai</p><p class="desc">Cross-platform Flutter applications with Firebase authentication, Firestore, storage and push notifications.</p></article>
+      <article class="reveal"><p class="date">2023-09 → 2024-04</p><h3>Backend Developer · Java Spring Boot</h3><p class="org">Tech-Instinct · Béjaïa, Algeria</p><p class="desc">Maintained and extended RH Partner's production REST microservices; schemas, SQL optimisation, JUnit tests, production defects.</p></article>
+      <article class="reveal"><p class="date">2022-09 → 2023-06</p><h3>Computer Science Instructor</h3><p class="org">ESTIN &amp; University Abderrahmane Mira · part-time</p><p class="desc">Mentored 100+ students through practical labs in programming, algorithms, networks, web and mobile development.</p></article>
+      <article class="reveal"><p class="date">2017 → 2022</p><h3>MSc Software Engineering · BSc Computer Science</h3><p class="org">University Abderrahmane Mira · Béjaïa</p><p class="desc">Thesis: MERN progressive web e-commerce app. Certifications: Java Developer, Huawei Cloud Computing.</p></article>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section wrap" id="contact">
+    <div class="contact">
+      <div><p class="prompt">ping abdellah</p><h2>64 bytes from Dubai: reply within a day.</h2><p>Have a role or a project in mind? Email is fastest. Happy to walk through how I'd approach your stack or your infrastructure.</p></div>
+      <div class="list">
+        <a href="mailto:douibouhaddi@gmail.com" data-track="email"><span>email</span>douibouhaddi@gmail.com</a>
+        <a href="tel:+971585342499" data-track="phone"><span>phone</span>+971 58 534 2499</a>
+        <a href="https://www.linkedin.com/in/abdellah-bouhaddi-1688421a9/" target="_blank" rel="noopener" data-track="linkedin"><span>linkedin</span>abdellah-bouhaddi</a>
+        <a href="https://github.com/AbdllahBhd" target="_blank" rel="noopener" data-track="github"><span>github</span>AbdllahBhd</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="wrap"><span>© 2026 Abdellah Bouhaddi</span><span>Variant B · Terminal</span><span>Dubai, UAE · UTC+4</span></footer>
+
+<!-- Analytics: GoatCounter (privacy-friendly, no cookies). Replace YOURCODE after creating a free account at goatcounter.com -->
+<script data-goatcounter="https://YOURCODE.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script>
+function track(name){ if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "event/" + name, title: name, event: true }); }
+document.querySelectorAll("[data-track]").forEach(a => a.addEventListener("click", () => track(a.dataset.track)));
+
+/* ---- terminal ---- */
+const out = document.getElementById("out"), input = document.getElementById("cmd"), form = document.getElementById("form");
+const COMMANDS = {
+  help: () => `<span class="k">available commands</span>\n  help        this list\n  skills      what I work with\n  projects    selected work\n  infra       what I run in production\n  experience  where I have worked\n  contact     how to reach me\n  resume      download the PDF\n  clear       clear the screen\n\n<span class="d">keyboard: 1–4 jump to sections · Esc returns here</span>`,
+  skills: () => `<span class="k">backend</span>   C#, ASP.NET Core, Web API, EF Core, LINQ, SQL Server, PostgreSQL, JWT\n<span class="k">frontend</span>  Razor Pages, React, TypeScript, HTML/CSS, Bootstrap, Flutter\n<span class="k">infra</span>     Linux, AWS EC2, Nginx, TLS, DNS, Docker, GitHub Actions, Prometheus, Grafana, Loki\n<span class="k">payments</span>  Stripe (subscriptions, invoicing, webhooks), Network International\n<span class="k">also</span>      Java, Spring Boot, PHP, Laravel, Filament, WordPress, WooCommerce`,
+  projects: () => `<span class="c">●</span> MATMAK          production  .NET SaaS platform, team contribution     <a href="../portfolio/work/matmak.html">open</a>\n<span class="c">●</span> XSHIELD         production  online store delivered end to end         <a href="../portfolio/work/xshield.html">open</a>\n<span class="w">●</span> HEXIS Training  staging     Laravel + React training platform         <a href="../portfolio/work/hexis-training.html">open</a>\n<span class="c">●</span> BODYFENCE/HPL   production  WordPress plugin over a MATMAK API\n<span class="c">●</span> RH Partner      production  Spring Boot microservices (Tech-Instinct)`,
+  infra: () => `<span class="k">what I own at MATMAK</span>\n  cloud accounts · Linux servers · AWS EC2 · production databases\n  domains &amp; DNS · email · TLS · backups · access control\n  CI/CD with GitHub Actions · monitoring with Prometheus/Grafana/Loki\n<span class="d">responsibility: availability, security, backups, access control</span>`,
+  experience: () => `2024-06 → now    Full Stack Developer         MATMAK, Dubai\n2024-04 → 06     Mobile App Developer         Freelance, Dubai\n2023-09 → 2024   Backend Developer (Java)     Tech-Instinct, Béjaïa\n2022-09 → 2023   CS Instructor (part-time)    ESTIN / Univ. A. Mira`,
+  contact: () => `email     <a href="mailto:douibouhaddi@gmail.com">douibouhaddi@gmail.com</a>\nphone     +971 58 534 2499\nlinkedin  <a href="https://www.linkedin.com/in/abdellah-bouhaddi-1688421a9/" target="_blank" rel="noopener">abdellah-bouhaddi</a>\ngithub    <a href="https://github.com/AbdllahBhd" target="_blank" rel="noopener">AbdllahBhd</a>`,
+  resume: () => { window.open("../portfolio/assets/Abdellah_Bouhaddi_CV.pdf", "_blank"); track("resume"); return `<span class="c">opening resume.pdf…</span>`; },
+  clear: () => { out.innerHTML = ""; return null; },
+  whoami: () => `abdellah — full-stack software engineer, Dubai. builds it, runs it.`,
+  sudo: () => `<span class="e">abdellah is not in the sudoers file. This incident will be reported.</span> <span class="d">(just kidding — email me instead)</span>`,
+  ls: () => `work/  skills.yaml  experience.log  contact.txt  resume.pdf`,
+  pwd: () => `/home/abdellah/dubai`,
+  date: () => new Date().toString(),
+};
+function print(html){ out.insertAdjacentHTML("beforeend", html + "\n"); out.scrollTop = out.scrollHeight; }
+function run(raw){
+  const cmd = raw.trim().toLowerCase();
+  if (!cmd) return;
+  print(`<span class="c">abdellah@dubai:~$</span> ${raw.replace(/</g,"&lt;")}`);
+  const fn = COMMANDS[cmd.split(" ")[0]];
+  const result = fn ? fn() : `<span class="e">command not found:</span> ${cmd.replace(/</g,"&lt;")} <span class="d">— try</span> help`;
+  if (result !== null) print(result + "\n");
+  track("cmd-" + (fn ? cmd.split(" ")[0] : "unknown"));
+}
+form.addEventListener("submit", e => { e.preventDefault(); run(input.value); input.value = ""; });
+document.querySelectorAll(".chips button").forEach(b => b.addEventListener("click", () => { run(b.dataset.cmd); input.focus(); }));
+print(`<span class="d">Welcome. This is a real terminal for a fake shell. Type</span> help <span class="d">or click a command.</span>\n`);
+run("whoami");
+
+/* keyboard shortcuts */
+document.addEventListener("keydown", e => {
+  if (e.target === input || e.target.tagName === "INPUT") { if (e.key === "Escape") input.blur(); return; }
+  const map = { "1": "#work", "2": "#skills", "3": "#experience", "4": "#contact" };
+  if (map[e.key]) { document.querySelector(map[e.key]).scrollIntoView(); track("key-" + e.key); }
+  if (e.key === "Escape" || e.key === "/") { e.preventDefault(); input.focus(); input.scrollIntoView({ block: "center" }); }
+});
+
+/* meters, reveal, scroll-spy */
+const grow = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll("[data-w]").forEach(i => i.style.width = i.dataset.w + "%"); grow.unobserve(e.target); } }), { threshold: .3 });
+document.querySelectorAll(".board, .skills article").forEach(el => grow.observe(el));
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .08 });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+const navLinks = [...document.querySelectorAll("nav a")];
+const spy = new IntersectionObserver(es => { const v = es.find(e => e.isIntersecting); if (v) navLinks.forEach(a => a.getAttribute("href") === "#" + v.target.id ? a.setAttribute("aria-current", "location") : a.removeAttribute("aria-current")); }, { rootMargin: "-35% 0px -60% 0px" });
+navLinks.forEach(a => { const s = document.querySelector(a.getAttribute("href")); if (s) spy.observe(s); });
+</script>
+</body>
+</html>
