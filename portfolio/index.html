@@ -68,11 +68,9 @@
     </aside>
   </section>
 
-  <div class="wrap stats">
-    <div class="stat reveal"><strong><span data-count="3">3</span><b>+</b></strong><span>years building and operating production software</span></div>
-    <div class="stat reveal"><strong>~<span data-count="40">40</span><b>%</b></strong><span>faster database reads and writes after schema and query work</span></div>
-    <div class="stat reveal"><strong><span data-count="3">3</span></strong><span>client projects led from requirements to launch</span></div>
-    <div class="stat reveal"><strong>EN · AR · FR</strong><span>fluent, plus native Kabyle</span></div>
+  <div class="wrap proof reveal">
+    <p class="proof-lead"><strong>About 40% faster</strong> reads and writes on MATMAK's affected database paths, after I redesigned parts of the schema and tuned the EF Core queries behind them. <a href="work/matmak.html#performance">How it was done</a></p>
+    <p class="proof-facts"><span>3+ years in production software</span><span>3 client projects led to launch</span><span>English, Arabic, French, native Kabyle</span></p>
   </div>
 
   <!-- WORK -->
@@ -146,10 +144,10 @@
   <section class="block" id="skills"><div class="wrap">
     <div class="head"><div><p class="cmd">cat skills.yaml</p><h2>Skills</h2></div><p>Grouped by layer. Every item listed here is backed by a project or role above.</p></div>
     <div class="skills">
-      <article class="skill reveal"><h3>Backend &amp; data</h3><p>APIs, workflows, authentication and the data behind them.</p><ul class="tags"><li>C#</li><li>ASP.NET Core</li><li>Web API</li><li>EF Core</li><li>LINQ</li><li>SQL</li><li>SQL Server</li><li>PostgreSQL</li><li>JWT</li><li>Java</li><li>Spring Boot</li></ul></article>
-      <article class="skill reveal"><h3>Frontend</h3><p>Customer pages, admin tools, multilingual and mobile apps.</p><ul class="tags"><li>Razor Pages</li><li>React</li><li>TypeScript</li><li>HTML/CSS</li><li>Bootstrap</li><li>Flutter</li><li>Dart</li></ul></article>
-      <article class="skill reveal"><h3>Infrastructure</h3><p>From server purchase to go-live, and monitoring after.</p><ul class="tags"><li>Linux</li><li>AWS</li><li>Nginx</li><li>TLS</li><li>DNS</li><li>Docker</li><li>GitHub Actions</li><li>Prometheus</li><li>Grafana</li><li>Loki</li></ul></article>
-      <article class="skill reveal"><h3>Payments &amp; platforms</h3><p>Money flows and client platforms.</p><ul class="tags"><li>Stripe</li><li>Network International</li><li>WooCommerce</li><li>WordPress</li><li>PHP</li><li>Laravel</li><li>Filament</li><li>Firebase</li></ul></article>
+      <article class="skill reveal"><div><h3>Backend &amp; data</h3><p>APIs, workflows, authentication and the data behind them.</p></div><ul class="tags"><li>C#</li><li>ASP.NET Core</li><li>Web API</li><li>EF Core</li><li>LINQ</li><li>SQL</li><li>SQL Server</li><li>PostgreSQL</li><li>JWT</li><li>Java</li><li>Spring Boot</li></ul></article>
+      <article class="skill reveal"><div><h3>Frontend</h3><p>Customer pages, admin tools, multilingual and mobile apps.</p></div><ul class="tags"><li>Razor Pages</li><li>React</li><li>TypeScript</li><li>HTML/CSS</li><li>Bootstrap</li><li>Flutter</li><li>Dart</li></ul></article>
+      <article class="skill reveal"><div><h3>Infrastructure</h3><p>From server purchase to go-live, and monitoring after.</p></div><ul class="tags"><li>Linux</li><li>AWS</li><li>Nginx</li><li>TLS</li><li>DNS</li><li>Docker</li><li>GitHub Actions</li><li>Prometheus</li><li>Grafana</li><li>Loki</li></ul></article>
+      <article class="skill reveal"><div><h3>Payments &amp; platforms</h3><p>Money flows and client platforms.</p></div><ul class="tags"><li>Stripe</li><li>Network International</li><li>WooCommerce</li><li>WordPress</li><li>PHP</li><li>Laravel</li><li>Filament</li><li>Firebase</li></ul></article>
     </div>
     <p class="skills-note">Ways of working: Agile and Scrum, Jira, code review, secure coding, AI-assisted development (Cursor, Codex, MCP) with review and testing before release.</p>
   </div></section>
@@ -188,11 +186,12 @@
   <!-- BACKGROUND -->
   <section class="block" id="background"><div class="wrap">
     <div class="head"><div><p class="cmd">cat about.md</p><h2>Background</h2></div><p>Based in Dubai, with a software engineering foundation built in Béjaïa, Algeria. Teaching taught me to explain things plainly.</p></div>
-    <div class="bg-grid">
-      <article class="reveal"><p class="when">2020 — 2022</p><h3>Master's in Software Engineering</h3><p>University Abderrahmane Mira. Thesis: progressive web B2C e-commerce app on the MERN stack with real-time inventory and payments.</p></article>
-      <article class="reveal"><p class="when">2017 — 2020</p><h3>Bachelor's in Computer Science</h3><p>University Abderrahmane Mira. Projects: Java inventory software; C++ desktop and Android game with the Minimax algorithm.</p></article>
-      <article class="reveal"><p class="when">Certifications &amp; languages</p><h3>Java Developer · Huawei Cloud</h3><p>Java Developer Certificate (2020) and Huawei Certification in Cloud Computing.</p><ul class="langs"><li>English<small>fluent</small></li><li>Arabic<small>fluent</small></li><li>French<small>fluent</small></li><li>Kabyle<small>native</small></li></ul></article>
-    </div>
+    <ol class="bg-grid timeline">
+      <li class="reveal"><p class="when">2020 — 2022</p><div><h3>Master's in Software Engineering</h3><p>University Abderrahmane Mira. Thesis: progressive web B2C e-commerce app on the MERN stack with real-time inventory and payments.</p></div></li>
+      <li class="reveal"><p class="when">2020</p><div><h3>Java Developer Certificate</h3><p>Also holds the Huawei Certification in Cloud Computing.</p></div></li>
+      <li class="reveal"><p class="when">2017 — 2020</p><div><h3>Bachelor's in Computer Science</h3><p>University Abderrahmane Mira. Projects: Java inventory software; C++ desktop and Android game with the Minimax algorithm.</p></div></li>
+    </ol>
+    <div class="langs-row reveal"><h3>Languages</h3><ul class="langs"><li>English<small>fluent</small></li><li>Arabic<small>fluent</small></li><li>French<small>fluent</small></li><li>Kabyle<small>native</small></li></ul></div>
   </div></section>
 
   <!-- CONTACT -->

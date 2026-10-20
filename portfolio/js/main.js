@@ -61,17 +61,10 @@ tags.forEach((tag) => {
   tag.addEventListener("focus", on); tag.addEventListener("blur", off);
 });
 
-/* reveal + count-up */
-const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+/* reveal */
 const io = new IntersectionObserver((entries) => entries.forEach((e) => {
   if (!e.isIntersecting) return;
   e.target.classList.add("in"); io.unobserve(e.target);
-  e.target.querySelectorAll("[data-count]").forEach((el) => {
-    if (reduce) return;
-    const end = +el.dataset.count; let start = null;
-    const step = (ts) => { start = start || ts; const p = Math.min(1, (ts - start) / 800); el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); };
-    requestAnimationFrame(step);
-  });
 }), { threshold: 0.08 });
 document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
