@@ -240,7 +240,7 @@ The gates are relative to the Task 1 baseline. Each finding a later task owns ma
     2. Nothing is broken: G3 passes in full and G4 passes on all 6 pages.
     3. No files changed outside `portfolio/`.
 
-- [ ] **10. Final verification and review**
+- [x] **10. Final verification and review**
   - Run G1 to G4 in full on all 6 pages, at 1280 and 375, in both themes.
   - Run `/impeccable audit` again.
   - Run the `code-reviewer` agent on `git diff main...` and fix or rebut every finding.
@@ -307,6 +307,53 @@ The gates are relative to the Task 1 baseline. Each finding a later task owns ma
 - First slider top: 2,222px. Page height: 12,554px.
 - Blocks above it: header 105, hero text 492, contact card 518, stats 562, work head 162, filters 138.
 - Making the contact card compact (about 518 → 150) and the stats a single line (about 562 → 90) brings the first slider to about 1,300. Getting under 1,220 also needs about 80px trimmed from the hero/head/filter gaps. That is reachable.
+
+## Findings closure (Task 10, 2026-10-20)
+
+**Independent re-audit:** 16/20 on the first pass. After the review fixes it scored **18/20 with no P1**:
+
+| Dimension | Score |
+|---|---|
+| Accessibility | 4 |
+| Performance | 3 |
+| Theming | 4 |
+| Responsive | 4 |
+| Integrity | 3 |
+
+**Code review:** approved with nits. The one warning (reveal failsafe flashing on slow loads) is fixed. Verified with `main.js` delayed 4.2s: content never drops back to hidden.
+
+| ID | Status | Evidence |
+|---|---|---|
+| F1 | Closed (within the kept identity) | The proof statement leads. Skills, Background and Q&A have no card-like children (Task 4 JS check). The re-audit notes that the 2×2 project grid remains, which is the owner's choice. |
+| F2 | Closed | Framed screenshots carry the real domain (Task 5 sheets). The re-audit's leftover point, that slide 1 shows client marketing, is owner-blocked (needs admin, Grafana or architecture captures). |
+| F3 | Closed | The 40-image contact sheet shows no widgets (Task 3). |
+| F4 | Closed | 5/5 cards have an `.outcome` and at most 3 bullets. |
+| F5 | Closed | `hpl-bodyfence.html` and `rh-partner.html` exist, with a fact table and a 5-page next loop. |
+| F6 | Closed | First slider at 1,213px (baseline 2,222). |
+| F7 | Closed | Resume link visible on all 6 pages at 280, 320 and 375px. |
+| F8 | Closed | Edge fade plus the `at-end` class; the header tucks while scrolling down. |
+| F9 | Closed | No `[data-count]`; the 40% lead links to "How it was done". |
+| F10 | Closed | 0 unbacked skills. The wording is now "on this page". |
+| F11 | Closed | `li[tabindex]` = 0; the hover hint shows only under `(hover: hover)`. |
+| F12 | Closed | Dots at 3.41 (light) and 3.66 (dark). |
+| F13 | Closed | 0 contrast failures on 6 pages in both themes. |
+| F14 | Closed | `aria-disabled` keeps focus on the arrow being pressed. |
+| F15 | Closed | 0 targets under 44px with touch emulation. |
+| F16 | Closed | Under reduced motion, track scrolling is `auto` and dot transitions are `0s`. |
+| F17 | Closed | Media dimmed in dark mode; lightbox colours tokenized; `theme-color` follows the theme. |
+| F18 | Closed | 800w/1200w `srcset` on every slider image (WebP/AVIF is a possible follow-up). |
+| F19 | Closed | No `broken-image`; the lightbox image is created on first open. |
+| F20 | Closed | With `main.js` blocked, every reveal has opacity 1. |
+| F21 | Closed | Slides labelled "n of 4", live regions silent on load, `#fit` is a fieldset, theme buttons have `aria-label`s, glyphs have empty alt text. |
+| F22 | Closed | No `side-tab`. |
+| F23 | Closed | `check_no_emoji` exits 0. |
+| F24 | Closed | Variable Inter; dead CSS removed; 0 inline `style=`; to-top button clears the footer. |
+
+**Final gates:**
+- G1: only `cramped-padding` (verified false positives) and `overused-font` (Inter kept by decision)
+- G2: no-emoji OK; taste 5 advisory
+- G3: no overflow, 175 links all resolving, 0 contrast failures, 0 small targets
+- G4: final frame sheets of all 6 pages at 1280 and 375px in both themes
 
 ## Fact table (filled in by Task 6)
 
