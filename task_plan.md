@@ -190,7 +190,7 @@ The gates are relative to the Task 1 baseline. Each finding a later task owns ma
     2. Nothing is broken: G1 and G2 show no regression, and each new page has one h1 and no skipped heading levels.
     3. No files changed outside `portfolio/work/`, `portfolio/index.html` and `CLAUDE.md` (the case-study list).
 
-- [ ] **7. Phone experience** (F6, F7, F8, F24 to-top)
+- [x] **7. Phone experience** (F6, F7, F8, F24 to-top)
   - **Below 760px:**
     - The contact card becomes a compact action row.
     - The header keeps a compact Resume link, on all pages.

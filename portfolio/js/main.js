@@ -27,7 +27,7 @@ setTheme(root.getAttribute("data-theme") || "light", false);
 themeButtons.forEach((b) => b.addEventListener("click", () => setTheme(b.dataset.setTheme, true)));
 
 /* progress bar, scroll-spy, back to top */
-const bar = document.getElementById("progress"), toTop = document.getElementById("to-top");
+const bar = document.getElementById("progress"), toTop = document.getElementById("to-top"), footer = document.querySelector("footer");
 // Only same-page anchors take part in scroll-spy; links to other pages are ignored.
 const navLinks = [...document.querySelectorAll('.nav a[href^="#"], .case-nav a[href^="#"]')];
 const sections = navLinks.map((a) => document.querySelector(a.getAttribute("href")));
@@ -35,6 +35,8 @@ function onScroll() {
   const max = document.documentElement.scrollHeight - innerHeight;
   bar.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + "%";
   toTop.classList.toggle("show", scrollY > innerHeight);
+  // Ride above the footer instead of covering its text at the end of the page.
+  if (footer) toTop.style.bottom = Math.max(20, innerHeight - footer.getBoundingClientRect().top + 12) + "px";
   const y = scrollY + innerHeight * 0.35;
   let current = null;
   sections.forEach((s) => { if (s && y >= s.offsetTop) current = s; });
@@ -42,6 +44,12 @@ function onScroll() {
 }
 onScroll(); addEventListener("scroll", onScroll, { passive: true }); addEventListener("resize", onScroll);
 toTop.addEventListener("click", () => scrollTo({ top: 0 }));
+
+/* phone strips (nav, work filters): fade the right edge only while there is more to scroll */
+document.querySelectorAll(".nav, .filters").forEach((strip) => {
+  const edge = () => strip.classList.toggle("at-end", strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 2);
+  strip.addEventListener("scroll", edge, { passive: true }); addEventListener("resize", edge); edge();
+});
 
 /* copy buttons */
 const toast = document.getElementById("toast");
