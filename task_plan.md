@@ -113,7 +113,7 @@ The gates are relative to the Task 1 baseline. Each finding a later task owns ma
     2. Nothing is broken: `git status` shows only `task_plan.md` changed.
     3. No files changed outside `task_plan.md` and the scratchpad.
 
-- [ ] **2. Tokens, contrast, theme, font weights** (F12, F13, F17, F19, F24 weights)
+- [x] **2. Tokens, contrast, theme, font weights** (F12, F13, F17, F19, F24 weights)
   - Inter becomes a variable font (`wght@400..800`). Mono 600 becomes 500.
   - New tokens: dot, scrim, on-scrim, status-on-bg. Pairs to fix:
     - `.status`: at least 4.5:1 on every background

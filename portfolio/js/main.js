@@ -18,6 +18,8 @@ const root = document.documentElement;
 const themeButtons = document.querySelectorAll("[data-set-theme]");
 function setTheme(theme, save) {
   root.setAttribute("data-theme", theme);
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.content = getComputedStyle(root).getPropertyValue("--bg").trim();
   themeButtons.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.setTheme === theme)));
   if (save) { try { localStorage.setItem("theme", theme); } catch (e) { /* storage blocked */ } track("theme-" + theme); }
 }
@@ -121,9 +123,10 @@ document.querySelectorAll("[data-slider]").forEach((slider) => {
 /* lightbox */
 const lightbox = document.getElementById("lightbox");
 if (lightbox) {
-const lbImg = lightbox.querySelector("img"), lbCap = lightbox.querySelector("figcaption");
+// The image is created on first open: an <img> without src in the markup is invalid and reads as broken.
+const lbImg = document.createElement("img"), lbCap = lightbox.querySelector("figcaption");
 let lbSet = [], lbIndex = 0;
-function showLb(i) { lbIndex = (i + lbSet.length) % lbSet.length; const img = lbSet[lbIndex]; lbImg.src = img.src; lbImg.alt = img.alt; lbCap.textContent = img.alt + ` (${lbIndex + 1}/${lbSet.length})`; }
+function showLb(i) { lbIndex = (i + lbSet.length) % lbSet.length; const img = lbSet[lbIndex]; lbImg.src = img.src; lbImg.alt = img.alt; if (!lbImg.isConnected) lbCap.before(lbImg); lbCap.textContent = img.alt + ` (${lbIndex + 1}/${lbSet.length})`; }
 document.querySelectorAll("[data-zoom]").forEach((img) => (img.closest(".zoom") || img).addEventListener("click", () => {
   lbSet = [...img.closest("[data-slider]").querySelectorAll("img")]; showLb(lbSet.indexOf(img));
   if (typeof lightbox.showModal === "function") lightbox.showModal(); else window.open(img.src, "_blank");
