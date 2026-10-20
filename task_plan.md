@@ -82,6 +82,8 @@ The gates are relative to the Task 1 baseline. Each finding a later task owns ma
 - The only allowed final findings are `cramped-padding` (false positive: the detector doesn't resolve `clamp()`) and `overused-font` (Inter kept by decision).
 - *Amendment (Task 4, 2026-10-20):* a new `cramped-padding` hit is allowed only if it is verified as a false positive and listed here with measured evidence. Without this, G1 would block a correct design the detector misreads.
   - FP-1: `.proof-facts` is reported as "flush against border-left". Measured: text is inset 25px from the border at 1440, 1280 and 1024px, and there is no border below 1000px.
+  - FP-2 (Task 5): `.gallery` on the 3 case pages is reported as "flush against border+bg on bottom". Measured: the caption text sits 16px above the gallery's bottom border at 1440, 1280 and 375px.
+  - Not a false positive (Task 5): the first version of the frame bar used 11.84px text with a 7px vertical inset, which caused `tiny-text` and `cramped-padding`. Fixed to 0.8rem text with 8px padding.
 
 **G2: XIAS static gates.** Run `PYTHONUTF8=1 python scripts/check_no_emoji.py portfolio` and `PYTHONUTF8=1 python scripts/lint_taste.py portfolio`.
 - Pass: no count above the baseline.
@@ -160,7 +162,7 @@ The gates are relative to the Task 1 baseline. Each finding a later task owns ma
     2. Nothing is broken: G1 to G3 show no regression, and G4 passes on the home page and all 3 case pages, since `.case-stats` shares `.stat`.
     3. No files changed outside `portfolio/index.html`, `portfolio/css/styles.css` and `portfolio/js/main.js`.
 
-- [ ] **5. Work storytelling and skills evidence** (F2, F4, F10, F18 markup)
+- [x] **5. Work storytelling and skills evidence** (F2, F4, F10, F18 markup)
   - **Every home card gets:**
     - a `.outcome` sentence
     - at most 3 `.did li`
