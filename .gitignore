@@ -27,3 +27,7 @@ build/
 *.log
 .DS_Store
 Thumbs.db
+
+# apple-design skill is clone-on-activate (no upstream license) - never committed
+.claude/skills/apple-design/
+.agents/skills/apple-design/

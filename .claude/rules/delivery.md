@@ -19,6 +19,9 @@ Run this loop IN ORDER — never skip a step, never reorder:
    - Merge the feature branch into `develop` (regular merge, no squash unless
      pr.md says otherwise). Never merge with failing gates — no exceptions.
    - Never push directly to `main`.
+   - Solo flow note: the step-2 adversarial review IS the required review
+     (pr.md's "never merge without review" is satisfied by it). Teams that
+     require human PR review use a PR to develop instead of a direct merge.
 5. **Propose the next task:** suggest it with one line of reasoning (from
    task_plan.md, the roadmap, or open issues), and wait for the user's pick or
    confirmation.

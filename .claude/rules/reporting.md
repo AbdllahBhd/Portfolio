@@ -22,6 +22,17 @@ short sentences, no jargon walls:
 Skip a section only when it is truly empty. For tiny tasks, compress to
 Summary + Verified — never skip the evidence.
 
+## Goal footer (while executing a plan)
+
+- During plan execution, end EVERY response with exactly one line:
+  `— Goal: <plan objective, verbatim from task_plan.md> · Task N/M · Risk: none | <one-phrase drift note>`
+- The goal text is copied verbatim from the plan file, never paraphrased — a
+  mutated goal line IS the drift signal.
+- The footer complements the visible task list (which shows steps/checkmarks);
+  it answers "is this still the right direction", so never re-list steps in it.
+- A missing or altered footer tells the user the session is degrading — they
+  may compact or restart; make the footer easy to scan, one line, always last.
+
 ## Context management (suggest, don't wait to be asked)
 
 - **Between unrelated tasks:** suggest starting a fresh session (or `/clear`).
