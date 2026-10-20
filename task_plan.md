@@ -204,7 +204,7 @@ The gates are relative to the Task 1 baseline. Each finding a later task owns ma
     2. Nothing is broken: G3 (a) shows no overflow at 280 to 414px on all pages, and G4 passes on all pages.
     3. No files changed outside `portfolio/**/*.html`, `portfolio/css/styles.css` and `portfolio/js/main.js`.
 
-- [ ] **8. Accessibility and interaction** (F11, F14, F15, F16, F20, F21)
+- [x] **8. Accessibility and interaction** (F11, F14, F15, F16, F20, F21)
   - **Tags:** no `tabIndex`. The highlight works only under `(hover: hover)`, and the copy matches.
   - **Slider:**
     - Focus moves to the other arrow when one disables.

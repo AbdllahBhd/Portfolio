@@ -58,16 +58,16 @@ document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("clic
   try { await navigator.clipboard.writeText(b.dataset.copy); say("Copied " + b.dataset.copy); track("copy"); } catch (e) { say("Copy not available: " + b.dataset.copy); }
 }));
 
-/* hover a technology: highlight the same tag everywhere (nothing is hidden) */
-const tags = [...document.querySelectorAll(".tags li")];
-const norm = (t) => t.trim().toLowerCase();
-tags.forEach((tag) => {
-  const on = () => tags.forEach((t) => t.classList.toggle("match", norm(t.textContent) === norm(tag.textContent)));
-  const off = () => tags.forEach((t) => t.classList.remove("match"));
-  tag.tabIndex = 0;
-  tag.addEventListener("mouseenter", on); tag.addEventListener("mouseleave", off);
-  tag.addEventListener("focus", on); tag.addEventListener("blur", off);
-});
+/* hover a technology: highlight the same tag everywhere. A pointer nicety only: tags are not
+   controls, so they stay out of the tab order and nothing depends on it. */
+if (matchMedia("(hover: hover)").matches) {
+  const tags = [...document.querySelectorAll(".tags li")];
+  const norm = (t) => t.trim().toLowerCase();
+  tags.forEach((tag) => {
+    tag.addEventListener("mouseenter", () => tags.forEach((t) => t.classList.toggle("match", norm(t.textContent) === norm(tag.textContent))));
+    tag.addEventListener("mouseleave", () => tags.forEach((t) => t.classList.remove("match")));
+  });
+}
 
 /* reveal */
 const io = new IntersectionObserver((entries) => entries.forEach((e) => {
@@ -75,6 +75,8 @@ const io = new IntersectionObserver((entries) => entries.forEach((e) => {
   e.target.classList.add("in"); io.unobserve(e.target);
 }), { threshold: 0.08 });
 document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+// Reveals are observed: cancel the CSS failsafe that shows content when this script never runs.
+root.classList.add("js-ok");
 
 /* work filters */
 const filterButtons = [...document.querySelectorAll(".filters button")];
@@ -100,6 +102,10 @@ document.querySelectorAll("[data-slider]").forEach((slider) => {
   const dots = slider.querySelector(".dots");
   const caption = slider.querySelector(".slide-caption");
   const prev = slider.querySelector(".prev"), next = slider.querySelector(".next");
+  // The visible caption is not live; this region speaks only for changes the visitor makes.
+  const live = document.createElement("span"); live.className = "sr-only"; live.setAttribute("aria-live", "polite"); slider.appendChild(live);
+  let shown = 0, speak;
+  slides.forEach((slide, i) => { slide.setAttribute("role", "group"); slide.setAttribute("aria-roledescription", "slide"); slide.setAttribute("aria-label", `${i + 1} of ${slides.length}`); });
   slides.forEach((_, i) => {
     const dot = document.createElement("button");
     dot.type = "button"; dot.setAttribute("aria-label", `Show screenshot ${i + 1} of ${slides.length}`);
@@ -109,9 +115,15 @@ document.querySelectorAll("[data-slider]").forEach((slider) => {
   const index = () => Math.round(rail.scrollLeft / rail.clientWidth);
   function go(i) { if (!rail.clientWidth) return; const target = Math.max(0, Math.min(slides.length - 1, i)); rail.scrollTo({ left: target * rail.clientWidth }); sync(target); }
   function sync(i = index()) {
+    const text = slides[i].querySelector("img").dataset.caption;
     [...dots.children].forEach((d, k) => d.setAttribute("aria-current", String(k === i)));
-    caption.textContent = `${i + 1}/${slides.length} · ${slides[i].querySelector("img").dataset.caption}`;
+    caption.textContent = `${i + 1}/${slides.length} · ${text}`;
+    if (i !== shown) { shown = i; clearTimeout(speak); speak = setTimeout(() => { live.textContent = `Screenshot ${i + 1} of ${slides.length}: ${text}`; }, 300); }
+    // A disabled button drops focus to the page; hand it to the other arrow first.
+    const focused = document.activeElement;
     prev.disabled = i === 0; next.disabled = i === slides.length - 1;
+    if (focused === prev && prev.disabled) next.focus();
+    if (focused === next && next.disabled) prev.focus();
   }
   prev.addEventListener("click", () => { go(index() - 1); track("slide"); });
   next.addEventListener("click", () => { go(index() + 1); track("slide"); });
@@ -164,6 +176,8 @@ function renderFit() {
 if (fitBox && fitResult) {
   fitBox.addEventListener("change", () => { renderFit(); track("fit-check"); });
   renderFit();
+  // Live only after the first render, so the default summary is not announced on load.
+  fitResult.setAttribute("aria-live", "polite");
 }
 
 /* footer year */
