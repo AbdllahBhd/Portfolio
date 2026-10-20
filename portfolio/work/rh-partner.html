@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RH Partner case study — Abdellah Bouhaddi</title>
+<meta name="description" content="How Abdellah Bouhaddi maintained RH Partner's production Spring Boot microservices in Docker: schema design and SQL tuning about 35% faster, JWT-secured APIs and JUnit tests over 90% coverage.">
+<link rel="canonical" href="https://abdllahbhd.github.io/Portfolio/work/rh-partner.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abdllahbhd.github.io/Portfolio/work/rh-partner.html">
+<meta property="og:title" content="RH Partner case study — Abdellah Bouhaddi">
+<meta property="og:description" content="How Abdellah Bouhaddi maintained RH Partner's production Spring Boot microservices in Docker: schema design and SQL tuning about 35% faster, JWT-secured APIs and JUnit tests over 90% coverage.">
+<meta property="og:image" content="https://abdllahbhd.github.io/Portfolio/assets/screens/rh-1.jpg">
+<meta name="theme-color" content="#f7f8fa">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<script>
+  // Light is the default; a saved choice wins. Applied before first paint to avoid a flash.
+  (function () {
+    var root = document.documentElement, theme = "light";
+    root.classList.add("js");
+    try { var saved = localStorage.getItem("theme"); if (saved === "dark" || saved === "light") theme = saved; } catch (e) { /* storage blocked: keep light */ }
+    root.setAttribute("data-theme", theme);
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../css/styles.css">
+<script src="../js/main.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="progress" aria-hidden="true"><i id="progress"></i></div>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><i>AB</i>Abdellah Bouhaddi</a>
+    <nav class="nav" aria-label="Sections"><a href="../index.html#work">Work</a><a href="../index.html#experience">Experience</a><a href="../index.html#skills">Skills</a><a href="../index.html#ask">Ask me</a><a href="../index.html#background">Background</a><a href="../index.html#contact">Contact</a></nav>
+    <div class="theme-switch" role="group" aria-label="Color theme">
+      <button type="button" data-set-theme="light" aria-pressed="true" title="Light theme"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span>Light</span></button>
+      <button type="button" data-set-theme="dark" aria-pressed="false" title="Dark theme"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span>Dark</span></button>
+    </div>
+    <a class="btn sm primary" href="../assets/Abdellah_Bouhaddi_CV.pdf" download data-track="resume">Resume ↓</a>
+  </div>
+</header>
+
+<main id="main-content">
+  <section class="wrap case-hero" id="top">
+    <a class="back-link" href="../index.html#work">← All selected work</a>
+    <div class="meta"><span class="status">Production</span><span>Tech-Instinct · Béjaïa, Algeria · Sep 2023 → Apr 2024</span></div>
+    <p class="cmd" style="margin-top:18px">cat ./work/rh-partner.md</p>
+    <h1>Keeping an HR and payroll SaaS fast and tested in production.</h1>
+    <p class="lead">RH Partner is an HR and payroll SaaS. At Tech-Instinct I maintained and extended its production Spring Boot REST microservices, each deployed in its own Docker container, and worked on the schemas, queries and tests behind them.</p>
+    <div class="actions"><a class="btn primary" href="https://rh-partner.com/" target="_blank" rel="noopener">Visit the live website ↗</a><a class="btn" href="../assets/Abdellah_Bouhaddi_CV.pdf" download data-track="resume">Download resume</a></div>
+    <dl class="case-facts"><div><dt>Role</dt><dd>Backend Developer</dd></div><div><dt>Period</dt><dd>Sep 2023 → Apr 2024</dd></div><div><dt>Context</dt><dd>Existing product · Tech-Instinct</dd></div><div><dt>Core stack</dt><dd>Java · Spring Boot · Docker</dd></div></dl>
+    <div class="gallery reveal"><div class="slider" data-slider role="region" aria-roledescription="carousel" aria-label="RH Partner website screenshots"><div class="frame-bar"><span>rh-partner.com</span></div><div class="track" tabindex="0" role="group" aria-label="Screenshots. Use the arrow keys to browse."><figure class="slide"><button type="button" class="zoom" aria-label="Enlarge screenshot: HR platform hero"><img src="../assets/screens/rh-1.jpg" srcset="../assets/screens/rh-1-800.jpg 800w, ../assets/screens/rh-1.jpg 1200w" sizes="(max-width: 1120px) 100vw, 1120px" width="1200" height="750" loading="eager" alt="RH Partner website: HR platform hero" data-zoom data-caption="HR platform hero"></button></figure><figure class="slide"><button type="button" class="zoom" aria-label="Enlarge screenshot: HR modules"><img src="../assets/screens/rh-2.jpg" srcset="../assets/screens/rh-2-800.jpg 800w, ../assets/screens/rh-2.jpg 1200w" sizes="(max-width: 1120px) 100vw, 1120px" width="1200" height="750" loading="lazy" alt="RH Partner website: HR modules" data-zoom data-caption="HR modules"></button></figure><figure class="slide"><button type="button" class="zoom" aria-label="Enlarge screenshot: Platform benefits"><img src="../assets/screens/rh-3.jpg" srcset="../assets/screens/rh-3-800.jpg 800w, ../assets/screens/rh-3.jpg 1200w" sizes="(max-width: 1120px) 100vw, 1120px" width="1200" height="750" loading="lazy" alt="RH Partner website: Platform benefits" data-zoom data-caption="Platform benefits"></button></figure><figure class="slide"><button type="button" class="zoom" aria-label="Enlarge screenshot: Offers and demo request"><img src="../assets/screens/rh-4.jpg" srcset="../assets/screens/rh-4-800.jpg 800w, ../assets/screens/rh-4.jpg 1200w" sizes="(max-width: 1120px) 100vw, 1120px" width="1200" height="750" loading="lazy" alt="RH Partner website: Offers and demo request" data-zoom data-caption="Offers and demo request"></button></figure></div><button class="arrow prev" type="button" aria-label="Previous screenshot">‹</button><button class="arrow next" type="button" aria-label="Next screenshot">›</button><div class="slider-bar"><span class="slide-caption" aria-live="polite"></span><div class="dots" role="group" aria-label="Choose screenshot"></div></div></div></div>
+    <div class="case-stats"><div class="stat"><strong>~35%</strong><span>faster on the affected SQL queries</span></div><div class="stat"><strong>90%+</strong><span>test coverage in the tested scope</span></div><div class="stat"><strong>1 container</strong><span>per microservice, in Docker</span></div></div>
+  </section>
+
+  <div class="wrap case-layout">
+    <aside class="case-nav" aria-label="On this page"><p class="label">On this page</p><a href="#context">The context</a><a href="#services">The services</a><a href="#data">Making queries faster</a><a href="#tests">Tests and releases</a><a href="#outcome">What this shows</a><ul class="tags"><li>Java</li><li>Spring Boot</li><li>Docker</li><li>SQL Server</li><li>JWT</li><li>JUnit</li></ul><a class="btn sm" href="https://rh-partner.com/" target="_blank" rel="noopener">Live website ↗</a></aside>
+    <article class="case-body"><section id="context"><h2>The context</h2><p>RH Partner was already in production. The work was to maintain and extend its backend services, not to rebuild them.</p></section><section id="services"><h2>The services</h2><ul class="did"><li>Maintained and extended the Spring Boot REST microservices behind the product.</li><li>Each service runs in its own Docker container, alongside SQL Server in Docker.</li><li>APIs secured with JWT.</li></ul></section><section id="data"><h2>Making queries faster</h2><p>I designed database schemas and optimised SQL queries, which made the affected queries about 35% faster.</p></section><section id="tests"><h2>Tests and releases</h2><ul class="did"><li>Wrote JUnit unit and integration tests, reaching over 90% coverage in the tested scope.</li><li>Resolved production defects to keep releases reliable.</li></ul></section><section id="outcome"><h2>What this shows</h2><p>Backend work on a live product in a second stack: Java and Spring Boot services, containerised, measured on query speed and test coverage.</p></section></article>
+  </div>
+
+  <div class="wrap">
+    <a class="next-project" href="matmak.html"><span><small>Next case study</small><strong>MATMAK — extending a production .NET SaaS</strong></span><span class="go">Read it →</span></a>
+    <div class="contact case-cta reveal">
+      <div><p class="cmd">ping abdellah</p><h2>Hiring for work like this?</h2><p>I reply within a day. Happy to walk through how I would approach your product, your stack or your infrastructure.</p></div>
+      <div class="rows">
+        <a href="mailto:douibouhaddi@gmail.com" data-track="email">douibouhaddi@gmail.com <span>Email</span></a>
+        <a href="tel:+971585342499" data-track="phone">+971 58 534 2499 <span>Phone</span></a>
+        <a href="../assets/Abdellah_Bouhaddi_CV.pdf" download data-track="resume">Abdellah_Bouhaddi_CV.pdf <span>Resume ↓</span></a>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="wrap"><span>© <span id="current-year">2026</span> Abdellah Bouhaddi</span><span>Full-stack software engineer · .NET</span><span>Dubai, UAE</span></footer>
+<button class="to-top" id="to-top" type="button" aria-label="Back to top">↑</button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<dialog class="lightbox" id="lightbox" aria-label="Screenshot preview"><figure><figcaption></figcaption><button class="close" type="button" aria-label="Close preview">✕</button><button class="lb-prev" type="button" aria-label="Previous screenshot">‹</button><button class="lb-next" type="button" aria-label="Next screenshot">›</button></figure></dialog></body>
+</html>

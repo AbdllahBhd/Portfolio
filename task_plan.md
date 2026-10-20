@@ -181,7 +181,7 @@ The gates are relative to the Task 1 baseline. Each finding a later task owns ma
     2. Nothing is broken: G1 to G3 show no regression, and G4 passes on all 4 pages.
     3. No files changed outside `portfolio/index.html`, `portfolio/work/*.html` (tags, srcset and frame markup) and `portfolio/css/styles.css`.
 
-- [ ] **6. Two new case studies** (F5)
+- [x] **6. Two new case studies** (F5)
   - Write `portfolio/work/hpl-bodyfence.html` and `portfolio/work/rh-partner.html` in the shared template.
   - Link them from their cards.
   - Re-chain the "Next case study" links into one loop of 5.
@@ -310,6 +310,42 @@ The gates are relative to the Task 1 baseline. Each finding a later task owns ma
 
 ## Fact table (filled in by Task 6)
 
-_pending_
+**Sources:**
+- **CV** = `build_cv.py`: HPL at lines 146–151, RH at 163–167
+- **IDX** = `portfolio/index.html` before this branch
+- **USER** = answers on 2026-10-20
+- **SITE** = the live site's own screenshot content
+
+### `work/hpl-bodyfence.html`
+
+| Claim | Source |
+|---|---|
+| Production; integration | CV line 147 "Production"; IDX card meta "Integration" |
+| Custom WordPress plugin, PHP | CV line 150; CV line 147 "WordPress, PHP" |
+| Consumes a dedicated MATMAK API (REST) | CV line 150; CV line 147 "REST API" |
+| Shortcodes display vehicle patterns and car kits | CV line 150 |
+| HEXIS Precut Lab on the BODYFENCE website; URL | CV lines 146 and 148 |
+| The site has its own WordPress database | USER "for bodyfence for wordpres database" |
+| Installers, precut film (PPF) | SITE, hpl-1: "Take your PPF & window tint installations… with HEXIS Precut Lab" |
+| Layer table (API → plugin → shortcodes on pages) | Restates CV line 150; no new facts |
+
+### `work/rh-partner.html`
+
+| Claim | Source |
+|---|---|
+| Backend Developer; Tech-Instinct; Béjaïa; Sep 2023 to Apr 2024 | CV line 163 |
+| HR and payroll SaaS; production; maintained and extended Spring Boot REST microservices | CV line 165 |
+| Each service in its own Docker container | CV line 165 |
+| SQL Server in Docker | USER "SQL Server in Docker was RH Partner" |
+| JWT-secured APIs | USER "JWT in matmak rhp" |
+| Schemas and SQL optimised, about 35% faster on affected queries | CV line 166 |
+| JUnit unit and integration tests, over 90% coverage in scope | CV line 167 |
+| Resolved production defects for reliable releases | CV line 167 |
+
+**Gate note (Task 6):** the new pages raise G1 counts only by copying known template findings:
+- the contact, wrap and gallery `cramped-padding` false positives (FP-2 and the baseline ones), 3 per page
+- `overused-font`, 1 per page
+
+They raise G2 only through em-dashes and the `✕`, which Task 9 owns. No new kind of finding appeared.
 
 /goal every task in task_plan.md is checked off per its own "Done when", and the project's quality gates pass
