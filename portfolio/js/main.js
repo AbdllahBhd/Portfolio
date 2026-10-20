@@ -28,27 +28,36 @@ themeButtons.forEach((b) => b.addEventListener("click", () => setTheme(b.dataset
 
 /* progress bar, scroll-spy, back to top */
 const bar = document.getElementById("progress"), toTop = document.getElementById("to-top"), footer = document.querySelector("footer");
+const header = document.querySelector(".top"), phone = matchMedia("(max-width: 760px)");
+let lastY = scrollY;
 // Only same-page anchors take part in scroll-spy; links to other pages are ignored.
 const navLinks = [...document.querySelectorAll('.nav a[href^="#"], .case-nav a[href^="#"]')];
 const sections = navLinks.map((a) => document.querySelector(a.getAttribute("href")));
 function onScroll() {
-  const max = document.documentElement.scrollHeight - innerHeight;
-  bar.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + "%";
-  toTop.classList.toggle("show", scrollY > innerHeight);
-  // Ride above the footer instead of covering its text at the end of the page.
-  if (footer) toTop.style.bottom = Math.max(20, innerHeight - footer.getBoundingClientRect().top + 12) + "px";
-  const y = scrollY + innerHeight * 0.35;
+  // All layout reads first, then the writes, so a scroll event costs one layout pass.
+  const y0 = scrollY, max = document.documentElement.scrollHeight - innerHeight;
+  const footTop = footer ? footer.getBoundingClientRect().top : Infinity;
+  const y = y0 + innerHeight * 0.35;
   let current = null;
   sections.forEach((s) => { if (s && y >= s.offsetTop) current = s; });
+  bar.style.width = (max > 0 ? (y0 / max) * 100 : 0) + "%";
+  toTop.classList.toggle("show", y0 > innerHeight);
+  // Ride above the footer instead of covering its text at the end of the page.
+  if (footer) toTop.style.bottom = Math.max(20, innerHeight - footTop + 12) + "px";
+  // On phones the two-row header steps aside while reading down and returns on the way up.
+  if (header) header.classList.toggle("tucked", phone.matches && y0 > lastY && y0 > 160 && !header.contains(document.activeElement));
+  lastY = y0;
   navLinks.forEach((a, i) => sections[i] === current ? a.setAttribute("aria-current", "location") : a.removeAttribute("aria-current"));
 }
 onScroll(); addEventListener("scroll", onScroll, { passive: true }); addEventListener("resize", onScroll);
 toTop.addEventListener("click", () => scrollTo({ top: 0 }));
+if (header) header.addEventListener("focusin", () => header.classList.remove("tucked"));
 
 /* phone strips (nav, work filters): fade the right edge only while there is more to scroll */
 document.querySelectorAll(".nav, .filters").forEach((strip) => {
   const edge = () => strip.classList.toggle("at-end", strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 2);
   strip.addEventListener("scroll", edge, { passive: true }); addEventListener("resize", edge); edge();
+  if (document.fonts) document.fonts.ready.then(edge);
 });
 
 /* copy buttons */
@@ -74,7 +83,8 @@ const io = new IntersectionObserver((entries) => entries.forEach((e) => {
   if (!e.isIntersecting) return;
   e.target.classList.add("in"); io.unobserve(e.target);
 }), { threshold: 0.08 });
-document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+// Anything the CSS failsafe already showed (slow script load) stays shown instead of hiding again.
+document.querySelectorAll(".reveal").forEach((el) => (getComputedStyle(el).opacity === "1" ? el.classList.add("in") : io.observe(el)));
 // Reveals are observed: cancel the CSS failsafe that shows content when this script never runs.
 root.classList.add("js-ok");
 
@@ -89,7 +99,11 @@ filterButtons.forEach((button) => button.addEventListener("click", () => {
   workCards.forEach((card) => {
     const match = filter === "all" || card.dataset.tags.split(" ").includes(filter);
     card.classList.toggle("is-hidden", !match);
-    if (match) { shown += 1; card.classList.add("in"); }
+    if (match) {
+      shown += 1; card.classList.add("in");
+      // A card that was hidden has a zero-width rail; let its slider catch up now that it is visible.
+      const slider = card.querySelector("[data-slider]"); if (slider) slider.dispatchEvent(new Event("resync"));
+    }
   });
   filtersNote.textContent = filter === "all" ? "" : `Showing ${shown} of ${workCards.length} projects`;
   track("filter-" + filter);
@@ -99,6 +113,10 @@ filterButtons.forEach((button) => button.addEventListener("click", () => {
 document.querySelectorAll("[data-slider]").forEach((slider) => {
   const rail = slider.querySelector(".track");
   const slides = [...rail.children];
+  const zooms = slides.map((s) => s.querySelector(".zoom"));
+  // One tab stop for the screenshots: the visible slide's button. Arrow keys move between slides,
+  // and the dots repeat the arrows for pointers, so neither the rail nor the dots need their own stop.
+  rail.removeAttribute("tabindex");
   const dots = slider.querySelector(".dots");
   const caption = slider.querySelector(".slide-caption");
   const prev = slider.querySelector(".prev"), next = slider.querySelector(".next");
@@ -108,28 +126,32 @@ document.querySelectorAll("[data-slider]").forEach((slider) => {
   slides.forEach((slide, i) => { slide.setAttribute("role", "group"); slide.setAttribute("aria-roledescription", "slide"); slide.setAttribute("aria-label", `${i + 1} of ${slides.length}`); });
   slides.forEach((_, i) => {
     const dot = document.createElement("button");
-    dot.type = "button"; dot.setAttribute("aria-label", `Show screenshot ${i + 1} of ${slides.length}`);
+    dot.type = "button"; dot.tabIndex = -1; dot.setAttribute("aria-label", `Show screenshot ${i + 1} of ${slides.length}`);
     dot.addEventListener("click", () => go(i));
     dots.appendChild(dot);
   });
-  const index = () => Math.round(rail.scrollLeft / rail.clientWidth);
-  function go(i) { if (!rail.clientWidth) return; const target = Math.max(0, Math.min(slides.length - 1, i)); rail.scrollTo({ left: target * rail.clientWidth }); sync(target); }
+  const index = () => (rail.clientWidth ? Math.round(rail.scrollLeft / rail.clientWidth) : 0);
+  function go(i, focusSlide) {
+    if (!rail.clientWidth) return;
+    const target = Math.max(0, Math.min(slides.length - 1, i));
+    rail.scrollTo({ left: target * rail.clientWidth }); sync(target);
+    if (focusSlide) zooms[target].focus({ preventScroll: true });
+  }
   function sync(i = index()) {
     const text = slides[i].querySelector("img").dataset.caption;
     [...dots.children].forEach((d, k) => d.setAttribute("aria-current", String(k === i)));
     caption.textContent = `${i + 1}/${slides.length} · ${text}`;
     if (i !== shown) { shown = i; clearTimeout(speak); speak = setTimeout(() => { live.textContent = `Screenshot ${i + 1} of ${slides.length}: ${text}`; }, 300); }
-    // A disabled button drops focus to the page; hand it to the other arrow first.
-    const focused = document.activeElement;
-    prev.disabled = i === 0; next.disabled = i === slides.length - 1;
-    if (focused === prev && prev.disabled) next.focus();
-    if (focused === next && next.disabled) prev.focus();
+    zooms.forEach((z, k) => { z.tabIndex = k === i ? 0 : -1; });
+    // aria-disabled rather than disabled: focus stays on the arrow being pressed, and go() clamps.
+    prev.setAttribute("aria-disabled", String(i === 0)); next.setAttribute("aria-disabled", String(i === slides.length - 1));
   }
   prev.addEventListener("click", () => { go(index() - 1); track("slide"); });
   next.addEventListener("click", () => { go(index() + 1); track("slide"); });
-  rail.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") { e.preventDefault(); go(index() + 1); } if (e.key === "ArrowLeft") { e.preventDefault(); go(index() - 1); } });
+  rail.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") { e.preventDefault(); go(index() + 1, true); } if (e.key === "ArrowLeft") { e.preventDefault(); go(index() - 1, true); } });
   let raf; rail.addEventListener("scroll", () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => sync()); }, { passive: true });
   addEventListener("resize", () => { if (rail.clientWidth) go(index()); });
+  slider.addEventListener("resync", () => sync());
   sync(0);
 });
 
@@ -160,7 +182,7 @@ const FIT = {
   front: ["Razor Pages in production; React for HEXIS", false],
   infra: ["Owns Linux, AWS, DNS, CI/CD and monitoring at MATMAK", false],
   pay: ["Stripe and Network International in production", false],
-  lead: ["Led three client projects from requirements to launch", false],
+  lead: ["Led three client projects from requirements to delivery", false],
   mobile: ["Flutter apps with Firebase, 2024 (secondary skill)", true],
   java: ["Eight months on Spring Boot microservices (secondary skill)", true],
 };
