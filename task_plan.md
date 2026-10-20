@@ -229,7 +229,7 @@ The gates are relative to the Task 1 baseline. Each finding a later task owns ma
     2. Nothing is broken: G1 to G3 show no regression, and G4 passes on all pages.
     3. No files changed outside `portfolio/js/main.js`, `portfolio/css/styles.css` and `portfolio/**/*.html`.
 
-- [ ] **9. P3 cleanup** (F22, F23, F24 rest)
+- [x] **9. P3 cleanup** (F22, F23, F24 rest)
   - `.callout` gets a full hairline and surface instead of the side border.
   - Em-dashes go. Date ranges use a hyphen or "to"; titles and headings use a colon or middot.
   - The `✓` and `◐` glyphs become CSS or SVG marks.
