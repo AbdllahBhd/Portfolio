@@ -56,15 +56,20 @@ open the generated PDF/DOCX and read it.
   `#skills`, `#ask` (open Q&A + interactive fit checker), `#background`,
   `#contact`. Section labels are command-style (`$ ls ./work --sort=impact`)
   above plain headings. Case studies in `portfolio/work/` (`matmak.html`,
-  `hexis-training.html`, `xshield.html`) share the same header, slider gallery,
-  sticky "On this page" nav, next-project link and contact block.
+  `hexis-training.html`, `xshield.html`, `hpl-bodyfence.html`, `rh-partner.html`)
+  share the same header, framed slider gallery, sticky "On this page" nav,
+  contact block and a "Next case study" link; the five links form one loop.
+  Every claim on a case page must trace to `build_cv.py` or the user.
 - **Shared assets:** one stylesheet `portfolio/css/styles.css` and one script
   `portfolio/js/main.js` for every page (theme switch, progress bar, scroll-spy,
-  reveals, count-up, copy buttons, tag highlighting, work filters, sliders,
+  reveals, copy buttons, tag highlighting, work filters, sliders,
   lightbox, fit checker, footer year). Every feature checks its elements exist.
 - **Screenshots:** `portfolio/assets/screens/<site>-<1..4>.jpg` (1200×750 JPEG)
-  feed the sliders. They were captured from the live sites with Playwright at
-  1440×900, cookie banners rejected; re-capture when a client site changes.
+  plus `<site>-<n>-800.jpg` (800×500) feed the sliders through `srcset`; the
+  lightbox always opens the 1200px file. Captured 2026-10-20 from the live sites
+  with Playwright (scratch venv, not in the repo) at 1440×900: cookie banners
+  rejected, and chat/WhatsApp widgets, newsletter and video popups hidden.
+  Re-capture when a client site changes, and check every frame for widgets.
 - **Analytics:** GoatCounter, off until `GOATCOUNTER_CODE` at the top of
   `main.js` is set. Elements with `data-track="name"` send custom events.
 - **Resume download:** `portfolio/assets/Abdellah_Bouhaddi_CV.pdf` is what the

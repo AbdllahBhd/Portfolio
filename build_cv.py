@@ -98,9 +98,9 @@ MATMAK_INTRO = (
 
 MATMAK_PLATFORM = [
     "Extend and maintain an established ASP.NET Core SaaS and PPF cutting platform: REST APIs, Razor Pages interfaces, "
-    "and business workflows for authentication, subscriptions, invoicing, pricing, credits, and cutting operations.",
+    "and business workflows for JWT authentication, subscriptions, invoicing, pricing, credits, and cutting operations.",
     "Develop within a modular multi-project .NET solution (API, Client, Admin, Models, Services) built on Entity "
-    "Framework Core, LINQ, and SQL-backed application services.",
+    "Framework Core, LINQ, and SQL Server-backed application services.",
     "Redesigned the customer-facing pages and the administration interface into a modern, responsive UI connected "
     "to the existing application services and data workflows.",
     "Integrated Stripe one-time payments, recurring subscriptions, invoicing, and webhook-driven payment status updates.",
@@ -113,7 +113,7 @@ MATMAK_DELIVERY = [
     "domains, DNS, email, and payment services, covering availability, security, backups, and access control.",
     "Provision and harden Linux cloud and VPS servers from purchase to go-live: SSH access, firewalls, Nginx reverse "
     "proxy, SSL and TLS, application runtimes, and deployment of ASP.NET Core APIs and web applications.",
-    "Administer AWS EC2 instances, production databases, automated backups, and separate staging environments; "
+    "Administer AWS EC2 instances, production databases including SQL Server on AWS, automated backups, and separate staging environments; "
     "automate builds and deployments with GitHub Actions.",
     "Built production monitoring with Prometheus, Grafana, Loki, and Promtail: dashboards and alerts covering "
     "servers, APIs, Nginx, and application logs.",
@@ -135,7 +135,7 @@ CLIENT_PROJECTS = [
     ),
     (
         "HEXIS Training Centre (France)",
-        "Laravel, Filament, React  ·  Staging",
+        "Laravel, Filament, React, Docker  ·  Staging",
         None,
         [
             "Architected and built a multilingual training platform with a Laravel backend, Filament administration, and a React public interface.",
@@ -157,13 +157,14 @@ EARLIER_ROLES = [
         "Mobile Application Developer (Freelance)", "Apr 2024 – Jun 2024", "Self-employed", "Dubai, UAE",
         [
             "Developed cross-platform Android and iOS applications with Flutter and Dart, integrating Firebase Authentication, Cloud Firestore, Cloud Storage, and push notifications.",
+            "Migrated an app's data from Cloud Firestore to Supabase on PostgreSQL.",
         ],
     ),
     (
         "Backend Developer (Java Spring Boot)", "Sep 2023 – Apr 2024", "Tech-Instinct", "Bejaia, Algeria",
         [
-            "Maintained and extended the production Spring Boot REST microservices of RH Partner, an HR and payroll SaaS, with each service deployed in its own Docker container.",
-            "Designed database schemas and optimized SQL queries, improving affected query performance by 35%.",
+            "Maintained and extended the production Spring Boot REST microservices of RH Partner, an HR and payroll SaaS, with each service deployed in its own Docker container and APIs secured with JWT.",
+            "Designed database schemas and optimized SQL queries on SQL Server running in Docker, improving affected query performance by 35%.",
             "Wrote JUnit unit and integration tests reaching over 90% coverage in the tested scope, and resolved production defects to support reliable releases.",
         ],
     ),
@@ -179,7 +180,7 @@ EARLIER_ROLES = [
 EDUCATION = [
     (
         "Master's Degree in Software Engineering", "2020 – 2022", "University Abderrahmane Mira", "Bejaia, Algeria",
-        "Thesis: progressive web B2C ecommerce application built on the MERN stack (MongoDB, Express, React, Node.js) with real-time inventory, payment processing, and a responsive checkout.",
+        "Thesis: progressive web B2C ecommerce application built on the MERN stack (MongoDB, Express, React, Node.js) with real-time inventory, payment processing, and a responsive checkout. University projects also used TypeScript and Bootstrap.",
     ),
     (
         "Bachelor's Degree in Computer Science", "2017 – 2020", "University Abderrahmane Mira", "Bejaia, Algeria",
